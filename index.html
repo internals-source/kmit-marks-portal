@@ -61,6 +61,13 @@
   input[type=number] { width: 60px; text-align:center; }
   select { min-width: 180px; }
   table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+  /* On narrow screens, wide admin tables (marks entry, offerings, assignments, etc.) scroll
+     horizontally within their own panel instead of squishing columns unreadably or breaking
+     the page layout. */
+  @media (max-width: 900px) {
+    .panel { overflow-x: auto; }
+    .panel table { min-width: 640px; }
+  }
   th, td { padding: 8px; border-bottom: 1px solid var(--border); text-align: center; color: var(--text); }
   th { color: var(--muted); font-weight: 600; }
   td:first-child, th:first-child { text-align: left; }
@@ -276,6 +283,12 @@
     .topbar-search { display:none; }
     .profile-email-text { max-width:90px; }
   }
+  /* Desktop sidebar collapse — same hamburger button, opposite default: sidebar starts visible
+     on desktop, and toggling reclaims its 230px for wide tables (marks entry, admin lists). */
+  @media (min-width: 901px) {
+    .shell-sidebar.collapsed { transform: translateX(-100%); }
+    .shell-body.sidebar-collapsed { margin-left: 0; }
+  }
   .form-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; align-items: flex-end; }
   .form-row label { font-size: 12px; color: var(--muted); display:block; margin-bottom:3px; }
   .field { display:flex; flex-direction:column; }
@@ -384,6 +397,11 @@
   .hero-right { flex: 1; min-width: 320px; position:relative; display:flex; justify-content:center; }
   .hero-illustration-wrap { position:relative; width:100%; max-width: 420px; }
   .hero-illustration { width:100%; height:auto; animation: fadeSlideUp 0.8s ease both; animation-delay:0.2s; }
+  @media (max-width: 420px) {
+    .hero-body, .hero-ticker-wrap, .hero-announcement-wrap { padding: 0 16px; gap: 20px; }
+    .hero-left, .hero-right { min-width: 0; width: 100%; }
+    .prelogin-info-card { max-width: none; }
+  }
 
   .floating-badge {
     position:absolute; background:#fff; border:1px solid var(--lh-border); border-radius: 12px;
@@ -1995,7 +2013,13 @@ document.addEventListener('click', (e) => {
   }
 });
 document.getElementById('sidebar-toggle').onclick = () => {
+  // One button, two meanings by screen size: reveals the drawer on mobile ('open'),
+  // collapses the sidebar to reclaim space on desktop ('collapsed'). Both classes toggle
+  // together — each only has an effect within its own media query, so this works correctly
+  // at any width without needing to check window size in JS.
   document.querySelector('.shell-sidebar').classList.toggle('open');
+  document.querySelector('.shell-sidebar').classList.toggle('collapsed');
+  document.querySelector('.shell-body').classList.toggle('sidebar-collapsed');
 };
 
 document.getElementById('logout-btn').onclick = async () => {
