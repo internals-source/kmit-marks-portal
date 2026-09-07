@@ -2027,6 +2027,15 @@ document.getElementById('logout-btn').onclick = async () => {
   window.location.href = window.location.origin;
 }
 
+// Used by dead-end screens (registration, access-pending, account-setup) built via innerHTML,
+// where a normal getElementById().onclick wiring isn't convenient — inline onclick calls this
+// global instead, so someone stuck on any of those screens can always back out and try a
+// different account.
+window.__forceSignOut = async () => {
+  await supabase.auth.signOut();
+  window.location.href = window.location.origin;
+};
+
 // Populates a "Select..." dropdown + its paired "other" text input from a stored value,
 // falling back to __other when the value isn't one of the predefined options. Shared by
 // the Department and Designation fields on the My Profile edit form.
@@ -2106,6 +2115,21 @@ document.getElementById('ep-save-btn').onclick = async () => {
 
 // Renders a one-field registration form for first-time sign-ins (profile row exists,
 // created by the auth trigger, but has no name/faculty code yet).
+// Shared render for "stuck" screens (registration pending approval, account still being
+// provisioned) — always includes a way back out via Sign Out, since none of these previously
+// had one and a person landing here had no way to try a different account.
+function renderDeadEndScreen(title, messageHtml) {
+  document.getElementById('login-screen').innerHTML = `
+    <div class="hero-body" style="justify-content:center; padding:60px 20px;">
+      <div class="login-card anim-fade-3" style="max-width:440px; text-align:center;">
+        <div class="login-heading" style="margin-bottom:10px;">${title}</div>
+        <p class="login-status-sub" style="margin-bottom:20px;">${messageHtml}</p>
+        <button class="secondary" onclick="window.__forceSignOut()" style="width:100%;">Sign out</button>
+      </div>
+    </div>
+  `;
+}
+
 function showRegistrationForm(session, profile) {
   const email = session.user.email;
   const suggestedName = (profile.full_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || '').replace(/"/g, '&quot;');
@@ -2121,7 +2145,10 @@ function showRegistrationForm(session, profile) {
         </div>
         <div class="field" style="text-align:left; margin-bottom:14px;">
           <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Mobile Number</label>
-          <input id="reg-mobile" type="tel" placeholder="e.g. 9876543210" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+          <div style="display:flex; gap:0; align-items:stretch;">
+            <span style="display:flex; align-items:center; padding:0 10px; border:1px solid var(--border); border-right:none; border-radius:6px 0 0 6px; background:#f5f6fb; font-family:'DM Sans',sans-serif; font-size:14px; color:var(--muted);">+91</span>
+            <input id="reg-mobile" type="tel" inputmode="numeric" maxlength="10" placeholder="9876543210" style="flex:1; min-width:0; padding:9px; border:1px solid var(--border); border-radius:0 6px 6px 0; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+          </div>
         </div>
         <div class="field" style="text-align:left; margin-bottom:14px;">
           <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Department</label>
@@ -2149,7 +2176,8 @@ function showRegistrationForm(session, profile) {
           <input id="reg-designation-other" placeholder="Designation" style="display:none; width:100%; margin-top:8px; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
         </div>
         <p class="status-msg" id="reg-status" style="min-height:16px;"></p>
-        <button class="login-btn-outline" id="reg-submit-btn" style="width:100%;">Register</button>
+        <button class="login-btn-outline" id="reg-submit-btn" style="width:100%; margin-bottom:8px;">Register</button>
+        <button class="secondary" onclick="window.__forceSignOut()" style="width:100%;">Sign out (wrong account?)</button>
       </div>
     </div>
   `;
@@ -2160,17 +2188,23 @@ function showRegistrationForm(session, profile) {
   document.getElementById('reg-designation').onchange = (e) => {
     document.getElementById('reg-designation-other').style.display = e.target.value === '__other' ? 'block' : 'none';
   };
+  // Digits only, capped at 10 — the visible "+91" prefix is a separate fixed element, not part
+  // of this input's value.
+  document.getElementById('reg-mobile').addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+  });
 
   document.getElementById('reg-submit-btn').onclick = async () => {
     const statusEl = document.getElementById('reg-status');
     const fullName = document.getElementById('reg-full-name').value.trim();
-    const mobile = document.getElementById('reg-mobile').value.trim();
+    const mobileDigits = document.getElementById('reg-mobile').value.trim();
     const deptSel = document.getElementById('reg-department').value;
     const department = deptSel === '__other' ? document.getElementById('reg-department-other').value.trim() : deptSel;
     const desigSel = document.getElementById('reg-designation').value;
     const designation = desigSel === '__other' ? document.getElementById('reg-designation-other').value.trim() : desigSel;
     if (!fullName) { statusEl.innerText = 'Enter your full name to continue.'; return; }
-    if (!mobile) { statusEl.innerText = 'Enter your mobile number to continue.'; return; }
+    if (!/^\d{10}$/.test(mobileDigits)) { statusEl.innerText = 'Enter a valid 10-digit mobile number.'; return; }
+    const mobile = '+91' + mobileDigits;
 
     statusEl.innerText = 'Registering...';
     const facultyCode = profile.faculty_code || generateFacultyCode();
@@ -2184,8 +2218,8 @@ function showRegistrationForm(session, profile) {
     if (updErr) { statusEl.innerText = 'Error: ' + updErr.message; return; }
 
     if (updated.role === 'unapproved') {
-      document.getElementById('login-screen').innerHTML =
-        `<h1>Access Pending</h1><p class="sub">Your account (${esc(email)}) is not yet approved. Your faculty ID is <strong>${esc(updated.faculty_code) || '—'}</strong> — share this with the admin. Contact the admin to get approved.</p>`;
+      renderDeadEndScreen('Access Pending',
+        `Your account (${esc(email)}) is not yet approved. Your faculty ID is <strong>${esc(updated.faculty_code) || '—'}</strong> — share this with the admin. Contact the admin to get approved.`);
     } else {
       // Already whitelisted (faculty/admin/clerk) — reload to run init() fresh and land in the app.
       window.location.reload();
@@ -2204,8 +2238,8 @@ async function init() {
   // instant Google sign-in completes, so this branch is a rare defensive fallback —
   // it does NOT insert client-side (profiles has no INSERT policy for regular users).
   if (error && error.code === 'PGRST116') {
-    document.getElementById('login-screen').innerHTML =
-      `<h1>Setting Up Your Account</h1><p class="sub">Give it a moment and try signing in again. If this keeps happening, contact the admin.</p>`;
+    renderDeadEndScreen('Setting Up Your Account',
+      'Give it a moment and try signing in again. If this keeps happening, contact the admin.');
     return;
   }
 
@@ -2217,7 +2251,8 @@ async function init() {
     return;
   }
   if (profile.role === 'unapproved') {
-    document.getElementById('login-screen').innerHTML = `<h1>Access Pending</h1><p class="sub">Your account (${esc(email)}) is not yet approved. Your faculty ID is <strong>${esc(profile.faculty_code) || '—'}</strong> — share this with the admin. Contact the admin to get approved.</p>`;
+    renderDeadEndScreen('Access Pending',
+      `Your account (${esc(email)}) is not yet approved. Your faculty ID is <strong>${esc(profile.faculty_code) || '—'}</strong> — share this with the admin. Contact the admin to get approved.`);
     return;
   }
   currentProfile = profile;
