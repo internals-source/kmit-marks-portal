@@ -792,6 +792,1235 @@
           </div>
         </div>
       </aside>
+    </main>
+  </div>
+
+  <div id="app">
+   <div class="shell">
+    <aside class="shell-sidebar">
+      <div class="shell-logo">KMIT</div>
+      <div class="shell-nav-label">Navigation</div>
+      <div class="tabs" id="tabs">
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="offerings">My Subjects</button>
+        <button class="tab-btn" data-tab="low-marks">&lt; 14 Marks Students</button>
+        <button class="tab-btn admin-only clerk-visible" data-tab="admin-catalog" style="display:none;">Manage Catalog</button>
+        <button class="tab-btn admin-only clerk-visible" data-tab="admin-students" style="display:none;">Manage Students</button>
+        <button class="tab-btn admin-only" data-tab="admin-reregistration" style="display:none;">Re-Registration</button>
+        <button class="tab-btn admin-only" data-tab="admin-reports" style="display:none;">Reports</button>
+        <button class="tab-btn admin-only clerk-visible" data-tab="admin-offerings" style="display:none;">Manage Offerings</button>
+        <button class="tab-btn admin-only" data-tab="admin-structures" style="display:none;">Mark Structures</button>
+        <button class="tab-btn admin-only clerk-visible" data-tab="admin-assign" style="display:none;">Assign Faculty</button>
+        <button class="tab-btn admin-only" data-tab="admin-hod" style="display:none;">HOD Management</button>
+        <button class="tab-btn admin-only" data-tab="admin-audit" style="display:none;">Audit Log</button>
+        <button class="tab-btn hod-only" data-tab="hod-dashboard" style="display:none;">HOD Dashboard</button>
+        <button class="tab-btn coe-only" data-tab="coe-dashboard" style="display:none;">COE Dashboard</button>
+        <a href="marks-screen-preview.html" target="_blank" rel="noopener" class="tab-btn admin-only" style="display:none; text-decoration:none;" title="Opens a static preview of the marks entry screen with sample data — not connected to Supabase">Marks Screen Preview ↗</a>
+        <button class="tab-btn" data-tab="feedback">Feedback</button>
+      </div>
+    </aside>
+
+    <div class="shell-body">
+      <div class="shell-topbar">
+        <button class="topbar-hamburger" id="sidebar-toggle" type="button" title="Toggle navigation">☰</button>
+        <div class="topbar-search-wrap">
+          <div class="topbar-brand">Marks Management System</div>
+          <div class="topbar-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search here..." disabled title="Not wired up yet">
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="profile-menu">
+            <button class="profile-btn" id="profile-btn" type="button">
+              <span class="profile-avatar" id="profile-avatar">?</span>
+              <span class="profile-email-text" id="profile-email-text"></span>
+              <span class="profile-caret">▾</span>
+            </button>
+            <div class="profile-dropdown" id="profile-dropdown">
+              <div class="profile-dropdown-role" id="user-info"></div>
+              <div class="profile-dropdown-meta" id="user-meta" style="font-size:11px; color:var(--muted); padding:0 6px 8px;"></div>
+              <button class="secondary" id="edit-profile-btn" style="width:100%; margin-bottom:6px;">My Profile</button>
+              <button class="secondary" id="lock-screen-btn" style="width:100%; margin-bottom:6px;">🔒 Lock Screen</button>
+              <button class="secondary" id="logout-btn" style="width:100%;">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY PROFILE (edit) MODAL -->
+      <div id="profile-edit-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.45); z-index:100; align-items:center; justify-content:center;">
+        <div class="login-card" style="max-width:420px; width:90%; text-align:left;">
+          <div class="login-heading" style="margin-bottom:2px;">My Profile</div>
+          <p class="status-msg" id="edit-profile-email" style="margin-bottom:16px;"></p>
+
+          <div class="field" style="margin-bottom:14px;">
+            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Full Name</label>
+            <input id="ep-full-name" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+          </div>
+          <div class="field" style="margin-bottom:14px;">
+            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Mobile Number</label>
+            <input id="ep-mobile" type="tel" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+          </div>
+          <div class="field" style="margin-bottom:14px;">
+            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Department</label>
+            <select id="ep-department" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+              <option value="">Select department...</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+              <option value="__other">Other (type below)</option>
+            </select>
+            <input id="ep-department-other" placeholder="Department name" style="display:none; width:100%; margin-top:8px; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+          </div>
+          <div class="field" style="margin-bottom:14px;">
+            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Designation</label>
+            <select id="ep-designation" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+              <option value="">Select designation...</option>
+              <option value="Assistant Professor">Assistant Professor</option>
+              <option value="Associate Professor">Associate Professor</option>
+              <option value="Professor">Professor</option>
+              <option value="HOD">HOD</option>
+              <option value="Lab Assistant">Lab Assistant</option>
+              <option value="__other">Other (type below)</option>
+            </select>
+            <input id="ep-designation-other" placeholder="Designation" style="display:none; width:100%; margin-top:8px; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+          </div>
+          <p class="status-msg" id="ep-status" style="min-height:16px;"></p>
+          <div style="display:flex; gap:10px;">
+            <button class="secondary" id="ep-cancel-btn" style="flex:1;">Cancel</button>
+            <button class="login-btn-outline" id="ep-save-btn" style="flex:1;">Save</button>
+          </div>
+
+          <div style="border-top:1px solid var(--border); margin-top:18px; padding-top:16px;">
+            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:6px;">Security</label>
+            <div id="mfa-status-line" style="font-size:13px; margin-bottom:8px;">Checking two-factor authentication status...</div>
+            <button class="secondary" id="mfa-enroll-btn" style="width:100%; display:none;">Set Up Two-Factor Authentication</button>
+            <button class="secondary" id="mfa-disable-btn" style="width:100%; display:none; color:#b42318;">Disable Two-Factor Authentication</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MFA ENROLLMENT MODAL: QR code + 6-digit verification -->
+      <div id="mfa-enroll-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.55); z-index:110; align-items:center; justify-content:center;">
+        <div class="login-card" style="max-width:380px; width:90%; text-align:center;">
+          <div class="login-heading" style="margin-bottom:4px;">Set Up Two-Factor Authentication</div>
+          <p class="status-msg" style="margin-bottom:14px;">Scan this with Google Authenticator, Authy, or any TOTP app, then enter the 6-digit code it shows.</p>
+          <div id="mfa-qr-holder" style="display:flex; justify-content:center; margin-bottom:12px;"></div>
+          <p class="status-msg" id="mfa-secret-line" style="font-size:11px; word-break:break-all; margin-bottom:14px;"></p>
+          <input id="mfa-verify-code" placeholder="123456" maxlength="6" inputmode="numeric" style="width:100%; text-align:center; letter-spacing:4px; font-size:20px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:12px;">
+          <p class="status-msg" id="mfa-enroll-status" style="min-height:16px;"></p>
+          <div style="display:flex; gap:10px;">
+            <button class="secondary" id="mfa-enroll-cancel-btn" style="flex:1;">Cancel</button>
+            <button class="login-btn-outline" id="mfa-enroll-verify-btn" style="flex:1;">Verify &amp; Enable</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MFA CHALLENGE SCREEN: shown at login for accounts with 2FA already enabled -->
+      <div id="mfa-challenge-overlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:120; align-items:center; justify-content:center;">
+        <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
+          <div class="login-heading" style="margin-bottom:4px;">Two-Factor Verification</div>
+          <p class="status-msg" style="margin-bottom:16px;">Enter the 6-digit code from your authenticator app to continue.</p>
+          <input id="mfa-challenge-code" placeholder="123456" maxlength="6" inputmode="numeric" style="width:100%; text-align:center; letter-spacing:4px; font-size:22px; padding:12px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:14px;">
+          <p class="status-msg" id="mfa-challenge-status" style="min-height:16px;"></p>
+          <button class="login-btn-outline" id="mfa-challenge-verify-btn" style="width:100%; margin-bottom:8px;">Verify</button>
+          <button class="secondary" id="mfa-challenge-signout-btn" style="width:100%;">Sign out instead</button>
+        </div>
+      </div>
+
+      <!-- IDLE-TIMEOUT WARNING: grace period before automatic sign-out -->
+      <div id="idle-warning-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.55); z-index:130; align-items:center; justify-content:center;">
+        <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
+          <div class="login-heading" style="margin-bottom:4px;">Still there?</div>
+          <p class="status-msg" style="margin-bottom:14px;">You've been inactive for a while. For security, you'll be signed out in <strong id="idle-countdown">60</strong> seconds.</p>
+          <p class="status-msg" id="idle-unsaved-note" style="display:none; color:#b42318; margin-bottom:12px;">You have unsaved mark changes — they'll be lost if you're signed out.</p>
+          <button class="login-btn-outline" id="idle-stay-btn" style="width:100%; margin-bottom:8px;">Stay Signed In</button>
+          <button class="secondary" id="idle-signout-btn" style="width:100%;">Sign Out Now</button>
+        </div>
+      </div>
+
+      <!-- LOCK SCREEN: manual "step away" lock (Lock Screen button, or auto-triggered after
+           Print) — keeps the session alive but blocks the screen until unlocked. This is a
+           convenience/deterrent layer, not the real security backstop: the idle-timeout
+           auto-sign-out above keeps counting even while locked. -->
+      <div id="lock-screen-overlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:140; align-items:center; justify-content:center;">
+        <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
+          <div style="font-size:32px; margin-bottom:6px;">🔒</div>
+          <div class="login-heading" style="margin-bottom:2px;" id="lock-screen-name">Locked</div>
+          <p class="status-msg" id="lock-screen-sub" style="margin-bottom:16px;">This session is locked. Verify it's you to continue.</p>
+          <div id="lock-mfa-field">
+            <input id="lock-code" placeholder="123456" maxlength="6" inputmode="numeric" style="width:100%; text-align:center; letter-spacing:4px; font-size:20px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:12px;">
+          </div>
+          <div id="lock-email-field" style="display:none;">
+            <input id="lock-email" type="email" placeholder="your.email@kmit.in" style="width:100%; text-align:center; font-size:14px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:8px;">
+            <p class="status-msg" style="font-size:11px; margin-bottom:12px;">Set up two-factor authentication in My Profile for stronger protection than this.</p>
+          </div>
+          <p class="status-msg" id="lock-screen-status" style="min-height:16px;"></p>
+          <button class="login-btn-outline" id="lock-unlock-btn" style="width:100%; margin-bottom:8px;">Unlock</button>
+          <button class="secondary" id="lock-signout-btn" style="width:100%;">Not you? Sign out</button>
+        </div>
+      </div>
+
+      <div class="shell-page-header">
+        <div class="page-heading">
+          <div class="page-icon">⌂</div>
+          <div>
+            <div class="page-title" id="page-title">Dashboard</div>
+            <div class="page-subtitle" id="portal-label">Dashboard</div>
+          </div>
+        </div>
+        <div class="page-breadcrumb">YOU ARE HERE: <span id="breadcrumb-tab">Dashboard</span></div>
+      </div>
+
+      <main class="shell-main">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <div class="panel" id="welcome-banner" style="display:none;">
+        <h3 style="margin-top:0;" id="welcome-heading">Welcome</h3>
+        <div id="welcome-meta" style="color:var(--muted); font-size:13px;"></div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Quick Filter</h3>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="db-ay">
+              <option value="2024-2025" disabled>2024-2025</option>
+              <option value="2025-2026" disabled>2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028" disabled>2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="db-yearsem">
+              <option value="" selected>— All —</option>
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II">II-II</option>
+              <option value="III-I">III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="db-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="db-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+          <div class="field"><label>Section</label><select id="db-section"><option value="">— All —</option></select></div>
+        </div>
+        <p class="status-msg" id="dashboard-filter-summary"></p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Overview</h3>
+        <div class="stats-grid" id="dashboard-stats"><p class="status-msg">Loading...</p></div>
+      </div>
+    </div>
+
+    <!-- FACULTY: OFFERINGS LIST -->
+    <div class="view" id="view-offerings">
+      <div class="panel" id="offerings-panel">
+        <h3 style="margin-top:0;">Your Assigned Subjects</h3>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="mo-ay">
+              <option value="2024-2025" disabled>2024-2025</option>
+              <option value="2025-2026" disabled>2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028" disabled>2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="mo-yearsem">
+              <option value="" selected>— All —</option>
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II">II-II</option>
+              <option value="III-I">III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="mo-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="mo-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="mo-section"><option value="">— All —</option></select></div>
+          <div class="field">
+            <label>MID</label>
+            <select id="mo-mid">
+              <option value="">— All —</option>
+              <option value="I MID">I MID</option>
+              <option value="II MID">II MID</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <select id="mo-type">
+              <option value="">— All —</option>
+              <option value="theory">Theory</option>
+              <option value="lab">Lab</option>
+            </select>
+          </div>
+          <div class="field"><label>Subject</label><select id="mo-subject"><option value="">— All —</option></select></div>
+        </div>
+        <div id="offerings-list"><p class="status-msg">Loading...</p></div>
+      </div>
+
+      <div class="panel" id="marks-panel" style="display:none;">
+        <h3 style="margin-top:0;" id="marks-title"></h3>
+        <div id="marks-status" class="status-msg"></div>
+        <div class="form-row" style="align-items:center; margin-bottom:4px;">
+          <div class="field" style="flex:1; max-width:280px;">
+            <label>Search</label>
+            <input type="text" id="marks-search" placeholder="Roll no. or name...">
+          </div>
+          <div class="field">
+            <label>Filter</label>
+            <select id="marks-filter">
+              <option value="all">All Students</option>
+              <option value="entered">Marks Entered</option>
+              <option value="pending">Pending Entry</option>
+              <option value="invalid">Invalid / Out of Range</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <span id="marks-filter-count" style="font-size:12px;color:var(--muted);"></span>
+          </div>
+        </div>
+        <div class="marks-table-scroll">
+          <table id="marks-table">
+            <thead><tr id="marks-header"></tr></thead>
+            <tbody id="marks-body"></tbody>
+          </table>
+        </div>
+        <div id="marks-validation-error" class="field-error"></div>
+        <div style="margin-top:16px;">
+          <button id="save-all-btn">Save All</button>
+          <button class="secondary" id="print-marks-btn">Print</button>
+          <button class="secondary" id="export-marks-btn">Export Excel (CSV)</button>
+          <button class="secondary" id="refresh-offering-btn">Refresh</button>
+          <button class="secondary" id="back-btn">Back to list</button>
+          <button class="secondary" id="next-offering-btn">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACULTY: < 14 MARKS STUDENTS -->
+    <div class="view" id="view-low-marks">
+      <div class="panel">
+        <h3 style="margin-top:0;">Students Below Threshold</h3>
+        <p class="status-msg">Looks across all of <strong>your own</strong> assigned subjects/sections and lists students scoring below the threshold in any single MID.</p>
+        <div class="form-row">
+          <div class="field"><label>Below marks</label><input type="number" id="lm-threshold" value="14" style="width:110px;"></div>
+          <button id="lm-refresh-btn">Refresh</button>
+          <button class="secondary" id="lm-export-btn">Export Excel (CSV)</button>
+        </div>
+        <p class="status-msg" id="lm-status"></p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Roll No</th><th>Name</th><th>Subject</th><th>Section</th><th>MID</th><th>Type</th><th>Total</th></tr></thead>
+            <tbody id="lm-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: CATALOG (sections + subjects) -->
+    <div class="view" id="view-admin-catalog">
+      <div class="catalog-cols">
+        <div class="panel">
+          <h3 style="margin-top:0;">Sections</h3>
+          <div class="form-row">
+            <div class="field">
+              <label>Academic Year</label>
+              <select id="sec-ay">
+                <option value="2024-2025">2024-2025</option>
+                <option value="2025-2026">2025-2026</option>
+                <option value="2026-2027" selected>2026-2027</option>
+                <option value="2027-2028">2027-2028</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Year / Semester</label>
+              <select id="sec-yearsem">
+                <option value="I-I">I-I</option>
+                <option value="I-II">I-II</option>
+                <option value="II-I">II-I</option>
+                <option value="II-II" selected>II-II</option>
+                <option value="III-I">III-I</option>
+                <option value="III-II">III-II</option>
+                <option value="IV-I">IV-I</option>
+                <option value="IV-II">IV-II</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Regulation</label>
+              <input id="sec-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Branch</label>
+              <select id="sec-branch">
+                <option value="CSE">CSE</option>
+                <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+                <option value="CSE(DS)">CSE(DS)</option>
+                <option value="IT">IT</option>
+                <option value="__other">Other (type below)</option>
+              </select>
+            </div>
+            <div class="field" id="sec-branch-other-field" style="display:none;">
+              <label>Branch (custom)</label>
+              <input id="sec-branch-other" placeholder="e.g. ECE">
+            </div>
+            <div class="field">
+              <label>Section</label>
+              <input id="sec-letter" placeholder="A" style="width:70px;">
+            </div>
+            <button id="add-section-btn">Add</button>
+          </div>
+          <p class="status-msg" id="section-add-status"></p>
+
+          <div class="form-row" style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
+            <div class="field">
+              <label>View: Academic Year</label>
+              <select id="sec-filter-ay">
+                <option value="">— Select —</option>
+                <option value="2024-2025">2024-2025</option>
+                <option value="2025-2026">2025-2026</option>
+                <option value="2026-2027">2026-2027</option>
+                <option value="2027-2028">2027-2028</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Year / Semester</label>
+              <select id="sec-filter-yearsem">
+                <option value="">— Select —</option>
+                <option value="I-I">I-I</option>
+                <option value="I-II">I-II</option>
+                <option value="II-I">II-I</option>
+                <option value="II-II">II-II</option>
+                <option value="III-I">III-I</option>
+                <option value="III-II">III-II</option>
+                <option value="IV-I">IV-I</option>
+                <option value="IV-II">IV-II</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Regulation</label>
+              <input id="sec-filter-reg" placeholder="—" readonly style="background:#f7f8fd; width:90px;">
+            </div>
+            <div class="field">
+              <label>Branch</label>
+              <select id="sec-filter-branch">
+                <option value="">— Select —</option>
+                <option value="CSE">CSE</option>
+                <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+                <option value="CSE(DS)">CSE(DS)</option>
+                <option value="IT">IT</option>
+              </select>
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Name</th><th>Branch</th><th>AY</th><th>Actions</th></tr></thead>
+            <tbody id="sections-body"><tr><td colspan="4" class="status-msg">Select an academic year and branch above to view sections.</td></tr></tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <h3 style="margin-top:0;">Subjects</h3>
+          <div class="form-row">
+            <div class="field"><label>Name</label><input id="subj-name" placeholder="Data Structures"></div>
+            <div class="field"><label>Code</label><input id="subj-code" placeholder="244AB"></div>
+            <button id="add-subject-btn">Add</button>
+          </div>
+          <p class="status-msg" id="subject-add-status"></p>
+
+          <div class="form-row" style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
+            <div class="field" style="flex:1;">
+              <label>View: Search by Name or Code</label>
+              <input id="subj-search" placeholder="Type to search..." style="width:100%;">
+            </div>
+          </div>
+          <table>
+            <thead><tr><th>Name</th><th>Code</th><th>Actions</th></tr></thead>
+            <tbody id="subjects-body"><tr><td colspan="3" class="status-msg">Start typing above to search subjects.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: MANAGE STUDENTS -->
+    <div class="view" id="view-admin-students">
+      <div class="panel">
+        <h3 style="margin-top:0;">Bulk Import Students (CSV)</h3>
+        <p class="status-msg">CSV format: <code>roll_number,name</code> — first row can be a header, it will be skipped automatically if it doesn't look like a roll number. <a href="#" id="download-sample-csv" style="color:var(--accent); font-weight:600;">Download sample CSV</a></p>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="imp-ay">
+              <option value="2024-2025" disabled>2024-2025</option>
+              <option value="2025-2026" disabled>2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028" disabled>2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="imp-yearsem">
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II">II-II</option>
+              <option value="III-I">III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="imp-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="imp-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="import-section"></select></div>
+          <div class="field"><label>CSV File</label><input type="file" id="import-file" accept=".csv"></div>
+          <button id="import-students-btn">Import</button>
+        </div>
+        <p class="status-msg" id="import-status"></p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">View Roster</h3>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="roster-section"></select></div>
+          <button class="secondary" id="load-roster-btn">Load</button>
+        </div>
+        <table>
+          <thead><tr><th>Roll No</th><th>Name</th><th>Actions</th></tr></thead>
+          <tbody id="roster-body"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Re-Registration Candidates</h3>
+        <p class="status-msg">Students falling below the qualifying marks in Theory or Lab, in either MID — flagged individually per JNTUH/KMIT re-registration rules.</p>
+        <button class="secondary" id="goto-reregistration-btn">Open Re-Registration Report →</button>
+      </div>
+    </div>
+
+    <!-- ADMIN: RE-REGISTRATION REPORT -->
+    <div class="view" id="view-admin-reregistration">
+      <div class="panel">
+        <h3 style="margin-top:0;">Re-Registration Candidates</h3>
+        <p class="status-msg">
+          Checks each MID's Theory and Lab marks <strong>independently</strong> against the qualifying marks you set below. If a student falls short in <strong>any single one</strong> — I MID Theory, II MID Theory, I MID Lab, or II MID Lab (whichever apply to that subject) — they're flagged for re-registration, per JNTUH/KMIT rules. A student is only evaluated once every applicable offering for that subject has marks entered — anything missing is listed separately as <em>Incomplete</em> instead of being guessed at.
+          <br>Set the qualifying total per your regulation (e.g. 14 for a 35-mark internal, i.e. 40%) — this tool doesn't assume a fixed denominator since it can vary by subject/regulation.
+        </p>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="rr-ay">
+              <option value="2024-2025">2024-2025</option>
+              <option value="2025-2026">2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028">2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="rr-yearsem">
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II">II-II</option>
+              <option value="III-I" selected>III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="rr-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="rr-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="rr-section"><option value="">— All Sections —</option></select></div>
+          <div class="field"><label>Subject</label><select id="rr-subject"><option value="">— All Subjects —</option></select></div>
+          <div class="field"><label>Theory Qualifying (per MID)</label><input type="number" id="rr-threshold-theory" value="14" style="width:110px;"></div>
+          <div class="field"><label>Lab Qualifying (per MID)</label><input type="number" id="rr-threshold-lab" value="20" style="width:110px;"></div>
+          <button id="rr-generate-btn">Generate Report</button>
+        </div>
+        <p class="status-msg" id="rr-status"></p>
+      </div>
+      <div class="panel" id="rr-results-panel" style="display:none;">
+        <h3 style="margin-top:0;">Flagged for Re-Registration</h3>
+        <button class="secondary" id="rr-export-btn" style="margin-bottom:10px;">Export CSV</button>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Failed Component(s)</th></tr></thead>
+            <tbody id="rr-flagged-body"></tbody>
+          </table>
+        </div>
+        <h3 id="rr-incomplete-heading" style="display:none;">Incomplete Data (not evaluated)</h3>
+        <div class="table-scroll">
+          <table id="rr-incomplete-table" style="display:none;">
+            <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Missing</th></tr></thead>
+            <tbody id="rr-incomplete-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: REPORTS -->
+    <div class="view" id="view-admin-reports">
+      <div class="panel">
+        <h3 style="margin-top:0;">Marks Reports</h3>
+        <p class="status-msg">Generate a marks list for I MID, II MID, or a consolidated (average of I &amp; II MID) view — optionally filtered down to students below a given total. Export to Excel (CSV) or PDF (print).</p>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="rep-ay">
+              <option value="2024-2025">2024-2025</option>
+              <option value="2025-2026">2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028">2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="rep-yearsem">
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II">II-II</option>
+              <option value="III-I" selected>III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="rep-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="rep-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="rep-section"><option value="">— All Sections —</option></select></div>
+          <div class="field"><label>Subject</label><select id="rep-subject"><option value="">— All Subjects —</option></select></div>
+          <div class="field">
+            <label>Report</label>
+            <select id="rep-scope">
+              <option value="I MID">I MID Marks</option>
+              <option value="II MID">II MID Marks</option>
+              <option value="Consolidated">Consolidated (Avg of I &amp; II MID)</option>
+            </select>
+          </div>
+          <div class="field"><label>Only below marks (optional)</label><input type="number" id="rep-threshold" placeholder="e.g. 14"></div>
+          <button id="rep-generate-btn">Generate Report</button>
+        </div>
+        <p class="status-msg" id="rep-status"></p>
+      </div>
+      <div class="panel" id="rep-results-panel" style="display:none;">
+        <h3 style="margin-top:0;" id="rep-results-title">Report Results</h3>
+        <button class="secondary" id="rep-export-csv-btn" style="margin-bottom:10px;">Export Excel (CSV)</button>
+        <button class="secondary" id="rep-export-pdf-btn" style="margin-bottom:10px;">Export PDF (Print)</button>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Type</th><th>Total</th></tr></thead>
+            <tbody id="rep-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden print-only view of a generated report, populated at print time -->
+    <div id="print-report" style="display:none;">
+      <h2 id="print-report-title">KMIT (AEB) — Marks Report</h2>
+      <div class="print-meta" id="print-report-meta"></div>
+      <table>
+        <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Type</th><th>Total</th></tr></thead>
+        <tbody id="print-report-body"></tbody>
+      </table>
+    </div>
+    <div class="view" id="view-admin-offerings">
+      <div class="panel">
+        <h3 style="margin-top:0;">Subject Curriculum</h3>
+        <p class="status-msg">Map which subjects belong to a Regulation / Year / Branch. This is what filters the Subject dropdown below — a subject won't show up in Create Offering until it's mapped here. Use Branch "— All —" for subjects common to every branch (e.g. labs, humanities).</p>
+        <div class="form-row">
+          <div class="field" style="flex:2;"><label>Subject</label><select id="sc-subject"></select></div>
+          <div class="field">
+            <label>Regulation</label>
+            <select id="sc-regulation"></select>
+          </div>
+          <div class="field">
+            <label>Year</label>
+            <select id="sc-year">
+              <option value="I">I</option>
+              <option value="II" selected>II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="sc-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+          <button id="sc-map-btn">Map</button>
+        </div>
+        <p class="status-msg" id="sc-map-status"></p>
+
+        <div class="form-row" style="align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
+          <div class="field">
+            <label>Bulk upload (CSV)</label>
+            <input type="file" id="sc-csv-file" accept=".csv">
+          </div>
+          <button class="secondary" id="sc-csv-upload-btn" type="button">Upload CSV</button>
+          <button class="secondary" id="sc-csv-sample-btn" type="button">Download Sample CSV</button>
+        </div>
+        <p class="status-msg" id="sc-csv-status">CSV columns: <code>subject_code, regulation, year, branch</code> — leave <code>branch</code> blank for "— All —". Subject Code must match an existing subject in Manage Catalog exactly.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th style="text-align:left;">Subject</th><th>Regulation</th><th>Year</th><th>Branch</th><th></th></tr></thead>
+            <tbody id="sc-list-body"><tr><td colspan="5" class="status-msg">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Create Offering</h3>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="off-ay">
+              <option value="2024-2025" disabled>2024-2025</option>
+              <option value="2025-2026" disabled>2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028" disabled>2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="off-yearsem">
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II" selected>II-II</option>
+              <option value="III-I">III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="off-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="off-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="off-section"></select></div>
+          <div class="field"><label>Subject</label><select id="off-subject"></select></div>
+          <div class="field">
+            <label>Type</label>
+            <select id="off-type">
+              <option value="theory" selected>theory</option>
+              <option value="lab">lab</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>MID</label>
+            <select id="off-mid">
+              <option value="I MID" selected>I MID</option>
+              <option value="II MID">II MID</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Entry Opens</label><input type="date" id="off-start-date"></div>
+          <div class="field"><label>Entry Deadline</label><input type="date" id="off-end-date"></div>
+        </div>
+        <button id="create-offering-btn">Create Offering</button>
+        <p class="status-msg" id="offering-create-status"></p>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin-top:0;">All Offerings</h3>
+        <div id="admin-offerings-list"><p class="status-msg">Loading...</p></div>
+      </div>
+    </div>
+
+    <!-- ADMIN: MARK STRUCTURES -->
+    <div class="view" id="view-admin-structures">
+      <div class="panel">
+        <h3 style="margin-top:0;">Add / Update Mark Structure Column</h3>
+        <div class="form-row">
+          <div class="field">
+            <label>Regulation</label>
+            <select id="ms-reg">
+              <option value="KR23">KR23</option>
+              <option value="KR24" selected>KR24</option>
+              <option value="KR26">KR26</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year</label>
+            <select id="ms-year">
+              <option value="I">I</option>
+              <option value="II" selected>II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <select id="ms-type">
+              <option value="theory" selected>theory</option>
+              <option value="lab">lab</option>
+              <option value="mandatory">mandatory</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Column Key</label><input id="ms-key" placeholder="1a"></div>
+          <div class="field"><label>Label</label><input id="ms-label" placeholder="1a"></div>
+          <div class="field"><label>Max Marks</label><input type="number" id="ms-max" placeholder="5"></div>
+          <div class="field"><label>Order</label><input type="number" id="ms-order" placeholder="auto"></div>
+          <div class="field"><label>Auto-calc?</label><select id="ms-auto"><option value="false">No</option><option value="true">Yes</option></select></div>
+        </div>
+        <div class="form-row" id="ms-formula-row" style="display:none;">
+          <div class="field" style="flex:1;">
+            <label>Formula description <span style="font-weight:400; color:var(--muted);">(human-readable note only — set Calculation Type below for it to actually compute)</span></label>
+            <input id="ms-formula" placeholder="best 3 of (1a+1b, 2a+2b, 3a+3b, 4a+4b, 5a+5b)" style="width:100%;">
+          </div>
+        </div>
+        <div class="form-row" id="ms-calc-row" style="display:none; align-items:center;">
+          <div class="field">
+            <label>Calculation Type</label>
+            <select id="ms-calc-type">
+              <option value="">None (not computed)</option>
+              <option value="sum">Sum of Columns</option>
+              <option value="best_n_of_pairs">Best N of Paired Columns</option>
+            </select>
+          </div>
+          <div class="field" id="ms-calc-sum-field" style="flex:1; display:none;">
+            <label>Columns to sum <span style="font-weight:400;color:var(--muted);">(comma-separated column keys)</span></label>
+            <input id="ms-calc-sum-columns" placeholder="part_c,assignment,objective,descriptive_best_of_3" style="width:100%;">
+          </div>
+          <div class="field" id="ms-calc-pairs-field" style="flex:1; display:none;">
+            <label>Pairs <span style="font-weight:400;color:var(--muted);">(comma-separated key:key)</span></label>
+            <input id="ms-calc-pairs" placeholder="1a:1b,2a:2b,3a:3b,4a:4b,5a:5b" style="width:100%;">
+          </div>
+          <div class="field" id="ms-calc-n-field" style="display:none; max-width:110px;">
+            <label>Best N</label>
+            <input type="number" id="ms-calc-n" placeholder="3">
+          </div>
+        </div>
+        <button id="save-structure-btn">Save Column</button>
+        <button class="secondary" id="ms-clear-btn" type="button">Clear Column Fields</button>
+        <p class="status-msg" id="structure-save-status"></p>
+
+        <div class="form-row" style="align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
+          <div class="field">
+            <label>Bulk upload whole structure (CSV)</label>
+            <input type="file" id="ms-csv-file" accept=".csv">
+          </div>
+          <button class="secondary" id="ms-csv-upload-btn" type="button">Upload CSV</button>
+          <button class="secondary" id="ms-csv-sample-btn" type="button">Download Sample CSV</button>
+          <button class="secondary" id="ms-csv-preview-btn" type="button">Preview Sample (Landscape)</button>
+        </div>
+        <p class="status-msg" id="ms-csv-status">
+          CSV columns: <code>regulation, year, type, column_key, column_label, max_marks, sort_order, auto_calculated, formula, calc_type, calc_config</code> —
+          the sample mirrors the real KR24/II/theory structure for theory (with working calc_type/calc_config), plus bare skeletons for lab and mandatory (each year's real structure differs, so rename/add/remove rows and adjust max_marks as needed before uploading).
+          <code>regulation</code>/<code>year</code>/<code>type</code> can be left blank per row to fall back to the dropdowns above.
+          <code>sort_order</code> can be left blank to auto-number rows (numbering restarts for each regulation/year/type group, in file order), <code>auto_calculated</code> is <code>true</code>/<code>false</code>.
+          <code>formula</code> is a human-readable note only — for a column to actually compute, set <code>calc_type</code> to <code>sum</code> (with <code>calc_config</code> like <code>{"columns":["a","b"]}</code>) or <code>best_n_of_pairs</code> (with <code>{"pairs":[["1a","1b"],["2a","2b"]],"n":1}</code>).
+        </p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Existing Structures</h3>
+        <div class="form-row">
+          <div class="field"><label>Filter by Regulation</label><input id="ms-filter-reg" placeholder="KR24"></div>
+          <div class="field"><label>Filter by Year</label><input id="ms-filter-year" placeholder="II"></div>
+          <div class="field"><label>Filter by Type</label><input id="ms-filter-type" placeholder="theory"></div>
+          <button class="secondary" id="ms-filter-btn">Filter</button>
+          <button class="secondary" id="ms-print-btn">Print (Landscape)</button>
+          <button class="secondary" id="ms-export-btn">Export CSV</button>
+        </div>
+        <table>
+          <thead><tr><th>Key</th><th>Label</th><th>Max</th><th>Order</th><th>Auto</th><th>Actions</th></tr></thead>
+          <tbody id="structures-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Hidden print-only landscape view of Existing Structures, populated at print time -->
+    <div id="print-structures" style="display:none;">
+      <h2>KMIT (AEB) — Mark Structures</h2>
+      <div class="print-meta" id="print-structures-meta"></div>
+      <table>
+        <thead><tr><th>Key</th><th>Label</th><th>Max Marks</th><th>Order</th><th>Auto-calculated</th></tr></thead>
+        <tbody id="print-structures-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Hidden print-only view of a faculty marks-entry sheet, populated at print time -->
+    <div id="print-marks" style="display:none;">
+      <h2 id="print-marks-title">KMIT (AEB) — Marks Entry</h2>
+      <div class="print-meta" id="print-marks-meta"></div>
+      <table>
+        <thead><tr id="print-marks-header"></tr></thead>
+        <tbody id="print-marks-body"></tbody>
+      </table>
+      <div id="print-marks-footer">
+        <div class="sig-block">
+          <div class="sig-col">
+            <div class="sig-line"><span id="print-marks-faculty-name"></span><span>Date: __________</span></div>
+            <div style="margin-top:2px;color:#555;">Faculty Signature</div>
+          </div>
+          <div class="sig-col">
+            <div class="sig-line"><span id="print-marks-hod-name">HoD, <span id="print-marks-hod-branch"></span></span><span>Date: __________</span></div>
+            <div style="margin-top:2px;color:#555;">HoD Signature</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN: ASSIGN FACULTY -->
+    <div class="view" id="view-admin-assign">
+      <div class="panel">
+        <h3 style="margin-top:0;">Assign Faculty to Offering</h3>
+        <p class="status-msg">Filter down to the exact offering, same as Create Offering — the Subject list only shows subjects mapped for the selected Regulation/Year/Branch.</p>
+        <div class="form-row">
+          <div class="field">
+            <label>Academic Year</label>
+            <select id="af-ay">
+              <option value="2024-2025" disabled>2024-2025</option>
+              <option value="2025-2026" disabled>2025-2026</option>
+              <option value="2026-2027" selected>2026-2027 (current)</option>
+              <option value="2027-2028" disabled>2027-2028</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year / Semester</label>
+            <select id="af-yearsem">
+              <option value="I-I">I-I</option>
+              <option value="I-II">I-II</option>
+              <option value="II-I">II-I</option>
+              <option value="II-II" selected>II-II</option>
+              <option value="III-I">III-I</option>
+              <option value="III-II">III-II</option>
+              <option value="IV-I">IV-I</option>
+              <option value="IV-II">IV-II</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Regulation</label>
+            <input id="af-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
+          </div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="af-branch">
+              <option value="">— All —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Section</label><select id="af-section"></select></div>
+          <div class="field"><label>Subject</label><select id="af-subject"></select></div>
+          <div class="field">
+            <label>Type</label>
+            <select id="af-type">
+              <option value="theory" selected>theory</option>
+              <option value="lab">lab</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>MID</label>
+            <select id="af-mid">
+              <option value="I MID" selected>I MID</option>
+              <option value="II MID">II MID</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label>Faculty</label><select id="assign-faculty"></select></div>
+          <div class="field" style="flex:2;"><label>Offering (matches filters above)</label><select id="assign-offering"></select></div>
+        </div>
+        <button id="assign-btn">Assign</button>
+        <p class="status-msg" id="assign-status"></p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Current Assignments</h3>
+        <table>
+          <thead><tr><th>Faculty</th><th>Role</th><th>Subject</th><th>Section</th><th>MID</th><th>Actions</th></tr></thead>
+          <tbody id="assignments-body"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Reset Two-Factor Authentication</h3>
+        <p class="status-msg">For a faculty member who's lost access to their authenticator app — removes their 2FA so they can sign in with just Google again, then optionally set it back up.</p>
+        <div class="form-row">
+          <div class="field" style="flex:1;">
+            <label>Faculty Email</label>
+            <input id="mfa-reset-email" type="email" placeholder="faculty@kmit.in">
+          </div>
+          <button id="mfa-reset-btn">Reset Their 2FA</button>
+        </div>
+        <p class="status-msg" id="mfa-reset-status"></p>
+      </div>
+    </div>
+
+    <!-- ADMIN: HOD & COE MANAGEMENT -->
+    <div class="view" id="view-admin-hod">
+      <div class="panel">
+        <h3 style="margin-top:0;">Promote to HOD or COE</h3>
+        <p class="status-msg">The person must have signed in at least once already (so a profile exists) before they can be promoted. Both roles are read-only — HOD is scoped by branch/year below, COE sees everything institution-wide with no scoping needed.</p>
+        <div class="form-row">
+          <div class="field" style="flex:1;">
+            <label>Email</label>
+            <input id="hod-promote-email" type="email" placeholder="person@kmit.in">
+          </div>
+          <div class="field">
+            <label>Role</label>
+            <select id="hod-promote-role">
+              <option value="hod">HOD</option>
+              <option value="coe">COE</option>
+              <option value="clerk">Clerk (Year Coordinator)</option>
+            </select>
+          </div>
+          <button id="hod-promote-btn">Promote</button>
+        </div>
+        <p class="status-msg" id="hod-promote-status"></p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Assign HOD Scope</h3>
+        <p class="status-msg">Each HOD can hold multiple grants — e.g. one branch across two years, or all branches for one year. Leave Branch or Year blank to mean "all".</p>
+        <div class="form-row">
+          <div class="field"><label>HOD</label><select id="hod-assign-select"></select></div>
+          <div class="field">
+            <label>Branch</label>
+            <select id="hod-assign-branch">
+              <option value="">— All Branches —</option>
+              <option value="CSE">CSE</option>
+              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
+              <option value="CSE(DS)">CSE(DS)</option>
+              <option value="IT">IT</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Year</label>
+            <select id="hod-assign-year">
+              <option value="">— All Years —</option>
+              <option value="I">I</option>
+              <option value="II">II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+            </select>
+          </div>
+          <button id="hod-assign-btn">Grant Scope</button>
+        </div>
+        <p class="status-msg" id="hod-assign-status"></p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Current HOD Grants</h3>
+        <table>
+          <thead><tr><th>HOD</th><th>Branch</th><th>Year</th><th>Actions</th></tr></thead>
+          <tbody id="hod-assignments-body"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Assign Clerk (Year Coordinator) Scope</h3>
+        <p class="status-msg">Clerks get near-admin write access — create offerings, assign faculty, approve/freeze/unfreeze — scoped to their assigned year(s). Adding students/subjects/sections is unscoped (the schema has no year field on those, same as admin).</p>
+        <div class="form-row">
+          <div class="field"><label>Clerk</label><select id="clerk-assign-select"></select></div>
+          <div class="field">
+            <label>Year</label>
+            <select id="clerk-assign-year">
+              <option value="I">I</option>
+              <option value="II">II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+            </select>
+          </div>
+          <button id="clerk-assign-btn">Grant Scope</button>
+        </div>
+        <p class="status-msg" id="clerk-assign-status"></p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Current Clerk Grants</h3>
+        <table>
+          <thead><tr><th>Clerk</th><th>Year</th><th>Actions</th></tr></thead>
+          <tbody id="clerk-assignments-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- HOD: READ-ONLY DASHBOARD -->
+    <div class="view" id="view-hod-dashboard">
+      <div class="panel">
+        <h3 style="margin-top:0;">Your Scope</h3>
+        <p class="status-msg" id="hod-scope-summary">Loading...</p>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Marks Overview</h3>
+        <p class="status-msg">Read-only — HOD accounts view marks and reports but cannot edit them.</p>
+        <table>
+          <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>MID</th><th>Type</th><th>Total</th></tr></thead>
+          <tbody id="hod-marks-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- COE: READ-ONLY DASHBOARD (institution-wide, no scoping) -->
+    <div class="view" id="view-coe-dashboard">
+      <div class="panel">
+        <h3 style="margin-top:0;">Marks Overview — All Branches, All Years</h3>
+        <p class="status-msg">Read-only — COE accounts view marks and reports institution-wide but cannot edit them.</p>
+        <table>
+          <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>MID</th><th>Type</th><th>Total</th></tr></thead>
+          <tbody id="coe-marks-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADMIN: AUDIT LOG -->
+    <div class="view" id="view-admin-audit">
+      <div class="panel">
+        <h3 style="margin-top:0;">Recent Actions</h3>
+        <button class="secondary" id="refresh-audit-btn">Refresh</button>
+        <table>
+          <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Details</th></tr></thead>
+          <tbody id="audit-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FEEDBACK (visible to both admin and faculty) -->
+    <div class="view" id="view-feedback">
+      <div class="panel">
+        <h3 style="margin-top:0;">Feedback</h3>
+        <p class="status-msg">Found a bug, or have a suggestion for the portal? Send it straight to the Academic Examination Branch.</p>
+        <div class="form-row">
+          <div class="field">
+            <label>Category</label>
+            <select id="fb-category">
+              <option value="Bug Report">Bug Report</option>
+              <option value="Feature Suggestion">Feature Suggestion</option>
+              <option value="Data / Marks Issue">Data / Marks Issue</option>
+              <option value="Access / Login Issue">Access / Login Issue</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1;">
+            <label>Subject</label>
+            <input id="fb-subject" placeholder="e.g. Marks entry — save button not responding">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field" style="flex:1;">
+            <label>Message</label>
+            <textarea id="fb-message" rows="6" style="width:100%;" placeholder="Describe the issue or suggestion..."></textarea>
+          </div>
+        </div>
+        <button id="fb-send-btn">Send Feedback</button>
+        <p class="status-msg" id="fb-status">Opens your email app addressed to internals@kmit.in, with your name/role and this message pre-filled.</p>
+      </div>
+    </div>
+
+    <div class="app-footer">
+      <div><strong>KMIT</strong> · Autonomous Examination Branch</div>
+      <div class="app-footer-center">
+        Designed &amp; Developed by KMIT (AEB)<br>
+        Keshav Memorial Institute of Technology · 3-5-1026, Narayanaguda, Hyderabad<br>
+        Contact: <a href="mailto:exams@kmit.in">exams@kmit.in</a>
+      </div>
+      <div class="app-footer-nav">
+        <a href="https://kmit.in/" target="_blank" rel="noopener">About KMIT</a>
+        <a href="mailto:internals@kmit.in">Support</a>
+      </div>
+    </div>
+      </main>
     </div>
    </div>
   </div>
