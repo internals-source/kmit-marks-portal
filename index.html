@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KMIT (AEB) Marks Management System</title>
+<title>Ankan — Internal Assessment Portal | KMIT (AEB)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -24,10 +24,12 @@
   .site-letterhead { position: sticky; top: 0; z-index: 60; background: #fff; border-bottom: 1px solid var(--border); }
   .site-letterhead-inner {
     max-width: 1400px; margin: 0 auto; min-height: var(--letterhead-h);
-    display:flex; align-items:center; gap:16px; padding: 8px 24px; box-sizing:border-box;
+    display:flex; align-items:center; justify-content:center; gap: clamp(12px, 2.2vw, 28px);
+    padding: 8px 24px; box-sizing:border-box;
   }
   .site-letterhead-logo { height: 40px; flex-shrink: 0; }
-  .site-letterhead-text { flex:1; min-width: 0; text-align:center; }
+  /* Logo, name and badges form one centred cluster so there is no dead space between them. */
+  .site-letterhead-text { flex: 0 1 auto; min-width: 0; text-align:center; }
   .site-letterhead-name { font-family:'Syne',sans-serif; font-weight:800; font-size: clamp(13px, 2.1vw, 18px); color: var(--accent-purple); letter-spacing:.3px; line-height:1.3; }
   .site-letterhead-sub { font-size: clamp(9px, 1.1vw, 11px); color: var(--muted); font-weight:700; margin-top:2px; letter-spacing:.2px; }
   .site-letterhead-badges { display:flex; gap:8px; align-items:center; flex-shrink:0; }
@@ -421,6 +423,263 @@
     background: var(--card-cream);
   }
   .light-hero .login-eyebrow, .light-hero .login-heading, .light-hero .login-status-title { color: var(--card-text); }
+
+  /* ===================== LANDING PAGE (revamped) =====================
+     Scoped under .lp so the dead-end / registration screens (which reuse
+     .hero-body + .login-card) keep working exactly as before. */
+  .lp {
+    --lp-ink: #171a2b; --lp-ink-2: #5a6076; --lp-line: #e7e6f4;
+    --lp-brand: #4f46e5; --lp-brand-2: #7c3aed; --lp-gold: #b8863a;
+    position: relative; min-height: calc(100vh - var(--letterhead-h));
+    display: flex; flex-direction: column; overflow: hidden;
+    background: #fbfaff; color: var(--lp-ink);
+  }
+  /* Soft, slow-moving colour field instead of a flat gradient. */
+  .lp-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .lp-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; }
+  .lp-orb-a { width: 520px; height: 520px; top: -180px; left: -120px; background: radial-gradient(circle at 30% 30%, #c7d2fe, transparent 70%); }
+  .lp-orb-b { width: 620px; height: 620px; top: -140px; right: -200px; background: radial-gradient(circle at 70% 30%, #ede9fe, transparent 70%); }
+  .lp-orb-c { width: 460px; height: 460px; bottom: -220px; left: 35%; background: radial-gradient(circle at 50% 50%, #fdf0dc, transparent 70%); }
+  .lp-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--lp-line) 1px, transparent 1px), linear-gradient(90deg, var(--lp-line) 1px, transparent 1px);
+    background-size: 72px 72px; opacity: .45;
+    mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 75%);
+  }
+
+  .lp-nav {
+    position: relative; z-index: 2; max-width: 1160px; width: 100%; margin: 0 auto;
+    padding: 22px 32px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: .2px; }
+  .lp-nav-mark {
+    width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--lp-brand), var(--lp-brand-2));
+    color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .3px;
+    box-shadow: 0 6px 16px rgba(79,70,229,.28);
+  }
+  .lp-nav-links { display: flex; align-items: center; gap: 26px; }
+  .lp-nav-links a { color: var(--lp-ink-2); text-decoration: none; font-size: 13.5px; font-weight: 600; }
+  .lp-nav-links a:hover { color: var(--lp-brand); }
+  .lp-nav-cta {
+    border: 1px solid var(--lp-line) !important; background: #fff !important; background-image: none !important;
+    color: var(--lp-ink) !important; padding: 9px 18px; border-radius: 9px; font-size: 13px; font-weight: 700;
+    cursor: pointer; box-shadow: 0 1px 2px rgba(23,26,43,.05); animation: none !important;
+  }
+  .lp-nav-cta:hover { border-color: #cfcbf2 !important; }
+
+  .lp-main {
+    position: relative; z-index: 2; flex: 1; width: 100%; max-width: 1160px; margin: 0 auto;
+    padding: 48px 32px 64px; display: grid; gap: 56px; align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+  }
+  .lp-col-left, .lp-col-right { min-width: 0; display: grid; gap: 18px; align-content: start; }
+  .lp-col-left > .lp-eyebrow { justify-self: start; }
+  /* Welcome greeting above the status pill */
+  .lp-welcome { display: grid; gap: 4px; }
+  .lp-welcome-hi {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--lp-brand);
+  }
+  .lp-welcome-title {
+    font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -.6px; line-height: 1.1;
+    font-size: clamp(26px, 3.4vw, 38px); color: var(--lp-ink);
+  }
+  .lp-welcome-sub {
+    font-size: 15px; line-height: 1.5; color: var(--lp-ink-2); font-weight: 500; margin-top: 2px;
+  }
+  .lp-nav-brand-sub {
+    font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 13px; color: var(--lp-ink-2);
+    border-left: 1px solid var(--lp-line); margin-left: 8px; padding-left: 9px;
+  }
+  @media (max-width: 720px) { .lp-nav-brand-sub { display: none; } }
+  .lp-welcome-title em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--lp-brand), var(--lp-brand-2) 70%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lp-col-right { position: sticky; top: calc(var(--letterhead-h) + 20px); }
+  /* Auth-first column: the sign-in card is the single focal point. */
+  .lp-auth { width: 100%; max-width: 468px; display: grid; gap: 14px; justify-items: center; min-width: 0; }
+  .lp-auth > * { width: 100%; }
+  .lp-auth > .lp-eyebrow { width: auto; }
+  .lp-band { width: 100%; max-width: 1040px; }
+  .lp-band-title {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12.5px;
+    letter-spacing: .8px; text-transform: uppercase; color: var(--lp-ink-2); margin-bottom: 14px;
+  }
+  .lp-band-title::after {
+    content: ""; flex: 1; height: 1px; border-radius: 1px;
+    background: linear-gradient(90deg, var(--lp-line), transparent);
+  }
+
+  /* ---- Notifications panel (announcement + deadline ticker) ---- */
+  .lp-notify { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 6px; box-shadow: 0 1px 2px rgba(23,26,43,.05); }
+  .lp-notify-head {
+    display: flex; align-items: center; gap: 9px; padding: 12px 14px 11px;
+    font-size: 12px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--lp-ink-2);
+    border-bottom: 1px solid var(--lp-line);
+  }
+  .lp-notify-head .lp-bell { font-size: 14px; animation: lpBell 5s ease-in-out infinite; transform-origin: 50% 10%; }
+  .lp-notify-live {
+    margin-left: auto; display: inline-flex; align-items: center; gap: 6px; text-transform: none;
+    letter-spacing: 0; font-size: 11px; font-weight: 700; color: var(--ok);
+  }
+  .lp-notify-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); animation: lpPing 2s ease-out infinite; }
+  .lp-notify-body { padding: 12px; display: grid; gap: 10px; }
+  .lp-notify-empty { font-size: 13px; color: var(--lp-ink-2); }
+
+  /* ---- Animation system: staggered entrance + calm micro-interactions ---- */
+  @keyframes lpRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes lpRiseRight { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
+  @keyframes lpPing { 0% { box-shadow: 0 0 0 0 rgba(31,157,95,.45); } 70% { box-shadow: 0 0 0 7px rgba(31,157,95,0); } 100% { box-shadow: 0 0 0 0 rgba(31,157,95,0); } }
+  @keyframes lpBell { 0%, 84%, 100% { transform: rotate(0); } 88% { transform: rotate(12deg); } 92% { transform: rotate(-9deg); } 96% { transform: rotate(5deg); } }
+  @keyframes lpSheen { from { transform: translateX(-120%); } to { transform: translateX(220%); } }
+  @keyframes lpFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  .lp-anim { opacity: 0; animation: lpRise .62s cubic-bezier(.22,.68,.32,1) both; }
+  .lp-col-right .lp-card { animation: lpRiseRight .7s cubic-bezier(.22,.68,.32,1) both; }
+  .lp-d1 { animation-delay: .05s; } .lp-d2 { animation-delay: .12s; } .lp-d3 { animation-delay: .19s; }
+  .lp-d4 { animation-delay: .26s; } .lp-d5 { animation-delay: .33s; } .lp-d6 { animation-delay: .40s; }
+  .lp-d7 { animation-delay: .47s; }
+  /* Notifications sit directly under the status pill, above the capability band. */
+  .lp-col-left > .lp-notify { order: -1; }
+  .lp-col-left > .lp-eyebrow { order: -2; }
+  .lp-col-left > .lp-welcome { order: -3; }
+
+  .lp-orb-a { animation: lpFloat 14s ease-in-out infinite; }
+  .lp-orb-b { animation: lpFloat 18s ease-in-out infinite reverse; }
+  .lp-orb-c { animation: lpFloat 22s ease-in-out infinite; }
+
+  .lp-feature { transition: transform .28s cubic-bezier(.22,.68,.32,1), box-shadow .28s ease, border-color .28s ease; }
+  .lp-feature:hover { transform: translateY(-3px); border-color: #d8d5f6; box-shadow: 0 1px 2px rgba(23,26,43,.05), 0 14px 28px rgba(79,70,229,.10); }
+  .lp-feature .lp-feature-ico { display: inline-block; transition: transform .28s cubic-bezier(.22,.68,.32,1); }
+  .lp-feature:hover .lp-feature-ico { transform: scale(1.14) rotate(-5deg); }
+  .lp-google { position: relative; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease, filter .2s ease; }
+  .lp-google::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 42%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+    animation: lpSheen 3.4s ease-in-out infinite; animation-delay: 1.2s;
+  }
+  .lp-google:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(79,70,229,.34); }
+  .lp-google:active { transform: translateY(0); }
+  .lp-nav-cta, .lp-nav-links a { transition: transform .2s ease, color .2s ease, border-color .2s ease; }
+  .lp-nav-cta:hover { transform: translateY(-1px); }
+  .lp-step, .lp-info .announcement-box { transition: transform .25s ease; }
+  .lp-info .announcement-box:hover { transform: translateY(-2px); }
+
+  .lp-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px 6px 10px;
+    border-radius: 999px; background: #fff; border: 1px solid var(--lp-line);
+    font-size: 11.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    color: var(--lp-ink-2); box-shadow: 0 1px 2px rgba(23,26,43,.04);
+  }
+  .lp-eyebrow .lp-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 3px rgba(31,157,95,.16); }
+  .lp-title {
+    font-family: 'Syne', sans-serif; font-weight: 800; letter-spacing: -1px;
+    font-size: clamp(34px, 5vw, 58px); line-height: 1.04; margin: 22px 0 0;
+  }
+  .lp-title em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--lp-brand), var(--lp-brand-2) 55%, #b8863a);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lp-lede { margin: 20px 0 0; max-width: 52ch; font-size: 16px; line-height: 1.6; color: var(--lp-ink-2); }
+
+  .lp-features { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .lp-feature {
+    background: rgba(255,255,255,.78); backdrop-filter: blur(6px);
+    border: 1px solid var(--lp-line); border-radius: 12px; padding: 15px 16px;
+    box-shadow: 0 1px 2px rgba(23,26,43,.04);
+  }
+  .lp-feature-ico { font-size: 17px; line-height: 1; }
+  .lp-feature-h { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; margin: 9px 0 4px; }
+  .lp-feature-p { font-size: 12.5px; line-height: 1.5; color: var(--lp-ink-2); }
+
+  .lp-side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--letterhead-h) + 24px); }
+  .lp-card {
+    background: #fff; border: 1px solid var(--lp-line); border-radius: 16px; padding: 28px;
+    box-shadow: 0 1px 2px rgba(23,26,43,.05), 0 18px 46px rgba(79,70,229,.10);
+  }
+  .lp-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+  .lp-card-label { font-size: 11px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--lp-gold); }
+  .lp-secure { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--ok); background: rgba(31,157,95,.09); border-radius: 999px; padding: 4px 10px; }
+  .lp-card h2 { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; margin: 0 0 6px; letter-spacing: -.2px; }
+  .lp-card p.lp-card-sub { font-size: 13.5px; line-height: 1.55; color: var(--lp-ink-2); margin: 0 0 22px; }
+  .lp-google {
+    width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: linear-gradient(95deg, var(--lp-brand), var(--lp-brand-2)) !important;
+    color: #fff; border: none; border-radius: 10px; padding: 13px 18px; min-height: 48px;
+    font-family: 'DM Sans', sans-serif; font-size: 14.5px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 8px 22px rgba(79,70,229,.28); animation: none !important;
+  }
+  .lp-google:hover { filter: brightness(1.05); }
+  .lp-google:focus-visible { outline: 3px solid rgba(79,70,229,.35); outline-offset: 2px; }
+  .lp-google svg { background: #fff; border-radius: 4px; padding: 2px; }
+  .lp-meta { margin-top: 14px; font-size: 12px; line-height: 1.5; color: var(--lp-ink-2); text-align: center; }
+  .lp-meta a { color: var(--lp-brand); font-weight: 600; }
+  .lp-note {
+    margin-top: 14px; background: #fdeef0; color: #b53b50; border: 1px solid #f6d4da;
+    border-radius: 10px; padding: 10px 14px; font-size: 13px; text-align: center;
+  }
+  .lp-steps { margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--lp-line); display: grid; gap: 11px; }
+  .lp-step { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; color: var(--lp-ink-2); line-height: 1.45; }
+  .lp-step b { display: grid; place-items: center; flex: 0 0 18px; height: 18px; border-radius: 50%; background: #eef0fe; color: var(--lp-brand); font-size: 10.5px; font-weight: 800; margin-top: 1px; }
+
+  /* Announcement + deadline ticker, restyled for the light landing. */
+  .lp-info { display: grid; gap: 12px; min-width: 0; }
+  .lp-side, .lp-copy, .lp-main > * { min-width: 0; }
+  .lp-info .hero-announcement-wrap, .lp-info .hero-ticker-wrap { max-width: 100%; margin: 0; padding: 0; min-width: 0; overflow: hidden; }
+  .lp-info .announcement-box {
+    background: #fff; border: 1px solid var(--lp-line); border-left: 3px solid var(--lp-gold);
+    border-radius: 12px; padding: 15px 17px; box-shadow: 0 1px 2px rgba(23,26,43,.04);
+  }
+  .lp-info .announcement-box .ann-label { font-size: 11px; color: var(--lp-gold); }
+  .lp-info .announcement-box .ann-text { font-size: 14px; color: var(--lp-ink); }
+  .lp-info .ticker-wrap {
+    background: #fff; border: 1px solid var(--lp-line); border-radius: 12px; margin: 0;
+    width: 100%; max-width: 100%; padding: 11px 0;
+    box-shadow: 0 1px 2px rgba(23,26,43,.04);
+  }
+  .lp-info .ticker-item { color: var(--lp-ink); border-right-color: var(--lp-line); font-size: 12.5px; padding: 0 22px; }
+  .lp-info .ticker-item .ticker-label { color: var(--lp-gold); }
+
+  .lp-footer {
+    position: relative; z-index: 2; border-top: 1px solid var(--lp-line); background: rgba(255,255,255,.7);
+    backdrop-filter: blur(6px);
+  }
+  .lp-footer-inner {
+    max-width: 1160px; margin: 0 auto; padding: 22px 32px; display: flex; flex-wrap: wrap;
+    gap: 14px 32px; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--lp-ink-2); line-height: 1.6;
+  }
+  .lp-footer-inner strong { color: var(--lp-ink); }
+  .lp-footer-nav { display: flex; gap: 20px; }
+  .lp-footer-inner a { color: var(--lp-ink-2); text-decoration: none; font-weight: 600; }
+  .lp-footer-inner a:hover { color: var(--lp-brand); }
+
+  @media (max-width: 1000px) {
+    .lp-main { grid-template-columns: 1fr; gap: 36px; padding: 36px 24px 52px; }
+    .lp-col-right { position: static; order: -1; }
+    .lp-side { position: static; }
+    .lp-nav-links { display: none; }
+  }
+  @media (max-width: 560px) {
+    .lp-nav { padding: 18px 20px 0; }
+    .lp-main { padding: 32px 20px 44px; }
+    .lp-features { grid-template-columns: 1fr; }
+    .lp-card { padding: 22px; }
+    .lp-footer-inner { padding: 20px; flex-direction: column; align-items: flex-start; }
+  }
+  /* Honour reduced-motion: the marquee and fades are decorative only. */
+  @media (prefers-reduced-motion: reduce) {
+    .lp .ticker-track, .lp .anim-pulse, .lp [class*="anim-fade"],
+    .lp-anim, .lp-col-right .lp-card, .lp-orb, .lp-bell, .lp-notify-live i, .lp-google::after { animation: none !important; }
+    .lp-anim, .lp-col-right .lp-card { opacity: 1 !important; transform: none !important; }
+    .lp-feature:hover, .lp-google:hover, .lp-nav-cta:hover { transform: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -439,1273 +698,100 @@
     </div>
   </div>
 
-  <div id="login-screen" class="light-hero">
-    <div class="mms-banner">
-      <div class="mms-welcome">Welcome</div>
-      <div class="mms-title">Marks Management System</div>
+  <!-- ================= LANDING / SIGN-IN ================= -->
+  <div id="login-screen" class="lp">
+    <div class="lp-bg" aria-hidden="true">
+      <span class="lp-grid"></span>
+      <span class="lp-orb lp-orb-a"></span>
+      <span class="lp-orb lp-orb-b"></span>
+      <span class="lp-orb lp-orb-c"></span>
     </div>
 
-    <div class="hero-body">
-      <div class="hero-left">
-        <div class="prelogin-info-card">
-          <div id="announcement-box" class="hero-announcement-wrap"></div>
-          <div id="pre-login-info" class="hero-ticker-wrap"></div>
-        </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="login-card anim-fade-3">
-          <div class="login-eyebrow">Faculty Portal · KR24</div>
-          <div class="login-heading">Sign in to continue</div>
-          <span class="login-icon anim-pulse">🔒</span>
-          <div class="login-status-title">Google Sign-In Required</div>
-          <div class="login-status-sub">Sign in with your Google account to access the portal.</div>
-          <button class="login-btn-solid" id="login-btn">Faculty Sign In</button>
-          <div class="login-note" id="login-note" style="display:none;">Not signed in</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="app-footer light-footer">
-      <div><strong>KMIT</strong> · Autonomous Examination Branch</div>
-      <div class="app-footer-center">
-        Designed &amp; Developed by KMIT (AEB)<br>
-        Keshav Memorial Institute of Technology · 3-5-1026, Narayanaguda, Hyderabad<br>
-        Contact: <a href="mailto:exams@kmit.in">exams@kmit.in</a>
-      </div>
-      <div class="app-footer-nav">
-        <a href="https://kmit.in/" target="_blank" rel="noopener">About KMIT</a>
+    <nav class="lp-nav">
+      <div class="lp-nav-brand"><span class="lp-nav-mark">AEB</span> Ankan <span class="lp-nav-brand-sub">Internal Assessment Portal</span></div>
+      <div class="lp-nav-links">
+        <a href="#lp-how">How it works</a>
+        <a href="https://kmit.in/" target="_blank" rel="noopener">Institute</a>
         <a href="mailto:internals@kmit.in">Support</a>
       </div>
-    </div>
-  </div>
+      <button class="lp-nav-cta" id="nav-login-btn">Sign in</button>
+    </nav>
 
-  <div id="app">
-   <div class="shell">
-    <aside class="shell-sidebar">
-      <div class="shell-logo">KMIT</div>
-      <div class="shell-nav-label">Navigation</div>
-      <div class="tabs" id="tabs">
-        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
-        <button class="tab-btn" data-tab="offerings">My Subjects</button>
-        <button class="tab-btn" data-tab="low-marks">&lt; 14 Marks Students</button>
-        <button class="tab-btn admin-only clerk-visible" data-tab="admin-catalog" style="display:none;">Manage Catalog</button>
-        <button class="tab-btn admin-only clerk-visible" data-tab="admin-students" style="display:none;">Manage Students</button>
-        <button class="tab-btn admin-only" data-tab="admin-reregistration" style="display:none;">Re-Registration</button>
-        <button class="tab-btn admin-only" data-tab="admin-reports" style="display:none;">Reports</button>
-        <button class="tab-btn admin-only clerk-visible" data-tab="admin-offerings" style="display:none;">Manage Offerings</button>
-        <button class="tab-btn admin-only" data-tab="admin-structures" style="display:none;">Mark Structures</button>
-        <button class="tab-btn admin-only clerk-visible" data-tab="admin-assign" style="display:none;">Assign Faculty</button>
-        <button class="tab-btn admin-only" data-tab="admin-hod" style="display:none;">HOD Management</button>
-        <button class="tab-btn admin-only" data-tab="admin-audit" style="display:none;">Audit Log</button>
-        <button class="tab-btn hod-only" data-tab="hod-dashboard" style="display:none;">HOD Dashboard</button>
-        <button class="tab-btn coe-only" data-tab="coe-dashboard" style="display:none;">COE Dashboard</button>
-        <a href="marks-screen-preview.html" target="_blank" rel="noopener" class="tab-btn admin-only" style="display:none; text-decoration:none;" title="Opens a static preview of the marks entry screen with sample data — not connected to Supabase">Marks Screen Preview ↗</a>
-        <button class="tab-btn" data-tab="feedback">Feedback</button>
-      </div>
-    </aside>
-
-    <div class="shell-body">
-      <div class="shell-topbar">
-        <button class="topbar-hamburger" id="sidebar-toggle" type="button" title="Toggle navigation">☰</button>
-        <div class="topbar-search-wrap">
-          <div class="topbar-brand">Marks Management System</div>
-          <div class="topbar-search">
-            <span class="search-icon">🔍</span>
-            <input type="text" placeholder="Search here..." disabled title="Not wired up yet">
-          </div>
+    <main class="lp-main">
+      <section class="lp-col-left">
+        <div class="lp-welcome lp-anim lp-d1">
+          <div class="lp-welcome-hi">Welcome</div>
+          <div class="lp-welcome-title"><em>Ankan</em></div>
+          <div class="lp-welcome-sub">Internal Assessment Portal &middot; KMIT Autonomous Examination Branch</div>
         </div>
-        <div class="topbar-right">
-          <div class="profile-menu">
-            <button class="profile-btn" id="profile-btn" type="button">
-              <span class="profile-avatar" id="profile-avatar">?</span>
-              <span class="profile-email-text" id="profile-email-text"></span>
-              <span class="profile-caret">▾</span>
-            </button>
-            <div class="profile-dropdown" id="profile-dropdown">
-              <div class="profile-dropdown-role" id="user-info"></div>
-              <div class="profile-dropdown-meta" id="user-meta" style="font-size:11px; color:var(--muted); padding:0 6px 8px;"></div>
-              <button class="secondary" id="edit-profile-btn" style="width:100%; margin-bottom:6px;">My Profile</button>
-              <button class="secondary" id="lock-screen-btn" style="width:100%; margin-bottom:6px;">🔒 Lock Screen</button>
-              <button class="secondary" id="logout-btn" style="width:100%;">Sign out</button>
+
+        <span class="lp-eyebrow lp-anim lp-d2"><span class="lp-dot"></span> Autonomous Examination Branch</span>
+
+        <div class="lp-band lp-anim lp-d4" id="lp-how">
+          <div class="lp-band-title">What this portal handles</div>
+          <div class="lp-features">
+            <div class="lp-feature lp-anim lp-d4">
+              <div class="lp-feature-ico">✍️</div>
+              <div class="lp-feature-h">Structured entry</div>
+              <div class="lp-feature-p">Component columns come from the approved mark structure, with live max-mark validation on every cell.</div>
+            </div>
+            <div class="lp-feature lp-anim lp-d5">
+              <div class="lp-feature-ico">🔒</div>
+              <div class="lp-feature-h">Deadlines &amp; freeze</div>
+              <div class="lp-feature-p">Entry windows close automatically; the examination branch freezes an offering once it is verified.</div>
+            </div>
+            <div class="lp-feature lp-anim lp-d6">
+              <div class="lp-feature-ico">📊</div>
+              <div class="lp-feature-h">Reports that reconcile</div>
+              <div class="lp-feature-p">Section reports, low-marks lists and re-registration flags, printable or exportable as CSV.</div>
+            </div>
+            <div class="lp-feature lp-anim lp-d7">
+              <div class="lp-feature-ico">🛡️</div>
+              <div class="lp-feature-h">Accountable by default</div>
+              <div class="lp-feature-p">Institute Google sign-in, two-factor for privileged roles, and a full audit trail of every edit.</div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- MY PROFILE (edit) MODAL -->
-      <div id="profile-edit-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.45); z-index:100; align-items:center; justify-content:center;">
-        <div class="login-card" style="max-width:420px; width:90%; text-align:left;">
-          <div class="login-heading" style="margin-bottom:2px;">My Profile</div>
-          <p class="status-msg" id="edit-profile-email" style="margin-bottom:16px;"></p>
+        <div class="lp-notify lp-anim lp-d3">
+          <div class="lp-notify-head">
+            <span class="lp-bell">🔔</span> Notifications
+            <span class="lp-notify-live"><i></i> Live</span>
+          </div>
+          <div class="lp-notify-body lp-info">
+            <div id="announcement-box" class="hero-announcement-wrap"></div>
+            <div id="pre-login-info" class="hero-ticker-wrap"></div>
+          </div>
+        </div>
+      </section>
 
-          <div class="field" style="margin-bottom:14px;">
-            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Full Name</label>
-            <input id="ep-full-name" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
+      <aside class="lp-col-right">
+        <div class="lp-card">
+          <div class="lp-card-top">
+            <span class="lp-card-label">Faculty Portal</span>
+            <span class="lp-secure">🔒 Institute sign-in</span>
           </div>
-          <div class="field" style="margin-bottom:14px;">
-            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Mobile Number</label>
-            <input id="ep-mobile" type="tel" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
-          </div>
-          <div class="field" style="margin-bottom:14px;">
-            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Department</label>
-            <select id="ep-department" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
-              <option value="">Select department...</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-              <option value="__other">Other (type below)</option>
-            </select>
-            <input id="ep-department-other" placeholder="Department name" style="display:none; width:100%; margin-top:8px; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
-          </div>
-          <div class="field" style="margin-bottom:14px;">
-            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Designation</label>
-            <select id="ep-designation" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
-              <option value="">Select designation...</option>
-              <option value="Assistant Professor">Assistant Professor</option>
-              <option value="Associate Professor">Associate Professor</option>
-              <option value="Professor">Professor</option>
-              <option value="HOD">HOD</option>
-              <option value="Lab Assistant">Lab Assistant</option>
-              <option value="__other">Other (type below)</option>
-            </select>
-            <input id="ep-designation-other" placeholder="Designation" style="display:none; width:100%; margin-top:8px; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; font-size:14px; box-sizing:border-box;">
-          </div>
-          <p class="status-msg" id="ep-status" style="min-height:16px;"></p>
-          <div style="display:flex; gap:10px;">
-            <button class="secondary" id="ep-cancel-btn" style="flex:1;">Cancel</button>
-            <button class="login-btn-outline" id="ep-save-btn" style="flex:1;">Save</button>
-          </div>
+          <h2>Sign in to continue</h2>
+          <p class="lp-card-sub">Use your institute Google account. Your assigned subjects and sections load automatically.</p>
 
-          <div style="border-top:1px solid var(--border); margin-top:18px; padding-top:16px;">
-            <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:6px;">Security</label>
-            <div id="mfa-status-line" style="font-size:13px; margin-bottom:8px;">Checking two-factor authentication status...</div>
-            <button class="secondary" id="mfa-enroll-btn" style="width:100%; display:none;">Set Up Two-Factor Authentication</button>
-            <button class="secondary" id="mfa-disable-btn" style="width:100%; display:none; color:#b42318;">Disable Two-Factor Authentication</button>
-          </div>
-        </div>
-      </div>
+          <button class="lp-google" id="login-btn">
+            <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.8-6.8C35.6 2.5 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-2.8-.4-4.1H24v8.4h12.5c-.3 2.1-1.6 5.2-4.6 7.3l7.7 6c4.5-4.2 6.5-10.2 6.5-17.6z"/><path fill="#FBBC05" d="M10.5 28.6a14.7 14.7 0 0 1 0-9.2l-7.9-6.2a24 24 0 0 0 0 21.6l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.2 0 11.5-2 15.6-5.8l-7.7-6c-2.1 1.4-4.9 2.4-7.9 2.4-6.3 0-11.6-4.1-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>
+            Continue with Google
+          </button>
 
-      <!-- MFA ENROLLMENT MODAL: QR code + 6-digit verification -->
-      <div id="mfa-enroll-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.55); z-index:110; align-items:center; justify-content:center;">
-        <div class="login-card" style="max-width:380px; width:90%; text-align:center;">
-          <div class="login-heading" style="margin-bottom:4px;">Set Up Two-Factor Authentication</div>
-          <p class="status-msg" style="margin-bottom:14px;">Scan this with Google Authenticator, Authy, or any TOTP app, then enter the 6-digit code it shows.</p>
-          <div id="mfa-qr-holder" style="display:flex; justify-content:center; margin-bottom:12px;"></div>
-          <p class="status-msg" id="mfa-secret-line" style="font-size:11px; word-break:break-all; margin-bottom:14px;"></p>
-          <input id="mfa-verify-code" placeholder="123456" maxlength="6" inputmode="numeric" style="width:100%; text-align:center; letter-spacing:4px; font-size:20px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:12px;">
-          <p class="status-msg" id="mfa-enroll-status" style="min-height:16px;"></p>
-          <div style="display:flex; gap:10px;">
-            <button class="secondary" id="mfa-enroll-cancel-btn" style="flex:1;">Cancel</button>
-            <button class="login-btn-outline" id="mfa-enroll-verify-btn" style="flex:1;">Verify &amp; Enable</button>
+          <div class="lp-meta">
+            First time here? Sign in once and submit the short registration form &mdash;
+            the admin approves your account and assigns your subjects.
           </div>
-        </div>
-      </div>
+          <div class="lp-note" id="login-note" style="display:none;">Not signed in</div>
 
-      <!-- MFA CHALLENGE SCREEN: shown at login for accounts with 2FA already enabled -->
-      <div id="mfa-challenge-overlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:120; align-items:center; justify-content:center;">
-        <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
-          <div class="login-heading" style="margin-bottom:4px;">Two-Factor Verification</div>
-          <p class="status-msg" style="margin-bottom:16px;">Enter the 6-digit code from your authenticator app to continue.</p>
-          <input id="mfa-challenge-code" placeholder="123456" maxlength="6" inputmode="numeric" style="width:100%; text-align:center; letter-spacing:4px; font-size:22px; padding:12px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:14px;">
-          <p class="status-msg" id="mfa-challenge-status" style="min-height:16px;"></p>
-          <button class="login-btn-outline" id="mfa-challenge-verify-btn" style="width:100%; margin-bottom:8px;">Verify</button>
-          <button class="secondary" id="mfa-challenge-signout-btn" style="width:100%;">Sign out instead</button>
-        </div>
-      </div>
-
-      <!-- IDLE-TIMEOUT WARNING: grace period before automatic sign-out -->
-      <div id="idle-warning-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.55); z-index:130; align-items:center; justify-content:center;">
-        <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
-          <div class="login-heading" style="margin-bottom:4px;">Still there?</div>
-          <p class="status-msg" style="margin-bottom:14px;">You've been inactive for a while. For security, you'll be signed out in <strong id="idle-countdown">60</strong> seconds.</p>
-          <p class="status-msg" id="idle-unsaved-note" style="display:none; color:#b42318; margin-bottom:12px;">You have unsaved mark changes — they'll be lost if you're signed out.</p>
-          <button class="login-btn-outline" id="idle-stay-btn" style="width:100%; margin-bottom:8px;">Stay Signed In</button>
-          <button class="secondary" id="idle-signout-btn" style="width:100%;">Sign Out Now</button>
-        </div>
-      </div>
-
-      <!-- LOCK SCREEN: manual "step away" lock (Lock Screen button, or auto-triggered after
-           Print) — keeps the session alive but blocks the screen until unlocked. This is a
-           convenience/deterrent layer, not the real security backstop: the idle-timeout
-           auto-sign-out above keeps counting even while locked. -->
-      <div id="lock-screen-overlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:140; align-items:center; justify-content:center;">
-        <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
-          <div style="font-size:32px; margin-bottom:6px;">🔒</div>
-          <div class="login-heading" style="margin-bottom:2px;" id="lock-screen-name">Locked</div>
-          <p class="status-msg" id="lock-screen-sub" style="margin-bottom:16px;">This session is locked. Verify it's you to continue.</p>
-          <div id="lock-mfa-field">
-            <input id="lock-code" placeholder="123456" maxlength="6" inputmode="numeric" style="width:100%; text-align:center; letter-spacing:4px; font-size:20px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:12px;">
-          </div>
-          <div id="lock-email-field" style="display:none;">
-            <input id="lock-email" type="email" placeholder="your.email@kmit.in" style="width:100%; text-align:center; font-size:14px; padding:10px; border:1px solid var(--border); border-radius:6px; font-family:'DM Sans',sans-serif; box-sizing:border-box; margin-bottom:8px;">
-            <p class="status-msg" style="font-size:11px; margin-bottom:12px;">Set up two-factor authentication in My Profile for stronger protection than this.</p>
-          </div>
-          <p class="status-msg" id="lock-screen-status" style="min-height:16px;"></p>
-          <button class="login-btn-outline" id="lock-unlock-btn" style="width:100%; margin-bottom:8px;">Unlock</button>
-          <button class="secondary" id="lock-signout-btn" style="width:100%;">Not you? Sign out</button>
-        </div>
-      </div>
-
-      <div class="shell-page-header">
-        <div class="page-heading">
-          <div class="page-icon">⌂</div>
-          <div>
-            <div class="page-title" id="page-title">Dashboard</div>
-            <div class="page-subtitle" id="portal-label">Dashboard</div>
+          <div class="lp-steps">
+            <div class="lp-step"><b>1</b><span>Sign in with your <strong>@kmit.in</strong> Google account.</span></div>
+            <div class="lp-step"><b>2</b><span>Open an assigned subject offering from your dashboard.</span></div>
+            <div class="lp-step"><b>3</b><span>Enter marks, save, and print or export the section sheet.</span></div>
           </div>
         </div>
-        <div class="page-breadcrumb">YOU ARE HERE: <span id="breadcrumb-tab">Dashboard</span></div>
-      </div>
-
-      <main class="shell-main">
-
-    <!-- DASHBOARD -->
-    <div class="view active" id="view-dashboard">
-      <div class="panel" id="welcome-banner" style="display:none;">
-        <h3 style="margin-top:0;" id="welcome-heading">Welcome</h3>
-        <div id="welcome-meta" style="color:var(--muted); font-size:13px;"></div>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Quick Filter</h3>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="db-ay">
-              <option value="2024-2025" disabled>2024-2025</option>
-              <option value="2025-2026" disabled>2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028" disabled>2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="db-yearsem">
-              <option value="" selected>— All —</option>
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II">II-II</option>
-              <option value="III-I">III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="db-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="db-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-          <div class="field"><label>Section</label><select id="db-section"><option value="">— All —</option></select></div>
-        </div>
-        <p class="status-msg" id="dashboard-filter-summary"></p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Overview</h3>
-        <div class="stats-grid" id="dashboard-stats"><p class="status-msg">Loading...</p></div>
-      </div>
-    </div>
-
-    <!-- FACULTY: OFFERINGS LIST -->
-    <div class="view" id="view-offerings">
-      <div class="panel" id="offerings-panel">
-        <h3 style="margin-top:0;">Your Assigned Subjects</h3>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="mo-ay">
-              <option value="2024-2025" disabled>2024-2025</option>
-              <option value="2025-2026" disabled>2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028" disabled>2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="mo-yearsem">
-              <option value="" selected>— All —</option>
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II">II-II</option>
-              <option value="III-I">III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="mo-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="mo-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="mo-section"><option value="">— All —</option></select></div>
-          <div class="field">
-            <label>MID</label>
-            <select id="mo-mid">
-              <option value="">— All —</option>
-              <option value="I MID">I MID</option>
-              <option value="II MID">II MID</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Type</label>
-            <select id="mo-type">
-              <option value="">— All —</option>
-              <option value="theory">Theory</option>
-              <option value="lab">Lab</option>
-            </select>
-          </div>
-          <div class="field"><label>Subject</label><select id="mo-subject"><option value="">— All —</option></select></div>
-        </div>
-        <div id="offerings-list"><p class="status-msg">Loading...</p></div>
-      </div>
-
-      <div class="panel" id="marks-panel" style="display:none;">
-        <h3 style="margin-top:0;" id="marks-title"></h3>
-        <div id="marks-status" class="status-msg"></div>
-        <div class="form-row" style="align-items:center; margin-bottom:4px;">
-          <div class="field" style="flex:1; max-width:280px;">
-            <label>Search</label>
-            <input type="text" id="marks-search" placeholder="Roll no. or name...">
-          </div>
-          <div class="field">
-            <label>Filter</label>
-            <select id="marks-filter">
-              <option value="all">All Students</option>
-              <option value="entered">Marks Entered</option>
-              <option value="pending">Pending Entry</option>
-              <option value="invalid">Invalid / Out of Range</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>&nbsp;</label>
-            <span id="marks-filter-count" style="font-size:12px;color:var(--muted);"></span>
-          </div>
-        </div>
-        <div class="marks-table-scroll">
-          <table id="marks-table">
-            <thead><tr id="marks-header"></tr></thead>
-            <tbody id="marks-body"></tbody>
-          </table>
-        </div>
-        <div id="marks-validation-error" class="field-error"></div>
-        <div style="margin-top:16px;">
-          <button id="save-all-btn">Save All</button>
-          <button class="secondary" id="print-marks-btn">Print</button>
-          <button class="secondary" id="export-marks-btn">Export Excel (CSV)</button>
-          <button class="secondary" id="refresh-offering-btn">Refresh</button>
-          <button class="secondary" id="back-btn">Back to list</button>
-          <button class="secondary" id="next-offering-btn">Next →</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- FACULTY: < 14 MARKS STUDENTS -->
-    <div class="view" id="view-low-marks">
-      <div class="panel">
-        <h3 style="margin-top:0;">Students Below Threshold</h3>
-        <p class="status-msg">Looks across all of <strong>your own</strong> assigned subjects/sections and lists students scoring below the threshold in any single MID.</p>
-        <div class="form-row">
-          <div class="field"><label>Below marks</label><input type="number" id="lm-threshold" value="14" style="width:110px;"></div>
-          <button id="lm-refresh-btn">Refresh</button>
-          <button class="secondary" id="lm-export-btn">Export Excel (CSV)</button>
-        </div>
-        <p class="status-msg" id="lm-status"></p>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th>Roll No</th><th>Name</th><th>Subject</th><th>Section</th><th>MID</th><th>Type</th><th>Total</th></tr></thead>
-            <tbody id="lm-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: CATALOG (sections + subjects) -->
-    <div class="view" id="view-admin-catalog">
-      <div class="catalog-cols">
-        <div class="panel">
-          <h3 style="margin-top:0;">Sections</h3>
-          <div class="form-row">
-            <div class="field">
-              <label>Academic Year</label>
-              <select id="sec-ay">
-                <option value="2024-2025">2024-2025</option>
-                <option value="2025-2026">2025-2026</option>
-                <option value="2026-2027" selected>2026-2027</option>
-                <option value="2027-2028">2027-2028</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Year / Semester</label>
-              <select id="sec-yearsem">
-                <option value="I-I">I-I</option>
-                <option value="I-II">I-II</option>
-                <option value="II-I">II-I</option>
-                <option value="II-II" selected>II-II</option>
-                <option value="III-I">III-I</option>
-                <option value="III-II">III-II</option>
-                <option value="IV-I">IV-I</option>
-                <option value="IV-II">IV-II</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Regulation</label>
-              <input id="sec-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label>Branch</label>
-              <select id="sec-branch">
-                <option value="CSE">CSE</option>
-                <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-                <option value="CSE(DS)">CSE(DS)</option>
-                <option value="IT">IT</option>
-                <option value="__other">Other (type below)</option>
-              </select>
-            </div>
-            <div class="field" id="sec-branch-other-field" style="display:none;">
-              <label>Branch (custom)</label>
-              <input id="sec-branch-other" placeholder="e.g. ECE">
-            </div>
-            <div class="field">
-              <label>Section</label>
-              <input id="sec-letter" placeholder="A" style="width:70px;">
-            </div>
-            <button id="add-section-btn">Add</button>
-          </div>
-          <p class="status-msg" id="section-add-status"></p>
-
-          <div class="form-row" style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
-            <div class="field">
-              <label>View: Academic Year</label>
-              <select id="sec-filter-ay">
-                <option value="">— Select —</option>
-                <option value="2024-2025">2024-2025</option>
-                <option value="2025-2026">2025-2026</option>
-                <option value="2026-2027">2026-2027</option>
-                <option value="2027-2028">2027-2028</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Year / Semester</label>
-              <select id="sec-filter-yearsem">
-                <option value="">— Select —</option>
-                <option value="I-I">I-I</option>
-                <option value="I-II">I-II</option>
-                <option value="II-I">II-I</option>
-                <option value="II-II">II-II</option>
-                <option value="III-I">III-I</option>
-                <option value="III-II">III-II</option>
-                <option value="IV-I">IV-I</option>
-                <option value="IV-II">IV-II</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Regulation</label>
-              <input id="sec-filter-reg" placeholder="—" readonly style="background:#f7f8fd; width:90px;">
-            </div>
-            <div class="field">
-              <label>Branch</label>
-              <select id="sec-filter-branch">
-                <option value="">— Select —</option>
-                <option value="CSE">CSE</option>
-                <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-                <option value="CSE(DS)">CSE(DS)</option>
-                <option value="IT">IT</option>
-              </select>
-            </div>
-          </div>
-          <table>
-            <thead><tr><th>Name</th><th>Branch</th><th>AY</th><th>Actions</th></tr></thead>
-            <tbody id="sections-body"><tr><td colspan="4" class="status-msg">Select an academic year and branch above to view sections.</td></tr></tbody>
-          </table>
-        </div>
-        <div class="panel">
-          <h3 style="margin-top:0;">Subjects</h3>
-          <div class="form-row">
-            <div class="field"><label>Name</label><input id="subj-name" placeholder="Data Structures"></div>
-            <div class="field"><label>Code</label><input id="subj-code" placeholder="244AB"></div>
-            <button id="add-subject-btn">Add</button>
-          </div>
-          <p class="status-msg" id="subject-add-status"></p>
-
-          <div class="form-row" style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
-            <div class="field" style="flex:1;">
-              <label>View: Search by Name or Code</label>
-              <input id="subj-search" placeholder="Type to search..." style="width:100%;">
-            </div>
-          </div>
-          <table>
-            <thead><tr><th>Name</th><th>Code</th><th>Actions</th></tr></thead>
-            <tbody id="subjects-body"><tr><td colspan="3" class="status-msg">Start typing above to search subjects.</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: MANAGE STUDENTS -->
-    <div class="view" id="view-admin-students">
-      <div class="panel">
-        <h3 style="margin-top:0;">Bulk Import Students (CSV)</h3>
-        <p class="status-msg">CSV format: <code>roll_number,name</code> — first row can be a header, it will be skipped automatically if it doesn't look like a roll number. <a href="#" id="download-sample-csv" style="color:var(--accent); font-weight:600;">Download sample CSV</a></p>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="imp-ay">
-              <option value="2024-2025" disabled>2024-2025</option>
-              <option value="2025-2026" disabled>2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028" disabled>2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="imp-yearsem">
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II">II-II</option>
-              <option value="III-I">III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="imp-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="imp-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="import-section"></select></div>
-          <div class="field"><label>CSV File</label><input type="file" id="import-file" accept=".csv"></div>
-          <button id="import-students-btn">Import</button>
-        </div>
-        <p class="status-msg" id="import-status"></p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">View Roster</h3>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="roster-section"></select></div>
-          <button class="secondary" id="load-roster-btn">Load</button>
-        </div>
-        <table>
-          <thead><tr><th>Roll No</th><th>Name</th><th>Actions</th></tr></thead>
-          <tbody id="roster-body"></tbody>
-        </table>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Re-Registration Candidates</h3>
-        <p class="status-msg">Students falling below the qualifying marks in Theory or Lab, in either MID — flagged individually per JNTUH/KMIT re-registration rules.</p>
-        <button class="secondary" id="goto-reregistration-btn">Open Re-Registration Report →</button>
-      </div>
-    </div>
-
-    <!-- ADMIN: RE-REGISTRATION REPORT -->
-    <div class="view" id="view-admin-reregistration">
-      <div class="panel">
-        <h3 style="margin-top:0;">Re-Registration Candidates</h3>
-        <p class="status-msg">
-          Checks each MID's Theory and Lab marks <strong>independently</strong> against the qualifying marks you set below. If a student falls short in <strong>any single one</strong> — I MID Theory, II MID Theory, I MID Lab, or II MID Lab (whichever apply to that subject) — they're flagged for re-registration, per JNTUH/KMIT rules. A student is only evaluated once every applicable offering for that subject has marks entered — anything missing is listed separately as <em>Incomplete</em> instead of being guessed at.
-          <br>Set the qualifying total per your regulation (e.g. 14 for a 35-mark internal, i.e. 40%) — this tool doesn't assume a fixed denominator since it can vary by subject/regulation.
-        </p>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="rr-ay">
-              <option value="2024-2025">2024-2025</option>
-              <option value="2025-2026">2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028">2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="rr-yearsem">
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II">II-II</option>
-              <option value="III-I" selected>III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="rr-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="rr-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="rr-section"><option value="">— All Sections —</option></select></div>
-          <div class="field"><label>Subject</label><select id="rr-subject"><option value="">— All Subjects —</option></select></div>
-          <div class="field"><label>Theory Qualifying (per MID)</label><input type="number" id="rr-threshold-theory" value="14" style="width:110px;"></div>
-          <div class="field"><label>Lab Qualifying (per MID)</label><input type="number" id="rr-threshold-lab" value="20" style="width:110px;"></div>
-          <button id="rr-generate-btn">Generate Report</button>
-        </div>
-        <p class="status-msg" id="rr-status"></p>
-      </div>
-      <div class="panel" id="rr-results-panel" style="display:none;">
-        <h3 style="margin-top:0;">Flagged for Re-Registration</h3>
-        <button class="secondary" id="rr-export-btn" style="margin-bottom:10px;">Export CSV</button>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Failed Component(s)</th></tr></thead>
-            <tbody id="rr-flagged-body"></tbody>
-          </table>
-        </div>
-        <h3 id="rr-incomplete-heading" style="display:none;">Incomplete Data (not evaluated)</h3>
-        <div class="table-scroll">
-          <table id="rr-incomplete-table" style="display:none;">
-            <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Missing</th></tr></thead>
-            <tbody id="rr-incomplete-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: REPORTS -->
-    <div class="view" id="view-admin-reports">
-      <div class="panel">
-        <h3 style="margin-top:0;">Marks Reports</h3>
-        <p class="status-msg">Generate a marks list for I MID, II MID, or a consolidated (average of I &amp; II MID) view — optionally filtered down to students below a given total. Export to Excel (CSV) or PDF (print).</p>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="rep-ay">
-              <option value="2024-2025">2024-2025</option>
-              <option value="2025-2026">2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028">2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="rep-yearsem">
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II">II-II</option>
-              <option value="III-I" selected>III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="rep-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="rep-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="rep-section"><option value="">— All Sections —</option></select></div>
-          <div class="field"><label>Subject</label><select id="rep-subject"><option value="">— All Subjects —</option></select></div>
-          <div class="field">
-            <label>Report</label>
-            <select id="rep-scope">
-              <option value="I MID">I MID Marks</option>
-              <option value="II MID">II MID Marks</option>
-              <option value="Consolidated">Consolidated (Avg of I &amp; II MID)</option>
-            </select>
-          </div>
-          <div class="field"><label>Only below marks (optional)</label><input type="number" id="rep-threshold" placeholder="e.g. 14"></div>
-          <button id="rep-generate-btn">Generate Report</button>
-        </div>
-        <p class="status-msg" id="rep-status"></p>
-      </div>
-      <div class="panel" id="rep-results-panel" style="display:none;">
-        <h3 style="margin-top:0;" id="rep-results-title">Report Results</h3>
-        <button class="secondary" id="rep-export-csv-btn" style="margin-bottom:10px;">Export Excel (CSV)</button>
-        <button class="secondary" id="rep-export-pdf-btn" style="margin-bottom:10px;">Export PDF (Print)</button>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Type</th><th>Total</th></tr></thead>
-            <tbody id="rep-body"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hidden print-only view of a generated report, populated at print time -->
-    <div id="print-report" style="display:none;">
-      <h2 id="print-report-title">KMIT (AEB) — Marks Report</h2>
-      <div class="print-meta" id="print-report-meta"></div>
-      <table>
-        <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>Type</th><th>Total</th></tr></thead>
-        <tbody id="print-report-body"></tbody>
-      </table>
-    </div>
-    <div class="view" id="view-admin-offerings">
-      <div class="panel">
-        <h3 style="margin-top:0;">Subject Curriculum</h3>
-        <p class="status-msg">Map which subjects belong to a Regulation / Year / Branch. This is what filters the Subject dropdown below — a subject won't show up in Create Offering until it's mapped here. Use Branch "— All —" for subjects common to every branch (e.g. labs, humanities).</p>
-        <div class="form-row">
-          <div class="field" style="flex:2;"><label>Subject</label><select id="sc-subject"></select></div>
-          <div class="field">
-            <label>Regulation</label>
-            <select id="sc-regulation"></select>
-          </div>
-          <div class="field">
-            <label>Year</label>
-            <select id="sc-year">
-              <option value="I">I</option>
-              <option value="II" selected>II</option>
-              <option value="III">III</option>
-              <option value="IV">IV</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="sc-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-          <button id="sc-map-btn">Map</button>
-        </div>
-        <p class="status-msg" id="sc-map-status"></p>
-
-        <div class="form-row" style="align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-          <div class="field">
-            <label>Bulk upload (CSV)</label>
-            <input type="file" id="sc-csv-file" accept=".csv">
-          </div>
-          <button class="secondary" id="sc-csv-upload-btn" type="button">Upload CSV</button>
-          <button class="secondary" id="sc-csv-sample-btn" type="button">Download Sample CSV</button>
-        </div>
-        <p class="status-msg" id="sc-csv-status">CSV columns: <code>subject_code, regulation, year, branch</code> — leave <code>branch</code> blank for "— All —". Subject Code must match an existing subject in Manage Catalog exactly.</p>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th style="text-align:left;">Subject</th><th>Regulation</th><th>Year</th><th>Branch</th><th></th></tr></thead>
-            <tbody id="sc-list-body"><tr><td colspan="5" class="status-msg">Loading...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Create Offering</h3>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="off-ay">
-              <option value="2024-2025" disabled>2024-2025</option>
-              <option value="2025-2026" disabled>2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028" disabled>2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="off-yearsem">
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II" selected>II-II</option>
-              <option value="III-I">III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="off-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="off-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="off-section"></select></div>
-          <div class="field"><label>Subject</label><select id="off-subject"></select></div>
-          <div class="field">
-            <label>Type</label>
-            <select id="off-type">
-              <option value="theory" selected>theory</option>
-              <option value="lab">lab</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>MID</label>
-            <select id="off-mid">
-              <option value="I MID" selected>I MID</option>
-              <option value="II MID">II MID</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Entry Opens</label><input type="date" id="off-start-date"></div>
-          <div class="field"><label>Entry Deadline</label><input type="date" id="off-end-date"></div>
-        </div>
-        <button id="create-offering-btn">Create Offering</button>
-        <p class="status-msg" id="offering-create-status"></p>
-      </div>
-
-      <div class="panel">
-        <h3 style="margin-top:0;">All Offerings</h3>
-        <div id="admin-offerings-list"><p class="status-msg">Loading...</p></div>
-      </div>
-    </div>
-
-    <!-- ADMIN: MARK STRUCTURES -->
-    <div class="view" id="view-admin-structures">
-      <div class="panel">
-        <h3 style="margin-top:0;">Add / Update Mark Structure Column</h3>
-        <div class="form-row">
-          <div class="field">
-            <label>Regulation</label>
-            <select id="ms-reg">
-              <option value="KR23">KR23</option>
-              <option value="KR24" selected>KR24</option>
-              <option value="KR26">KR26</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year</label>
-            <select id="ms-year">
-              <option value="I">I</option>
-              <option value="II" selected>II</option>
-              <option value="III">III</option>
-              <option value="IV">IV</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Type</label>
-            <select id="ms-type">
-              <option value="theory" selected>theory</option>
-              <option value="lab">lab</option>
-              <option value="mandatory">mandatory</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Column Key</label><input id="ms-key" placeholder="1a"></div>
-          <div class="field"><label>Label</label><input id="ms-label" placeholder="1a"></div>
-          <div class="field"><label>Max Marks</label><input type="number" id="ms-max" placeholder="5"></div>
-          <div class="field"><label>Order</label><input type="number" id="ms-order" placeholder="auto"></div>
-          <div class="field"><label>Auto-calc?</label><select id="ms-auto"><option value="false">No</option><option value="true">Yes</option></select></div>
-        </div>
-        <div class="form-row" id="ms-formula-row" style="display:none;">
-          <div class="field" style="flex:1;">
-            <label>Formula description <span style="font-weight:400; color:var(--muted);">(human-readable note only — set Calculation Type below for it to actually compute)</span></label>
-            <input id="ms-formula" placeholder="best 3 of (1a+1b, 2a+2b, 3a+3b, 4a+4b, 5a+5b)" style="width:100%;">
-          </div>
-        </div>
-        <div class="form-row" id="ms-calc-row" style="display:none; align-items:center;">
-          <div class="field">
-            <label>Calculation Type</label>
-            <select id="ms-calc-type">
-              <option value="">None (not computed)</option>
-              <option value="sum">Sum of Columns</option>
-              <option value="best_n_of_pairs">Best N of Paired Columns</option>
-            </select>
-          </div>
-          <div class="field" id="ms-calc-sum-field" style="flex:1; display:none;">
-            <label>Columns to sum <span style="font-weight:400;color:var(--muted);">(comma-separated column keys)</span></label>
-            <input id="ms-calc-sum-columns" placeholder="part_c,assignment,objective,descriptive_best_of_3" style="width:100%;">
-          </div>
-          <div class="field" id="ms-calc-pairs-field" style="flex:1; display:none;">
-            <label>Pairs <span style="font-weight:400;color:var(--muted);">(comma-separated key:key)</span></label>
-            <input id="ms-calc-pairs" placeholder="1a:1b,2a:2b,3a:3b,4a:4b,5a:5b" style="width:100%;">
-          </div>
-          <div class="field" id="ms-calc-n-field" style="display:none; max-width:110px;">
-            <label>Best N</label>
-            <input type="number" id="ms-calc-n" placeholder="3">
-          </div>
-        </div>
-        <button id="save-structure-btn">Save Column</button>
-        <button class="secondary" id="ms-clear-btn" type="button">Clear Column Fields</button>
-        <p class="status-msg" id="structure-save-status"></p>
-
-        <div class="form-row" style="align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
-          <div class="field">
-            <label>Bulk upload whole structure (CSV)</label>
-            <input type="file" id="ms-csv-file" accept=".csv">
-          </div>
-          <button class="secondary" id="ms-csv-upload-btn" type="button">Upload CSV</button>
-          <button class="secondary" id="ms-csv-sample-btn" type="button">Download Sample CSV</button>
-          <button class="secondary" id="ms-csv-preview-btn" type="button">Preview Sample (Landscape)</button>
-        </div>
-        <p class="status-msg" id="ms-csv-status">
-          CSV columns: <code>regulation, year, type, column_key, column_label, max_marks, sort_order, auto_calculated, formula, calc_type, calc_config</code> —
-          the sample mirrors the real KR24/II/theory structure for theory (with working calc_type/calc_config), plus bare skeletons for lab and mandatory (each year's real structure differs, so rename/add/remove rows and adjust max_marks as needed before uploading).
-          <code>regulation</code>/<code>year</code>/<code>type</code> can be left blank per row to fall back to the dropdowns above.
-          <code>sort_order</code> can be left blank to auto-number rows (numbering restarts for each regulation/year/type group, in file order), <code>auto_calculated</code> is <code>true</code>/<code>false</code>.
-          <code>formula</code> is a human-readable note only — for a column to actually compute, set <code>calc_type</code> to <code>sum</code> (with <code>calc_config</code> like <code>{"columns":["a","b"]}</code>) or <code>best_n_of_pairs</code> (with <code>{"pairs":[["1a","1b"],["2a","2b"]],"n":1}</code>).
-        </p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Existing Structures</h3>
-        <div class="form-row">
-          <div class="field"><label>Filter by Regulation</label><input id="ms-filter-reg" placeholder="KR24"></div>
-          <div class="field"><label>Filter by Year</label><input id="ms-filter-year" placeholder="II"></div>
-          <div class="field"><label>Filter by Type</label><input id="ms-filter-type" placeholder="theory"></div>
-          <button class="secondary" id="ms-filter-btn">Filter</button>
-          <button class="secondary" id="ms-print-btn">Print (Landscape)</button>
-          <button class="secondary" id="ms-export-btn">Export CSV</button>
-        </div>
-        <table>
-          <thead><tr><th>Key</th><th>Label</th><th>Max</th><th>Order</th><th>Auto</th><th>Actions</th></tr></thead>
-          <tbody id="structures-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Hidden print-only landscape view of Existing Structures, populated at print time -->
-    <div id="print-structures" style="display:none;">
-      <h2>KMIT (AEB) — Mark Structures</h2>
-      <div class="print-meta" id="print-structures-meta"></div>
-      <table>
-        <thead><tr><th>Key</th><th>Label</th><th>Max Marks</th><th>Order</th><th>Auto-calculated</th></tr></thead>
-        <tbody id="print-structures-body"></tbody>
-      </table>
-    </div>
-
-    <!-- Hidden print-only view of a faculty marks-entry sheet, populated at print time -->
-    <div id="print-marks" style="display:none;">
-      <h2 id="print-marks-title">KMIT (AEB) — Marks Entry</h2>
-      <div class="print-meta" id="print-marks-meta"></div>
-      <table>
-        <thead><tr id="print-marks-header"></tr></thead>
-        <tbody id="print-marks-body"></tbody>
-      </table>
-      <div id="print-marks-footer">
-        <div class="sig-block">
-          <div class="sig-col">
-            <div class="sig-line"><span id="print-marks-faculty-name"></span><span>Date: __________</span></div>
-            <div style="margin-top:2px;color:#555;">Faculty Signature</div>
-          </div>
-          <div class="sig-col">
-            <div class="sig-line"><span id="print-marks-hod-name">HoD, <span id="print-marks-hod-branch"></span></span><span>Date: __________</span></div>
-            <div style="margin-top:2px;color:#555;">HoD Signature</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: ASSIGN FACULTY -->
-    <div class="view" id="view-admin-assign">
-      <div class="panel">
-        <h3 style="margin-top:0;">Assign Faculty to Offering</h3>
-        <p class="status-msg">Filter down to the exact offering, same as Create Offering — the Subject list only shows subjects mapped for the selected Regulation/Year/Branch.</p>
-        <div class="form-row">
-          <div class="field">
-            <label>Academic Year</label>
-            <select id="af-ay">
-              <option value="2024-2025" disabled>2024-2025</option>
-              <option value="2025-2026" disabled>2025-2026</option>
-              <option value="2026-2027" selected>2026-2027 (current)</option>
-              <option value="2027-2028" disabled>2027-2028</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year / Semester</label>
-            <select id="af-yearsem">
-              <option value="I-I">I-I</option>
-              <option value="I-II">I-II</option>
-              <option value="II-I">II-I</option>
-              <option value="II-II" selected>II-II</option>
-              <option value="III-I">III-I</option>
-              <option value="III-II">III-II</option>
-              <option value="IV-I">IV-I</option>
-              <option value="IV-II">IV-II</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Regulation</label>
-            <input id="af-reg" placeholder="auto-suggested" readonly style="background:#f7f8fd; width:90px;">
-          </div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="af-branch">
-              <option value="">— All —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Section</label><select id="af-section"></select></div>
-          <div class="field"><label>Subject</label><select id="af-subject"></select></div>
-          <div class="field">
-            <label>Type</label>
-            <select id="af-type">
-              <option value="theory" selected>theory</option>
-              <option value="lab">lab</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>MID</label>
-            <select id="af-mid">
-              <option value="I MID" selected>I MID</option>
-              <option value="II MID">II MID</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>Faculty</label><select id="assign-faculty"></select></div>
-          <div class="field" style="flex:2;"><label>Offering (matches filters above)</label><select id="assign-offering"></select></div>
-        </div>
-        <button id="assign-btn">Assign</button>
-        <p class="status-msg" id="assign-status"></p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Current Assignments</h3>
-        <table>
-          <thead><tr><th>Faculty</th><th>Role</th><th>Subject</th><th>Section</th><th>MID</th><th>Actions</th></tr></thead>
-          <tbody id="assignments-body"></tbody>
-        </table>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Reset Two-Factor Authentication</h3>
-        <p class="status-msg">For a faculty member who's lost access to their authenticator app — removes their 2FA so they can sign in with just Google again, then optionally set it back up.</p>
-        <div class="form-row">
-          <div class="field" style="flex:1;">
-            <label>Faculty Email</label>
-            <input id="mfa-reset-email" type="email" placeholder="faculty@kmit.in">
-          </div>
-          <button id="mfa-reset-btn">Reset Their 2FA</button>
-        </div>
-        <p class="status-msg" id="mfa-reset-status"></p>
-      </div>
-    </div>
-
-    <!-- ADMIN: HOD & COE MANAGEMENT -->
-    <div class="view" id="view-admin-hod">
-      <div class="panel">
-        <h3 style="margin-top:0;">Promote to HOD or COE</h3>
-        <p class="status-msg">The person must have signed in at least once already (so a profile exists) before they can be promoted. Both roles are read-only — HOD is scoped by branch/year below, COE sees everything institution-wide with no scoping needed.</p>
-        <div class="form-row">
-          <div class="field" style="flex:1;">
-            <label>Email</label>
-            <input id="hod-promote-email" type="email" placeholder="person@kmit.in">
-          </div>
-          <div class="field">
-            <label>Role</label>
-            <select id="hod-promote-role">
-              <option value="hod">HOD</option>
-              <option value="coe">COE</option>
-              <option value="clerk">Clerk (Year Coordinator)</option>
-            </select>
-          </div>
-          <button id="hod-promote-btn">Promote</button>
-        </div>
-        <p class="status-msg" id="hod-promote-status"></p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Assign HOD Scope</h3>
-        <p class="status-msg">Each HOD can hold multiple grants — e.g. one branch across two years, or all branches for one year. Leave Branch or Year blank to mean "all".</p>
-        <div class="form-row">
-          <div class="field"><label>HOD</label><select id="hod-assign-select"></select></div>
-          <div class="field">
-            <label>Branch</label>
-            <select id="hod-assign-branch">
-              <option value="">— All Branches —</option>
-              <option value="CSE">CSE</option>
-              <option value="CSE(AI&ML)">CSE(AI&ML)</option>
-              <option value="CSE(DS)">CSE(DS)</option>
-              <option value="IT">IT</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year</label>
-            <select id="hod-assign-year">
-              <option value="">— All Years —</option>
-              <option value="I">I</option>
-              <option value="II">II</option>
-              <option value="III">III</option>
-              <option value="IV">IV</option>
-            </select>
-          </div>
-          <button id="hod-assign-btn">Grant Scope</button>
-        </div>
-        <p class="status-msg" id="hod-assign-status"></p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Current HOD Grants</h3>
-        <table>
-          <thead><tr><th>HOD</th><th>Branch</th><th>Year</th><th>Actions</th></tr></thead>
-          <tbody id="hod-assignments-body"></tbody>
-        </table>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Assign Clerk (Year Coordinator) Scope</h3>
-        <p class="status-msg">Clerks get near-admin write access — create offerings, assign faculty, approve/freeze/unfreeze — scoped to their assigned year(s). Adding students/subjects/sections is unscoped (the schema has no year field on those, same as admin).</p>
-        <div class="form-row">
-          <div class="field"><label>Clerk</label><select id="clerk-assign-select"></select></div>
-          <div class="field">
-            <label>Year</label>
-            <select id="clerk-assign-year">
-              <option value="I">I</option>
-              <option value="II">II</option>
-              <option value="III">III</option>
-              <option value="IV">IV</option>
-            </select>
-          </div>
-          <button id="clerk-assign-btn">Grant Scope</button>
-        </div>
-        <p class="status-msg" id="clerk-assign-status"></p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Current Clerk Grants</h3>
-        <table>
-          <thead><tr><th>Clerk</th><th>Year</th><th>Actions</th></tr></thead>
-          <tbody id="clerk-assignments-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- HOD: READ-ONLY DASHBOARD -->
-    <div class="view" id="view-hod-dashboard">
-      <div class="panel">
-        <h3 style="margin-top:0;">Your Scope</h3>
-        <p class="status-msg" id="hod-scope-summary">Loading...</p>
-      </div>
-      <div class="panel">
-        <h3 style="margin-top:0;">Marks Overview</h3>
-        <p class="status-msg">Read-only — HOD accounts view marks and reports but cannot edit them.</p>
-        <table>
-          <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>MID</th><th>Type</th><th>Total</th></tr></thead>
-          <tbody id="hod-marks-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- COE: READ-ONLY DASHBOARD (institution-wide, no scoping) -->
-    <div class="view" id="view-coe-dashboard">
-      <div class="panel">
-        <h3 style="margin-top:0;">Marks Overview — All Branches, All Years</h3>
-        <p class="status-msg">Read-only — COE accounts view marks and reports institution-wide but cannot edit them.</p>
-        <table>
-          <thead><tr><th>Roll No</th><th>Name</th><th>Section</th><th>Subject</th><th>MID</th><th>Type</th><th>Total</th></tr></thead>
-          <tbody id="coe-marks-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ADMIN: AUDIT LOG -->
-    <div class="view" id="view-admin-audit">
-      <div class="panel">
-        <h3 style="margin-top:0;">Recent Actions</h3>
-        <button class="secondary" id="refresh-audit-btn">Refresh</button>
-        <table>
-          <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Details</th></tr></thead>
-          <tbody id="audit-body"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- FEEDBACK (visible to both admin and faculty) -->
-    <div class="view" id="view-feedback">
-      <div class="panel">
-        <h3 style="margin-top:0;">Feedback</h3>
-        <p class="status-msg">Found a bug, or have a suggestion for the portal? Send it straight to the Academic Examination Branch.</p>
-        <div class="form-row">
-          <div class="field">
-            <label>Category</label>
-            <select id="fb-category">
-              <option value="Bug Report">Bug Report</option>
-              <option value="Feature Suggestion">Feature Suggestion</option>
-              <option value="Data / Marks Issue">Data / Marks Issue</option>
-              <option value="Access / Login Issue">Access / Login Issue</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="field" style="flex:1;">
-            <label>Subject</label>
-            <input id="fb-subject" placeholder="e.g. Marks entry — save button not responding">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="field" style="flex:1;">
-            <label>Message</label>
-            <textarea id="fb-message" rows="6" style="width:100%;" placeholder="Describe the issue or suggestion..."></textarea>
-          </div>
-        </div>
-        <button id="fb-send-btn">Send Feedback</button>
-        <p class="status-msg" id="fb-status">Opens your email app addressed to internals@kmit.in, with your name/role and this message pre-filled.</p>
-      </div>
-    </div>
-
-    <div class="app-footer">
-      <div><strong>KMIT</strong> · Autonomous Examination Branch</div>
-      <div class="app-footer-center">
-        Designed &amp; Developed by KMIT (AEB)<br>
-        Keshav Memorial Institute of Technology · 3-5-1026, Narayanaguda, Hyderabad<br>
-        Contact: <a href="mailto:exams@kmit.in">exams@kmit.in</a>
-      </div>
-      <div class="app-footer-nav">
-        <a href="https://kmit.in/" target="_blank" rel="noopener">About KMIT</a>
-        <a href="mailto:internals@kmit.in">Support</a>
-      </div>
-    </div>
-      </main>
+      </aside>
     </div>
    </div>
   </div>
@@ -1764,6 +850,8 @@ function resetIdleTimer() {
 }
 function showIdleWarning() {
   const overlay = document.getElementById('idle-warning-overlay');
+  clearInterval(graceCountdownInterval); // never leave two countdowns racing
+  clearTimeout(graceTimer);
   overlay.style.display = 'flex';
   document.getElementById('idle-unsaved-note').style.display = marksDirty ? 'block' : 'none';
   let secondsLeft = Math.floor(IDLE_GRACE_MS / 1000);
@@ -1943,6 +1031,87 @@ let cachedRegulationMap = [];
 let cachedSubjectCurriculum = [];
 let cachedStructures = [];
 let cachedRoster = [];
+let cachedAssignments = [];
+let existingMarkStudentIds = new Set();
+
+// ---------- SHARED HELPERS (bug fixes) ----------
+// Local calendar date (YYYY-MM-DD) in the browser's own timezone. Using toISOString() here
+// returned the UTC date, which is the previous day between 00:00 and 05:30 IST -- that made
+// entry-open / deadline checks fire up to 5.5 hours early or late.
+function localToday() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+// Roll numbers are strings but should sort naturally (…09, …10, …11) and must not crash on
+// a null/undefined roll.
+function compareRoll(a, b) {
+  return String(a ?? '').localeCompare(String(b ?? ''), undefined, { numeric: true, sensitivity: 'base' });
+}
+
+// CSV cell escaping + formula-injection guard: a value starting with = + - @ (or a leading
+// tab/CR) is executed as a formula by Excel/Sheets, so prefix it with an apostrophe.
+function csvCell(v) {
+  let str = String(v ?? '');
+  if (/^[=+\-@\t\r]/.test(str)) str = "'" + str;
+  return `"${str.replace(/"/g, '""')}"`;
+}
+
+// PostgREST caps a plain select at 1000 rows and long .in() lists blow past URL length limits,
+// so institution-wide report queries were silently truncated. Chunk the id list and page
+// through every chunk with .range().
+const PG_PAGE_SIZE = 1000;
+const IN_CHUNK_SIZE = 100;
+async function fetchAllByIn(table, columns, column, ids) {
+  const out = [];
+  const unique = [...new Set(ids)];
+  for (let i = 0; i < unique.length; i += IN_CHUNK_SIZE) {
+    const chunk = unique.slice(i, i + IN_CHUNK_SIZE);
+    let from = 0;
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const { data, error } = await supabase.from(table).select(columns)
+        .in(column, chunk).range(from, from + PG_PAGE_SIZE - 1);
+      if (error) return { data: null, error };
+      out.push(...(data || []));
+      if (!data || data.length < PG_PAGE_SIZE) break;
+      from += PG_PAGE_SIZE;
+    }
+  }
+  return { data: out, error: null };
+}
+
+// Called by loadOfferings(). These two were previously called but never defined, which threw
+// a ReferenceError (module = strict mode) on every login and stopped the assigned-subjects
+// list from ever rendering.
+function updateDashboardSectionOptions() {
+  const el = document.getElementById('dashboard-section');
+  if (!el) return; // no dashboard-level section filter in the current markup
+  const names = [...new Set(facultyOfferingsRaw.map(o => o.sections?.name).filter(Boolean))].sort();
+  const current = el.value;
+  el.innerHTML = '<option value="">— All —</option>' + names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
+  if (names.includes(current)) el.value = current;
+}
+
+function renderDashboardFilterSummary() {
+  const el = document.getElementById('dashboard-filter-summary');
+  if (!el) return;
+  const total = facultyOfferingsRaw.length;
+  const sections = new Set(facultyOfferingsRaw.map(o => o.sections?.name).filter(Boolean)).size;
+  const subjects = new Set(facultyOfferingsRaw.map(o => o.subjects?.name).filter(Boolean)).size;
+  el.innerText = total
+    ? `${total} assigned offering(s) · ${subjects} subject(s) · ${sections} section(s).`
+    : '';
+}
+
+// Print, then lock once the print dialog has actually closed. window.print() is not reliably
+// blocking, so locking on the next line could fire while the dialog was still open.
+function printThenLock() {
+  const onDone = () => { window.removeEventListener('afterprint', onDone); lockScreen(); };
+  window.addEventListener('afterprint', onDone);
+  window.print();
+  setTimeout(() => { window.removeEventListener('afterprint', onDone); lockScreen(); }, 3000);
+}
 
 // Suggests a regulation based on Academic Year + Year/Sem, using each batch's
 // admission year (current AY minus years-of-study already completed).
@@ -2685,8 +1854,8 @@ document.getElementById('rr-generate-btn').onclick = async () => {
 
   // 2. Marks for those offerings, and the students in those sections.
   const [{ data: marksRows, error: marksErr }, { data: students, error: stuErr }] = await Promise.all([
-    supabase.from('marks').select('student_id, offering_id, computed_total').in('offering_id', offeringIds),
-    supabase.from('students').select('*').in('section_id', sectionIds)
+    fetchAllByIn('marks', 'student_id, offering_id, computed_total', 'offering_id', offeringIds),
+    fetchAllByIn('students', '*', 'section_id', sectionIds)
   ]);
   if (marksErr) { statusEl.innerText = 'Error: ' + marksErr.message; return; }
   if (stuErr) { statusEl.innerText = 'Error: ' + stuErr.message; return; }
@@ -2732,8 +1901,8 @@ document.getElementById('rr-generate-btn').onclick = async () => {
     });
   });
 
-  flagged.sort((a, b) => a.roll.localeCompare(b.roll));
-  incomplete.sort((a, b) => a.roll.localeCompare(b.roll));
+  flagged.sort((a, b) => compareRoll(a.roll, b.roll));
+  incomplete.sort((a, b) => compareRoll(a.roll, b.roll));
   lastRRFlagged = flagged;
 
   document.getElementById('rr-flagged-body').innerHTML = flagged.length
@@ -2758,10 +1927,10 @@ document.getElementById('rr-generate-btn').onclick = async () => {
 
 document.getElementById('rr-export-btn').onclick = () => {
   if (lastRRFlagged.length === 0) { alert('Nothing to export — generate a report first.'); return; }
-  const header = 'Roll No,Name,Section,Subject,Failed Component(s)\n';
+  const header = 'Roll No,Name,Section,Subject,Failed Component(s)\r\n';
   const rows = lastRRFlagged.map(f => [f.roll, f.name, f.section, f.subject, f.failed]
-    .map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
-  const blob = new Blob([header + rows], { type: 'text/csv' });
+    .map(csvCell).join(',')).join('\r\n');
+  const blob = new Blob(['\ufeff' + header + rows], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 're-registration-candidates.csv';
@@ -2776,7 +1945,7 @@ document.getElementById('rep-yearsem').onchange = () => { updateSuggestedRegulat
 document.getElementById('rep-branch').onchange = () => { updateRepSectionOptions(); updateRepSubjectOptions(); };
 
 let lastReportRows = [];
-let lastReportMeta = { title: '', scope: '' };
+let lastReportMeta = { title: '', meta: '' };
 
 document.getElementById('rep-generate-btn').onclick = async () => {
   const statusEl = document.getElementById('rep-status');
@@ -2816,8 +1985,8 @@ document.getElementById('rep-generate-btn').onclick = async () => {
   const sectionIds = [...new Set(scopedOfferings.map(o => o.section_id))];
 
   const [{ data: marksRows, error: marksErr }, { data: students, error: stuErr }] = await Promise.all([
-    supabase.from('marks').select('student_id, offering_id, computed_total').in('offering_id', offeringIds),
-    supabase.from('students').select('*').in('section_id', sectionIds)
+    fetchAllByIn('marks', 'student_id, offering_id, computed_total', 'offering_id', offeringIds),
+    fetchAllByIn('students', '*', 'section_id', sectionIds)
   ]);
   if (marksErr) { statusEl.innerText = 'Error: ' + marksErr.message; return; }
   if (stuErr) { statusEl.innerText = 'Error: ' + stuErr.message; return; }
@@ -2868,7 +2037,7 @@ document.getElementById('rep-generate-btn').onclick = async () => {
   }
 
   const filtered = threshold !== null ? rows.filter(r => r.total < threshold) : rows;
-  filtered.sort((a, b) => a.roll.localeCompare(b.roll));
+  filtered.sort((a, b) => compareRoll(a.roll, b.roll));
   lastReportRows = filtered;
   lastReportMeta = {
     title: `${scope} Marks Report${threshold !== null ? ` — Below ${threshold}` : ''}`,
@@ -2886,7 +2055,7 @@ document.getElementById('rep-generate-btn').onclick = async () => {
 document.getElementById('rep-export-csv-btn').onclick = () => {
   if (lastReportRows.length === 0) { alert('Nothing to export — generate a report first.'); return; }
   const header = ['Roll No', 'Name', 'Section', 'Subject', 'Type', 'Total'];
-  const csvEscape = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const csvEscape = csvCell;
   const csv = [header, ...lastReportRows.map(r => [r.roll, r.name, r.section, r.subject, r.type, r.total])]
     .map(r => r.map(csvEscape).join(',')).join('\r\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
@@ -2903,8 +2072,7 @@ document.getElementById('rep-export-pdf-btn').onclick = () => {
   document.getElementById('print-report-meta').innerText = lastReportMeta.meta;
   document.getElementById('print-report-body').innerHTML = lastReportRows.map(r =>
     `<tr><td>${esc(r.roll)}</td><td>${esc(r.name)}</td><td>${esc(r.section)}</td><td>${esc(r.subject)}</td><td>${esc(r.type)}</td><td>${esc(r.total)}</td></tr>`).join('');
-  window.print();
-  lockScreen(); // same reasoning as marks print — this report contains real student data
+  printThenLock(); // same reasoning as marks print — this report contains real student data
 };
 
 // ---------- ASSIGN FACULTY: cascading filters ----------
@@ -2955,13 +2123,13 @@ async function loadLowMarksTab() {
   const sectionNameByOffering = {};
   facultyOfferingsRaw.forEach(o => { sectionNameByOffering[o.id] = o.sections?.name || '?'; });
 
-  const { data: marksRows, error: marksErr } = await supabase.from('marks')
-    .select('student_id, offering_id, computed_total').in('offering_id', offeringIds);
+  const { data: marksRows, error: marksErr } =
+    await fetchAllByIn('marks', 'student_id, offering_id, computed_total', 'offering_id', offeringIds);
   if (marksErr) { statusEl.innerText = 'Error: ' + marksErr.message; return; }
 
   const studentIds = [...new Set((marksRows || []).map(m => m.student_id))];
   if (studentIds.length === 0) { statusEl.innerText = 'No marks entered yet across your subjects.'; bodyEl.innerHTML = ''; return; }
-  const { data: students, error: stuErr } = await supabase.from('students').select('id, roll_number, name').in('id', studentIds);
+  const { data: students, error: stuErr } = await fetchAllByIn('students', 'id, roll_number, name', 'id', studentIds);
   if (stuErr) { statusEl.innerText = 'Error: ' + stuErr.message; return; }
   const studentById = {};
   (students || []).forEach(s => { studentById[s.id] = s; });
@@ -2981,7 +2149,7 @@ async function loadLowMarksTab() {
         type: off?.type === 'lab' ? 'Lab' : 'Theory', total: Number(m.computed_total)
       };
     })
-    .sort((a, b) => a.roll.localeCompare(b.roll));
+    .sort((a, b) => compareRoll(a.roll, b.roll));
 
   lastLowMarksRows = rows;
   bodyEl.innerHTML = rows.length
@@ -2994,7 +2162,7 @@ document.getElementById('lm-refresh-btn').onclick = loadLowMarksTab;
 document.getElementById('lm-export-btn').onclick = () => {
   if (lastLowMarksRows.length === 0) { alert('Nothing to export — refresh the list first.'); return; }
   const header = ['Roll No', 'Name', 'Subject', 'Section', 'MID', 'Type', 'Total'];
-  const csvEscape = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const csvEscape = csvCell;
   const csv = [header, ...lastLowMarksRows.map(r => [r.roll, r.name, r.subject, r.section, r.mid, r.type, r.total])]
     .map(r => r.map(csvEscape).join(',')).join('\r\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
@@ -3167,6 +2335,9 @@ window.__openOffering = async (offeringId) => {
     .eq('offering_id', offeringId);
   const marksByStudent = {};
   (existingMarks || []).forEach(m => marksByStudent[m.student_id] = m);
+  // Needed so that clearing every mark for a student still produces a save (an erase),
+  // instead of the row being skipped and the old value surviving in the database.
+  existingMarkStudentIds = new Set((existingMarks || []).map(m => m.student_id));
 
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -3188,7 +2359,7 @@ window.__openOffering = async (offeringId) => {
   // case the date restrictions are ignored (frozen still applies either way). This mirrors
   // exactly what save_marks enforces server-side, so the UI never shows something the backend
   // would then reject.
-  const today = new Date().toISOString().slice(0, 10);
+  const today = localToday();
   const notYetOpen = !offering.deadline_override && offering.start_date && today < offering.start_date;
   const deadlinePassed = !offering.deadline_override && offering.end_date && today > offering.end_date;
   const readOnly = offering.status === 'FROZEN' || notYetOpen || deadlinePassed;
@@ -3333,9 +2504,12 @@ document.getElementById('next-offering-btn').onclick = () => {
 
 // Reads whatever is currently on screen (including unsaved edits) into a plain array of rows:
 // [roll_number, name, ...one value per currentColumns in order, total]. Shared by Print and CSV export.
-function collectMarksRows() {
+function collectMarksRows({ visibleOnly = false } = {}) {
   const rows = [];
   document.querySelectorAll('#marks-body tr').forEach(tr => {
+    // Respect the active search / status filter so a printout or export matches exactly what
+    // the person is looking at (previously hidden rows were silently included).
+    if (visibleOnly && tr.style.display === 'none') return;
     const cells = tr.querySelectorAll('td');
     const firstCellLines = cells[0].innerText.split('\n');
     const rollNo = firstCellLines[0] || '';
@@ -3375,17 +2549,16 @@ document.getElementById('print-marks-btn').onclick = () => {
   document.getElementById('print-marks-header').innerHTML =
     ['Roll No / Name', ...currentColumns.map(c => `${esc(c.column_label)} /${esc(c.max_marks)}`), 'Total']
       .map(h => `<th>${h}</th>`).join('');
-  document.getElementById('print-marks-body').innerHTML = collectMarksRows().map(r => {
+  document.getElementById('print-marks-body').innerHTML = collectMarksRows({ visibleOnly: true }).map(r => {
     const [rollNo, name, ...rest] = r;
     return `<tr><td>${esc(rollNo)}<br><span style="color:#555;font-size:11px;">${esc(name)}</span></td>${rest.map(v => `<td>${esc(v)}</td>`).join('')}</tr>`;
   }).join('');
   document.getElementById('print-marks-faculty-name').innerText = facultyName || '____________________';
   document.getElementById('print-marks-hod-branch').innerText = branch || sectionName || '';
-  window.print();
   // Printing is exactly the moment someone is about to walk away from a shared PC to collect
-  // the printout — lock the screen right after the print dialog is dismissed rather than
-  // leaving marks visible/editable unattended.
-  lockScreen();
+  // the printout — lock the screen once the print dialog is dismissed rather than leaving
+  // marks visible/editable unattended.
+  printThenLock();
 };
 
 // Feedback: opens the person's own email client via mailto, addressed to internals@kmit.in,
@@ -3409,8 +2582,8 @@ document.getElementById('fb-send-btn').onclick = () => {
 document.getElementById('export-marks-btn').onclick = () => {
   if (!currentOffering) return;
   const header = ['Roll No', 'Name', ...currentColumns.map(c => `${c.column_label} /${c.max_marks}`), 'Total'];
-  const csvEscape = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const csv = [header, ...collectMarksRows()].map(r => r.map(csvEscape).join(',')).join('\r\n');
+  const csvEscape = csvCell;
+  const csv = [header, ...collectMarksRows({ visibleOnly: true })].map(r => r.map(csvEscape).join(',')).join('\r\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' }); // BOM so Excel reads UTF-8 correctly
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -3443,8 +2616,14 @@ document.getElementById('save-all-btn').onclick = async () => {
     const rollNo = row.children[0]?.innerText.split('\n')[0] || studentId;
     const inputs = row.querySelectorAll('input[data-key]');
     const values = {};
-    inputs.forEach(inp => { if (inp.value !== '') values[inp.dataset.key] = Number(inp.value); });
-    if (Object.keys(values).length > 0) toSave.push({ studentId, rollNo, values });
+    let anyFilled = false;
+    inputs.forEach(inp => {
+      if (inp.value !== '') { values[inp.dataset.key] = Number(inp.value); anyFilled = true; }
+      else values[inp.dataset.key] = null; // explicit null so a cleared mark is actually erased
+    });
+    // Save when something is entered, or when the student already had a saved row and the
+    // faculty has now blanked it out (previously this silently kept the old marks).
+    if (anyFilled || existingMarkStudentIds.has(studentId)) toSave.push({ studentId, rollNo, values });
   });
   if (toSave.length === 0) { statusEl.innerText = 'Nothing to save — no marks entered yet.'; return; }
 
@@ -3698,13 +2877,25 @@ document.getElementById('import-students-btn').onclick = async () => {
   if (!sectionId || !file) { statusEl.innerText = 'Select a section and a CSV file.'; return; }
 
   const text = await file.text();
-  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  // Use the shared quote-aware parser -- a plain split(',') corrupted any quoted name that
+  // contained a comma (e.g. "Reddy, Sai Kiran").
+  const rows = parseCsv(text);
   const students = [];
-  for (const line of lines) {
-    const [roll, name] = line.split(',').map(s => s?.trim());
-    if (!roll || !name) continue;
-    if (/roll|hall/i.test(roll)) continue; // skip header row
+  rows.forEach((cols, i) => {
+    const roll = (cols[0] || '').trim();
+    const name = (cols[1] || '').trim();
+    // Only the FIRST row can be a header -- the old check dropped any real student whose
+    // roll number happened to contain "roll"/"hall".
+    if (i === 0 && (/roll|hall/i.test(roll) || /name/i.test(name))) return;
+    if (!roll || !name) return;
     students.push({ roll_number: roll, name });
+  });
+  const seen = new Set();
+  const duplicates = [];
+  for (let i = students.length - 1; i >= 0; i--) {
+    const key = students[i].roll_number.toLowerCase();
+    if (seen.has(key)) { duplicates.push(students[i].roll_number); students.splice(i, 1); }
+    else seen.add(key);
   }
   if (students.length === 0) { statusEl.innerText = 'No valid rows found in CSV.'; return; }
 
@@ -3713,7 +2904,7 @@ document.getElementById('import-students-btn').onclick = async () => {
     p_students: students
   });
   if (error) { statusEl.innerText = 'Error: ' + error.message; return; }
-  statusEl.innerText = `Imported ${data} student(s).`;
+  statusEl.innerText = `Imported ${data} student(s).` + (duplicates.length ? ` Skipped ${duplicates.length} duplicate roll number(s): ${duplicates.join(', ')}.` : '');
 }
 
 document.getElementById('load-roster-btn').onclick = async () => {
@@ -3856,6 +3047,14 @@ window.__deleteOffering = async (offeringId) => {
   // Delete dependents first — subject_offerings is referenced by marks and faculty_assignments,
   // and those foreign keys aren't ON DELETE CASCADE, so deleting the offering directly used to
   // fail with a silent FK-violation error. Clear the children explicitly instead.
+  // Preferred path: one server-side transaction, so a mid-way failure can't leave marks
+  // deleted but the offering still present. Falls back to the old three-step client delete
+  // when the RPC hasn't been created in this database yet.
+  const { error: rpcErr } = await supabase.rpc('admin_delete_offering', { p_offering_id: offeringId });
+  if (!rpcErr) { await refreshCatalogCache(); loadAdminOfferings(); return; }
+  const rpcMissing = ['PGRST202', '42883'].includes(rpcErr.code) || /function .*does not exist|Could not find the function/i.test(rpcErr.message || '');
+  if (!rpcMissing) { alert(rpcErr.message); return; }
+  if (!confirm('Deleting this offering in steps (no single-transaction RPC found). If one step fails the deletion may be partial. Continue?')) return;
   const { error: marksErr } = await supabase.from('marks').delete().eq('offering_id', offeringId);
   if (marksErr) { alert('Could not remove marks for this offering: ' + marksErr.message); return; }
   const { error: assignErr } = await supabase.from('faculty_assignments').delete().eq('offering_id', offeringId);
@@ -4223,7 +3422,7 @@ document.getElementById('ms-csv-upload-btn').onclick = async () => {
 document.getElementById('ms-export-btn').onclick = () => {
   if (!cachedStructures || cachedStructures.length === 0) { alert('Nothing to export — filter or load some structures first.'); return; }
   const header = 'regulation,year,type,column_key,column_label,max_marks,sort_order,auto_calculated,formula,calc_type,calc_config';
-  const csvEscape = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const csvEscape = csvCell;
   const rows = cachedStructures.map(c => [
     c.regulation, c.year, c.type, c.column_key, c.column_label, c.max_marks, c.sort_order, c.auto_calculated ? 'true' : 'false', c.formula || '',
     c.calc_type || '', c.calc_config ? JSON.stringify(c.calc_config) : ''
