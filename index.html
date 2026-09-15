@@ -19,7 +19,7 @@
     --card-cream: #fdf9f3; --card-text: #1e2a4a; --card-muted: #6b7488;
     --letterhead-h: 62px;
   }
-​
+
   /* ---- Site letterhead: institute branding bar, shown above everything on every screen ---- */
   .site-letterhead { position: sticky; top: 0; z-index: 60; background: #fff; border-bottom: 1px solid var(--border); }
   .site-letterhead-inner {
@@ -38,7 +38,7 @@
     .site-letterhead-inner { flex-wrap: wrap; justify-content:center; text-align:center; padding: 10px 14px; }
     .site-letterhead-badges { order: 3; width:100%; justify-content:center; }
   }
-​
+
   * { box-sizing: border-box; }
   body {
     margin:0; color:var(--text);
@@ -87,7 +87,7 @@
   .tag.frozen { color: var(--danger); background: rgba(224,71,95,0.1); }
   .status-msg { font-size: 13px; margin-top: 10px; color: var(--muted); }
   #app { display:none; }
-​
+
   /* ---- Precision Dark login screen ---- */
   #login-screen { padding-top: 60px; padding-bottom: 60px; }
   .split-wrap {
@@ -116,7 +116,7 @@
   .badge.green { color:#4cd18a; background: rgba(76,209,138,0.1); border-color: rgba(76,209,138,0.3); }
   .badge.blue { color:#5b8cff; background: rgba(91,140,255,0.1); border-color: rgba(91,140,255,0.3); }
   .badge.gold { color:var(--gold); background: rgba(212,162,76,0.12); border-color: rgba(212,162,76,0.35); }
-​
+
   .login-card {
     background: var(--card-cream); border-radius: 16px; padding: 32px;
     max-width: 420px; margin: 0 auto; text-align:left;
@@ -159,11 +159,11 @@
   .prelogin-info-card .hero-announcement-wrap .announcement-box { margin-bottom: 14px; border-radius: 8px; }
   .prelogin-info-card .hero-ticker-wrap .ticker-wrap { margin-bottom: 0; border-radius: 8px; overflow:hidden; }
   /* ---------------------------------- */
-​
+
   .total-cell { font-weight: 600; color: var(--accent); }
   input.invalid { border-color: var(--danger); background: rgba(224,71,95,0.08); color: var(--danger); }
   .field-error { color: var(--danger); font-size: 11px; margin-top: 6px; }
-​
+
   /* ---- Print: Existing Structures + Marks Entry (both landscape — mark tables are wide) ---- */
   @media print {
     body * { visibility: hidden; }
@@ -192,7 +192,7 @@
   .tabs { display:flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
   .tab-btn { background: transparent; border: none; color: var(--muted); padding: 10px 4px; cursor: pointer; font-size: 13px; border-bottom: 2px solid transparent; border-radius:0; font-family:'Open Sans',sans-serif; font-weight:600; }
   .tab-btn.active { color: var(--text); border-bottom: 2px solid var(--accent-purple); }
-​
+
   /* ---- App shell v2: full-height colored sidebar + top bar ---- */
   .shell { display:flex; min-height:100vh; }
   .shell-sidebar {
@@ -206,7 +206,7 @@
   .shell-sidebar .tab-btn { color: rgba(255,255,255,0.85); text-align:left; padding:11px 12px; border-radius:8px; border-bottom:none; font-weight:600; }
   .shell-sidebar .tab-btn:hover { background: rgba(255,255,255,0.08); }
   .shell-sidebar .tab-btn.active { background: rgba(255,255,255,0.18); color:#fff; border-bottom:none; }
-​
+
   .shell-body { flex:1; min-width:0; margin-left:230px; display:flex; flex-direction:column; min-height:100vh; }
   .shell-topbar {
     display:flex; align-items:center; gap:16px; background:#fff; border-bottom:1px solid var(--border);
@@ -220,7 +220,7 @@
   .topbar-search input { border:none; background:transparent; outline:none; font-size:13px; width:100%; padding:0; color:var(--text); }
   .topbar-search svg, .topbar-search span.search-icon { color:var(--muted); font-size:13px; }
   .topbar-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
-​
+
   .shell-page-header {
     display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;
     padding: 20px 24px 16px;
@@ -234,9 +234,9 @@
   .page-subtitle { font-size:12px; color:var(--muted); margin-top:2px; }
   .page-breadcrumb { font-size:11px; letter-spacing:.3px; color:var(--muted); text-transform:uppercase; font-weight:600; }
   .page-breadcrumb span { color: var(--accent-purple); }
-​
+
   .shell-main { flex:1; padding: 0 24px 24px; }
-​
+
   .profile-menu { position:relative; flex-shrink:0; }
   .profile-btn {
     display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--border);
@@ -262,7 +262,7 @@
     font-size:12px; color: var(--muted); padding:2px 6px 10px; border-bottom:1px solid var(--border);
     margin-bottom:8px; text-transform:capitalize; word-break:break-all;
   }
-​
+
   .app-footer {
     margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border);
     display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;
@@ -277,7 +277,7 @@
   .app-footer-nav a:hover { color: var(--text); text-decoration:underline; }
   .light-footer { max-width: 1300px; margin: 30px auto 0; padding: 18px 48px 24px; border-top: 1px solid var(--lh-border); }
   @media (max-width: 900px) { .light-footer { padding: 16px 20px 20px; } }
-​
+
   @media (max-width: 900px) {
     .shell-sidebar { transform: translateX(-100%); }
     .shell-sidebar.open { transform: translateX(0); }
@@ -302,7 +302,7 @@
   .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
   .catalog-cols { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 700px) { .catalog-cols { grid-template-columns: 1fr; } }
-​
+
   /* ---- Animations & pre-login content ---- */
   @keyframes fadeSlideUp { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform: translateY(0); } }
   @keyframes softPulse { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.08); opacity:0.85; } }
@@ -318,7 +318,7 @@
   button:not(.secondary):not(.danger) { animation: gradientShift 6s ease infinite; }
   .login-btn-outline:hover { transform: translateY(-1px); transition: transform 0.15s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
   .panel, .login-card { transition: transform 0.15s ease; }
-​
+
   .info-card {
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; text-align:left;
@@ -326,7 +326,7 @@
   .info-card .info-label { font-size: 10px; letter-spacing:0.4px; text-transform:uppercase; color: var(--gold); font-weight:700; margin-bottom:4px; }
   .info-card .info-value { font-size: 14px; color: #dfe4f2; font-family:'Open Sans',sans-serif; }
   .countdown-num { font-family:'Poppins',sans-serif; font-weight:800; font-size:20px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-​
+
   /* ---- Marquee ticker ---- */
   @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   .ticker-wrap {
@@ -347,7 +347,7 @@
   }
   .ticker-item .ticker-label { color: var(--gold); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; }
   .ticker-item .ticker-count { font-family:'Poppins',sans-serif; font-weight:800; background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-​
+
   .announcement-box {
     background: rgba(212,162,76,0.08); border: 1px solid rgba(212,162,76,0.3);
     border-left: 3px solid var(--gold);
@@ -359,7 +359,7 @@
     padding: 2px 7px; border-radius: 20px; text-transform:none;
   }
   .announcement-box .ann-text { font-size: 16px; color: #e8eaf0; font-family:'Open Sans',sans-serif; line-height:1.5; }
-​
+
   /* ===================== LIGHT HERO LOGIN PAGE ===================== */
   .light-hero {
     --lh-bg1: #eef0fc; --lh-bg2: #e2e6fb; --lh-text: #1e2a4a; --lh-muted: #6b7488;
@@ -384,13 +384,13 @@
     .hero-nav { flex-direction:column; gap:14px; padding: 20px; }
     .hero-nav-links { display:none; }
   }
-​
+
   .hero-ticker-wrap, .hero-announcement-wrap { max-width: 1300px; margin: 0 auto; padding: 0 48px; }
   .hero-ticker-wrap .ticker-wrap { background: rgba(255,255,255,0.6); border: 1px solid var(--lh-border); margin-bottom: 12px; }
   .hero-ticker-wrap .ticker-item { color: var(--lh-text); border-right-color: var(--lh-border); }
   .hero-announcement-wrap .announcement-box { background: #fff8ea; border-color: rgba(212,162,76,0.5); }
   .hero-announcement-wrap .ann-text { color: var(--lh-text); }
-​
+
   .hero-body {
     max-width: 1300px; margin: 40px auto 0; padding: 0 48px;
     display:flex; align-items:center; gap: 60px; flex-wrap: wrap;
@@ -404,7 +404,7 @@
     .hero-left, .hero-right { min-width: 0; width: 100%; }
     .prelogin-info-card { max-width: none; }
   }
-​
+
   .floating-badge {
     position:absolute; background:#fff; border:1px solid var(--lh-border); border-radius: 12px;
     padding: 10px 16px; font-size:12px; font-weight:700; color: var(--lh-text);
@@ -418,12 +418,12 @@
     .floating-badge { position:static; display:inline-block; margin: 6px 6px 0 0; }
     .hero-illustration-wrap { display:flex; flex-direction:column; align-items:center; }
   }
-​
+
   .light-hero .login-card {
     background: var(--card-cream);
   }
   .light-hero .login-eyebrow, .light-hero .login-heading, .light-hero .login-status-title { color: var(--card-text); }
-​
+
   /* ===================== LANDING PAGE (revamped) =====================
      Scoped under .lp so the dead-end / registration screens (which reuse
      .hero-body + .login-card) keep working exactly as before. */
@@ -447,7 +447,7 @@
     mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 75%);
     -webkit-mask-image: radial-gradient(120% 90% at 50% 0%, #000 20%, transparent 75%);
   }
-​
+
   .lp-nav {
     position: relative; z-index: 2; max-width: 1160px; width: 100%; margin: 0 auto;
     padding: 22px 32px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -468,7 +468,7 @@
     cursor: pointer; box-shadow: 0 1px 2px rgba(23,26,43,.05); animation: none !important;
   }
   .lp-nav-cta:hover { border-color: #cfcbf2 !important; }
-​
+
   .lp-main {
     position: relative; z-index: 2; flex: 1; width: 100%; max-width: 1160px; margin: 0 auto;
     padding: 48px 32px 64px; display: grid; gap: 56px; align-items: start;
@@ -514,7 +514,7 @@
     content: ""; flex: 1; height: 1px; border-radius: 1px;
     background: linear-gradient(90deg, var(--lp-line), transparent);
   }
-​
+
   /* ---- Notifications panel (announcement + deadline ticker) ---- */
   .lp-notify { background: #fff; border: 1px solid var(--lp-line); border-radius: 14px; padding: 6px; box-shadow: 0 1px 2px rgba(23,26,43,.05); }
   .lp-notify-head {
@@ -530,7 +530,7 @@
   .lp-notify-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); animation: lpPing 2s ease-out infinite; }
   .lp-notify-body { padding: 12px; display: grid; gap: 10px; }
   .lp-notify-empty { font-size: 13px; color: var(--lp-ink-2); }
-​
+
   /* ---- Animation system: staggered entrance + calm micro-interactions ---- */
   @keyframes lpRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
   @keyframes lpRiseRight { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
@@ -538,7 +538,7 @@
   @keyframes lpBell { 0%, 84%, 100% { transform: rotate(0); } 88% { transform: rotate(12deg); } 92% { transform: rotate(-9deg); } 96% { transform: rotate(5deg); } }
   @keyframes lpSheen { from { transform: translateX(-120%); } to { transform: translateX(220%); } }
   @keyframes lpFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-​
+
   .lp-anim { opacity: 0; animation: lpRise .62s cubic-bezier(.22,.68,.32,1) both; }
   .lp-col-right .lp-card { animation: lpRiseRight .7s cubic-bezier(.22,.68,.32,1) both; }
   .lp-d1 { animation-delay: .05s; } .lp-d2 { animation-delay: .12s; } .lp-d3 { animation-delay: .19s; }
@@ -548,11 +548,11 @@
   .lp-col-left > .lp-notify { order: -1; }
   .lp-col-left > .lp-eyebrow { order: -2; }
   .lp-col-left > .lp-welcome { order: -3; }
-​
+
   .lp-orb-a { animation: lpFloat 14s ease-in-out infinite; }
   .lp-orb-b { animation: lpFloat 18s ease-in-out infinite reverse; }
   .lp-orb-c { animation: lpFloat 22s ease-in-out infinite; }
-​
+
   .lp-feature { transition: transform .28s cubic-bezier(.22,.68,.32,1), box-shadow .28s ease, border-color .28s ease; }
   .lp-feature:hover { transform: translateY(-3px); border-color: #d8d5f6; box-shadow: 0 1px 2px rgba(23,26,43,.05), 0 14px 28px rgba(79,70,229,.10); }
   .lp-feature .lp-feature-ico { display: inline-block; transition: transform .28s cubic-bezier(.22,.68,.32,1); }
@@ -569,7 +569,7 @@
   .lp-nav-cta:hover { transform: translateY(-1px); }
   .lp-step, .lp-info .announcement-box { transition: transform .25s ease; }
   .lp-info .announcement-box:hover { transform: translateY(-2px); }
-​
+
   .lp-eyebrow {
     display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px 6px 10px;
     border-radius: 999px; background: #fff; border: 1px solid var(--lp-line);
@@ -587,7 +587,7 @@
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .lp-lede { margin: 20px 0 0; max-width: 52ch; font-size: 16px; line-height: 1.6; color: var(--lp-ink-2); }
-​
+
   .lp-features { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .lp-feature {
     background: rgba(255,255,255,.78); backdrop-filter: blur(6px);
@@ -597,7 +597,7 @@
   .lp-feature-ico { font-size: 17px; line-height: 1; }
   .lp-feature-h { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; margin: 9px 0 4px; }
   .lp-feature-p { font-size: 12.5px; line-height: 1.5; color: var(--lp-ink-2); }
-​
+
   .lp-side { display: flex; flex-direction: column; gap: 16px; position: sticky; top: calc(var(--letterhead-h) + 24px); }
   .lp-card {
     background: #fff; border: 1px solid var(--lp-line); border-radius: 16px; padding: 28px;
@@ -627,7 +627,7 @@
   .lp-steps { margin: 22px 0 0; padding: 18px 0 0; border-top: 1px solid var(--lp-line); display: grid; gap: 11px; }
   .lp-step { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; color: var(--lp-ink-2); line-height: 1.45; }
   .lp-step b { display: grid; place-items: center; flex: 0 0 18px; height: 18px; border-radius: 50%; background: #eef0fe; color: var(--lp-brand); font-size: 10.5px; font-weight: 800; margin-top: 1px; }
-​
+
   /* Announcement + deadline ticker, restyled for the light landing. */
   .lp-info { display: grid; gap: 12px; min-width: 0; }
   .lp-side, .lp-copy, .lp-main > * { min-width: 0; }
@@ -645,7 +645,7 @@
   }
   .lp-info .ticker-item { color: var(--lp-ink); border-right-color: var(--lp-line); font-size: 12.5px; padding: 0 22px; }
   .lp-info .ticker-item .ticker-label { color: var(--lp-gold); }
-​
+
   .lp-footer {
     position: relative; z-index: 2; border-top: 1px solid var(--lp-line); background: rgba(255,255,255,.7);
     backdrop-filter: blur(6px);
@@ -659,7 +659,7 @@
   .lp-footer-nav { display: flex; gap: 20px; }
   .lp-footer-inner a { color: var(--lp-ink-2); text-decoration: none; font-weight: 600; }
   .lp-footer-inner a:hover { color: var(--lp-brand); }
-​
+
   @media (max-width: 1000px) {
     .lp-main { grid-template-columns: 1fr; gap: 36px; padding: 36px 24px 52px; }
     .lp-col-right { position: static; order: -1; }
@@ -680,7 +680,7 @@
     .lp-anim, .lp-col-right .lp-card { opacity: 1 !important; transform: none !important; }
     .lp-feature:hover, .lp-google:hover, .lp-nav-cta:hover { transform: none !important; }
   }
-​
+
   /* ---------- Corporate design foundations (8pt grid, semantic tokens, a11y states) ---------- */
   :root {
     --c-primary: #4f46e5;          /* KMIT indigo kept as brand primary */
@@ -697,7 +697,7 @@
   }
   /* semantic colours aligned to the skill's tokens */
   :root { --ok: var(--c-success); --danger: var(--c-danger); }
-​
+
   /* type scale: 12/14/16/20/24/32, 16px body floor for reading surfaces */
   body { font-size: 16px; line-height: 1.5; color: var(--c-text); }
   h1 { font-family:'Poppins',sans-serif; font-size: 32px; line-height:1.2; font-weight:700; }
@@ -706,19 +706,19 @@
   .card-label, .lp-card-label, .lp-eyebrow, .ann-label, .ticker-label {
     font-family:'IBM Plex Mono',ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
   }
-​
+
   /* radii: 4px small, 8px surfaces. Pills only for tags/status. */
   input, select, textarea, button, .btn, .card, .panel, .lp-card, .lp-feature, .lp-notify, .lp-band { border-radius: var(--r-md); }
   .tab-btn, .chip, .tag, .badge, .lp-dot { border-radius: var(--r-sm); }
   .ann-new-tag, .lp-secure, .lp-notify-live { border-radius: 999px; }
-​
+
   /* 8pt rhythm + 44px minimum touch targets */
   button, .btn, .lp-google, .login-btn-outline { min-height: 44px; padding: 12px var(--s-2); }
   input, select { min-height: 44px; padding: 8px 12px; font-size: 16px; }
   table th, table td { padding: 8px 12px; }
   .lp-card { padding: var(--s-4); }
   .lp-feature { padding: var(--s-3); }
-​
+
   /* explicit interaction states: default / hover / focus-visible / active / disabled */
   a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
   textarea:focus-visible, [tabindex]:focus-visible {
@@ -730,24 +730,24 @@
     opacity: .55; cursor: not-allowed; filter: none; transform: none;
   }
   input:invalid { border-color: var(--c-danger); }
-​
+
   /* borders before shadows */
   .lp-card, .lp-feature, .lp-notify, .lp-band { box-shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.04); }
-​
+
   /* wide data tables scroll in-region instead of the page */
   .table-wrap, .marks-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-​
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   }
-​
+
   /* compact read-only inputs keep their own metrics under the 8pt/16px input rule */
   input[placeholder="auto-suggested"] { width: 132px !important; font-size: 14px; padding: 8px 10px; }
   .shell-topbar { gap: var(--s-2); align-items: center; }
 </style>
 </head>
 <body>
-​
+
   <div class="site-letterhead">
     <div class="site-letterhead-inner">
       <img src="data:image/png;base64,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" alt="KMIT" class="site-letterhead-logo">
@@ -761,7 +761,7 @@
       </div>
     </div>
   </div>
-​
+
   <!-- ================= LANDING / SIGN-IN ================= -->
   <div id="login-screen" class="lp">
     <div class="lp-bg" aria-hidden="true">
@@ -770,7 +770,7 @@
       <span class="lp-orb lp-orb-b"></span>
       <span class="lp-orb lp-orb-c"></span>
     </div>
-​
+
     <nav class="lp-nav">
       <div class="lp-nav-brand"><span class="lp-nav-mark">AEB</span> Ankan <span class="lp-nav-brand-sub">Internal Assessment Portal</span></div>
       <div class="lp-nav-links">
@@ -780,7 +780,7 @@
       </div>
       <button class="lp-nav-cta" id="nav-login-btn">Sign in</button>
     </nav>
-​
+
     <main class="lp-main">
       <section class="lp-col-left">
         <div class="lp-welcome lp-anim lp-d1">
@@ -788,9 +788,9 @@
           <div class="lp-welcome-title"><em>Ankan</em></div>
           <div class="lp-welcome-sub">Internal Assessment Portal &middot; KMIT Autonomous Examination Branch</div>
         </div>
-​
+
         <span class="lp-eyebrow lp-anim lp-d2"><span class="lp-dot"></span> Autonomous Examination Branch</span>
-​
+
         <div class="lp-band lp-anim lp-d4" id="lp-how">
           <div class="lp-band-title">What this portal handles</div>
           <div class="lp-features">
@@ -816,7 +816,7 @@
             </div>
           </div>
         </div>
-​
+
         <div class="lp-notify lp-anim lp-d3">
           <div class="lp-notify-head">
             <span class="lp-bell">🔔</span> Notifications
@@ -828,7 +828,7 @@
           </div>
         </div>
       </section>
-​
+
       <aside class="lp-col-right">
         <div class="lp-card">
           <div class="lp-card-top">
@@ -837,18 +837,18 @@
           </div>
           <h2>Sign in to continue</h2>
           <p class="lp-card-sub">Use your institute Google account. Your assigned subjects and sections load automatically.</p>
-​
+
           <button class="lp-google" id="login-btn">
             <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.8-6.8C35.6 2.5 30.2 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.2C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-2.8-.4-4.1H24v8.4h12.5c-.3 2.1-1.6 5.2-4.6 7.3l7.7 6c4.5-4.2 6.5-10.2 6.5-17.6z"/><path fill="#FBBC05" d="M10.5 28.6a14.7 14.7 0 0 1 0-9.2l-7.9-6.2a24 24 0 0 0 0 21.6l7.9-6.2z"/><path fill="#34A853" d="M24 48c6.2 0 11.5-2 15.6-5.8l-7.7-6c-2.1 1.4-4.9 2.4-7.9 2.4-6.3 0-11.6-4.1-13.5-9.9l-7.9 6.2C6.5 42.6 14.6 48 24 48z"/></svg>
             Continue with Google
           </button>
-​
+
           <div class="lp-meta">
             First time here? Sign in once and submit the short registration form &mdash;
             the admin approves your account and assigns your subjects.
           </div>
           <div class="lp-note" id="login-note" style="display:none;">Not signed in</div>
-​
+
           <div class="lp-steps">
             <div class="lp-step"><b>1</b><span>Sign in with your <strong>@kmit.in</strong> Google account.</span></div>
             <div class="lp-step"><b>2</b><span>Open an assigned subject offering from your dashboard.</span></div>
@@ -858,7 +858,7 @@
       </aside>
     </main>
   </div>
-​
+
   <div id="app">
    <div class="shell">
     <aside class="shell-sidebar">
@@ -883,7 +883,7 @@
         <button class="tab-btn" data-tab="feedback">Feedback</button>
       </div>
     </aside>
-​
+
     <div class="shell-body">
       <div class="shell-topbar">
         <button class="topbar-hamburger" id="sidebar-toggle" type="button" title="Toggle navigation">☰</button>
@@ -911,13 +911,13 @@
           </div>
         </div>
       </div>
-​
+
       <!-- MY PROFILE (edit) MODAL -->
       <div id="profile-edit-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.45); z-index:100; align-items:center; justify-content:center;">
         <div class="login-card" style="max-width:420px; width:90%; text-align:left;">
           <div class="login-heading" style="margin-bottom:2px;">My Profile</div>
           <p class="status-msg" id="edit-profile-email" style="margin-bottom:16px;"></p>
-​
+
           <div class="field" style="margin-bottom:14px;">
             <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:4px;">Full Name</label>
             <input id="ep-full-name" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:6px; font-family:'Open Sans',sans-serif; font-size:14px; box-sizing:border-box;">
@@ -956,7 +956,7 @@
             <button class="secondary" id="ep-cancel-btn" style="flex:1;">Cancel</button>
             <button class="login-btn-outline" id="ep-save-btn" style="flex:1;">Save</button>
           </div>
-​
+
           <div style="border-top:1px solid var(--border); margin-top:18px; padding-top:16px;">
             <label style="font-size:12px; color:var(--muted); display:block; margin-bottom:6px;">Security</label>
             <div id="mfa-status-line" style="font-size:13px; margin-bottom:8px;">Checking two-factor authentication status...</div>
@@ -965,7 +965,7 @@
           </div>
         </div>
       </div>
-​
+
       <!-- MFA ENROLLMENT MODAL: QR code + 6-digit verification -->
       <div id="mfa-enroll-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.55); z-index:110; align-items:center; justify-content:center;">
         <div class="login-card" style="max-width:380px; width:90%; text-align:center;">
@@ -981,7 +981,7 @@
           </div>
         </div>
       </div>
-​
+
       <!-- MFA CHALLENGE SCREEN: shown at login for accounts with 2FA already enabled -->
       <div id="mfa-challenge-overlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:120; align-items:center; justify-content:center;">
         <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
@@ -993,7 +993,7 @@
           <button class="secondary" id="mfa-challenge-signout-btn" style="width:100%;">Sign out instead</button>
         </div>
       </div>
-​
+
       <!-- IDLE-TIMEOUT WARNING: grace period before automatic sign-out -->
       <div id="idle-warning-overlay" style="display:none; position:fixed; inset:0; background:rgba(15,15,30,0.55); z-index:130; align-items:center; justify-content:center;">
         <div class="login-card" style="max-width:360px; width:90%; text-align:center;">
@@ -1004,7 +1004,7 @@
           <button class="secondary" id="idle-signout-btn" style="width:100%;">Sign Out Now</button>
         </div>
       </div>
-​
+
       <!-- LOCK SCREEN: manual "step away" lock (Lock Screen button, or auto-triggered after
            Print) — keeps the session alive but blocks the screen until unlocked. This is a
            convenience/deterrent layer, not the real security backstop: the idle-timeout
@@ -1026,7 +1026,7 @@
           <button class="secondary" id="lock-signout-btn" style="width:100%;">Not you? Sign out</button>
         </div>
       </div>
-​
+
       <div class="shell-page-header">
         <div class="page-heading">
           <div class="page-icon">⌂</div>
@@ -1037,9 +1037,9 @@
         </div>
         <div class="page-breadcrumb">YOU ARE HERE: <span id="breadcrumb-tab">Dashboard</span></div>
       </div>
-​
+
       <main class="shell-main">
-​
+
     <!-- DASHBOARD -->
     <div class="view active" id="view-dashboard">
       <div class="panel" id="welcome-banner" style="display:none;">
@@ -1095,7 +1095,7 @@
         <div class="stats-grid" id="dashboard-stats"><p class="status-msg">Loading...</p></div>
       </div>
     </div>
-​
+
     <!-- FACULTY: OFFERINGS LIST -->
     <div class="view" id="view-offerings">
       <div class="panel" id="offerings-panel">
@@ -1161,7 +1161,7 @@
         </div>
         <div id="offerings-list"><p class="status-msg">Loading...</p></div>
       </div>
-​
+
       <div class="panel" id="marks-panel" style="display:none;">
         <h3 style="margin-top:0;" id="marks-title"></h3>
         <div id="marks-status" class="status-msg"></div>
@@ -1201,7 +1201,7 @@
         </div>
       </div>
     </div>
-​
+
     <!-- FACULTY: < 14 MARKS STUDENTS -->
     <div class="view" id="view-low-marks">
       <div class="panel">
@@ -1221,7 +1221,7 @@
         </div>
       </div>
     </div>
-​
+
     <!-- ADMIN: CATALOG (sections + subjects) -->
     <div class="view" id="view-admin-catalog">
       <div class="catalog-cols">
@@ -1277,7 +1277,7 @@
             <button id="add-section-btn">Add</button>
           </div>
           <p class="status-msg" id="section-add-status"></p>
-​
+
           <div class="form-row" style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
             <div class="field">
               <label>View: Academic Year</label>
@@ -1331,7 +1331,7 @@
             <button id="add-subject-btn">Add</button>
           </div>
           <p class="status-msg" id="subject-add-status"></p>
-​
+
           <div class="form-row" style="margin-top:18px; border-top:1px solid var(--border); padding-top:16px;">
             <div class="field" style="flex:1;">
               <label>View: Search by Name or Code</label>
@@ -1345,7 +1345,7 @@
         </div>
       </div>
     </div>
-​
+
     <!-- ADMIN: MANAGE STUDENTS -->
     <div class="view" id="view-admin-students">
       <div class="panel">
@@ -1413,7 +1413,7 @@
         <button class="secondary" id="goto-reregistration-btn">Open Re-Registration Report →</button>
       </div>
     </div>
-​
+
     <!-- ADMIN: RE-REGISTRATION REPORT -->
     <div class="view" id="view-admin-reregistration">
       <div class="panel">
@@ -1487,7 +1487,7 @@
         </div>
       </div>
     </div>
-​
+
     <!-- ADMIN: REPORTS -->
     <div class="view" id="view-admin-reports">
       <div class="panel">
@@ -1559,7 +1559,7 @@
         </div>
       </div>
     </div>
-​
+
     <!-- Hidden print-only view of a generated report, populated at print time -->
     <div id="print-report" style="display:none;">
       <h2 id="print-report-title">KMIT (AEB) — Marks Report</h2>
@@ -1601,7 +1601,7 @@
           <button id="sc-map-btn">Map</button>
         </div>
         <p class="status-msg" id="sc-map-status"></p>
-​
+
         <div class="form-row" style="align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
           <div class="field">
             <label>Bulk upload (CSV)</label>
@@ -1683,13 +1683,13 @@
         <button id="create-offering-btn">Create Offering</button>
         <p class="status-msg" id="offering-create-status"></p>
       </div>
-​
+
       <div class="panel">
         <h3 style="margin-top:0;">All Offerings</h3>
         <div id="admin-offerings-list"><p class="status-msg">Loading...</p></div>
       </div>
     </div>
-​
+
     <!-- ADMIN: MARK STRUCTURES -->
     <div class="view" id="view-admin-structures">
       <div class="panel">
@@ -1759,7 +1759,7 @@
         <button id="save-structure-btn">Save Column</button>
         <button class="secondary" id="ms-clear-btn" type="button">Clear Column Fields</button>
         <p class="status-msg" id="structure-save-status"></p>
-​
+
         <div class="form-row" style="align-items:center; border-top:1px solid var(--border); padding-top:14px; margin-top:4px;">
           <div class="field">
             <label>Bulk upload whole structure (CSV)</label>
@@ -1793,7 +1793,7 @@
         </table>
       </div>
     </div>
-​
+
     <!-- Hidden print-only landscape view of Existing Structures, populated at print time -->
     <div id="print-structures" style="display:none;">
       <h2>KMIT (AEB) — Mark Structures</h2>
@@ -1803,7 +1803,7 @@
         <tbody id="print-structures-body"></tbody>
       </table>
     </div>
-​
+
     <!-- Hidden print-only view of a faculty marks-entry sheet, populated at print time -->
     <div id="print-marks" style="display:none;">
       <h2 id="print-marks-title">KMIT (AEB) — Marks Entry</h2>
@@ -1825,7 +1825,7 @@
         </div>
       </div>
     </div>
-​
+
     <!-- ADMIN: ASSIGN FACULTY -->
     <div class="view" id="view-admin-assign">
       <div class="panel">
@@ -1914,7 +1914,7 @@
         <p class="status-msg" id="mfa-reset-status"></p>
       </div>
     </div>
-​
+
     <!-- ADMIN: HOD & COE MANAGEMENT -->
     <div class="view" id="view-admin-hod">
       <div class="panel">
@@ -1999,7 +1999,7 @@
         </table>
       </div>
     </div>
-​
+
     <!-- HOD: READ-ONLY DASHBOARD -->
     <div class="view" id="view-hod-dashboard">
       <div class="panel">
@@ -2015,7 +2015,7 @@
         </table>
       </div>
     </div>
-​
+
     <!-- COE: READ-ONLY DASHBOARD (institution-wide, no scoping) -->
     <div class="view" id="view-coe-dashboard">
       <div class="panel">
@@ -2027,7 +2027,7 @@
         </table>
       </div>
     </div>
-​
+
     <!-- ADMIN: AUDIT LOG -->
     <div class="view" id="view-admin-audit">
       <div class="panel">
@@ -2039,7 +2039,7 @@
         </table>
       </div>
     </div>
-​
+
     <!-- FEEDBACK (visible to both admin and faculty) -->
     <div class="view" id="view-feedback">
       <div class="panel">
@@ -2071,7 +2071,7 @@
         <p class="status-msg" id="fb-status">Opens your email app addressed to internals@kmit.in, with your name/role and this message pre-filled.</p>
       </div>
     </div>
-​
+
     <div class="app-footer">
       <div><strong>KMIT</strong> · Autonomous Examination Branch</div>
       <div class="app-footer-center">
@@ -2088,17 +2088,17 @@
     </div>
    </div>
   </div>
-​
+
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-​
+
 const supabase = createClient(
   'https://axmvyttammxcjgrkwtlu.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF4bXZ5dHRhbW14Y2pncmt3dGx1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc2MzU0NjMsImV4cCI6MjEwMzIxMTQ2M30.iX0deGX7kHEEc0H185SFGg0uak6MuL5xEUw_BB8Z4Cc'
 )
-​
+
 let currentProfile = null;
-​
+
 // Escapes any DB-sourced text before it goes into innerHTML/template-literal markup, so a
 // stray < or " in a bulk-imported name (student roster CSV, mark structure label, etc.)
 // can't break the layout or inject markup. Applied at the highest-risk points: data that
@@ -2110,7 +2110,7 @@ function esc(v) {
 let currentColumns = [];
 let currentOffering = null;
 let marksDirty = false;
-​
+
 // ---------- AUTO SIGN-OUT (idle timeout with grace period) ----------
 // Shorter than a typical single-user-device default, since this app is often used on shared
 // faculty-room/lab PCs where "forgot to sign out" has real consequences (someone else editing
@@ -2118,7 +2118,7 @@ let marksDirty = false;
 const IDLE_TIMEOUT_MS = 5 * 60 * 1000;   // 5 min of inactivity before warning
 const IDLE_GRACE_MS = 30 * 1000;         // 30 sec to respond before actual sign-out
 let idleTimer = null, graceTimer = null, graceCountdownInterval = null, idleListenersAttached = false;
-​
+
 function startIdleTimer() {
   resetIdleTimer();
   if (idleListenersAttached) return;
@@ -2172,7 +2172,7 @@ document.getElementById('idle-signout-btn').onclick = async () => {
   await supabase.auth.signOut();
   window.location.reload();
 };
-​
+
 // ---------- LOCK SCREEN (manual "step away" lock) ----------
 // Keeps the session alive but blocks the UI until unlocked — for deliberately stepping away
 // (Lock Screen button) or automatically right after printing marks, since walking to the
@@ -2189,7 +2189,7 @@ async function lockScreen() {
   document.getElementById('lock-code').value = '';
   document.getElementById('lock-email').value = '';
   document.getElementById('lock-screen-status').innerText = '';
-​
+
   const { data: factors } = await supabase.auth.mfa.listFactors();
   const hasMfa = !!factors?.totp?.[0];
   document.getElementById('lock-mfa-field').style.display = hasMfa ? 'block' : 'none';
@@ -2200,11 +2200,11 @@ async function lockScreen() {
   overlay.style.display = 'flex';
 }
 document.getElementById('lock-screen-btn').onclick = lockScreen;
-​
+
 document.getElementById('lock-unlock-btn').onclick = async () => {
   const statusEl = document.getElementById('lock-screen-status');
   const hasMfaField = document.getElementById('lock-mfa-field').style.display !== 'none';
-​
+
   if (hasMfaField) {
     const code = document.getElementById('lock-code').value.trim();
     if (!/^\d{6}$/.test(code)) { statusEl.innerText = 'Enter the 6-digit code from your authenticator app.'; return; }
@@ -2219,16 +2219,16 @@ document.getElementById('lock-unlock-btn').onclick = async () => {
     const email = document.getElementById('lock-email').value.trim().toLowerCase();
     if (email !== (currentProfile.email || '').toLowerCase()) { statusEl.innerText = 'That doesn\'t match the signed-in account.'; return; }
   }
-​
+
   document.getElementById('lock-screen-overlay').style.display = 'none';
   resetIdleTimer(); // successful unlock = legitimate presence, safe to restart the safety-net clock
 };
-​
+
 document.getElementById('lock-signout-btn').onclick = async () => {
   await supabase.auth.signOut();
   window.location.reload();
 };
-​
+
 // ---------- MFA (TOTP two-factor authentication) ----------
 // Challenge screen shown at login for accounts that already have a verified TOTP factor.
 // Enrollment itself (turning 2FA on for the first time) happens from My Profile > Security.
@@ -2256,7 +2256,7 @@ function showMfaChallenge(onSuccess) {
     window.location.reload();
   };
 }
-​
+
 // My Profile > Security: reflects current enrollment and wires the Enroll/Disable buttons.
 async function refreshMfaStatusLine() {
   const { data: factors } = await supabase.auth.mfa.listFactors();
@@ -2279,7 +2279,7 @@ async function refreshMfaStatusLine() {
     disableBtn.style.display = 'none';
   }
 }
-​
+
 let pendingMfaFactorId = null;
 document.getElementById('mfa-enroll-btn').onclick = async () => {
   const { data, error } = await supabase.auth.mfa.enroll({ factorType: 'totp' });
@@ -2309,7 +2309,7 @@ document.getElementById('mfa-enroll-verify-btn').onclick = async () => {
   refreshMfaStatusLine();
   alert('Two-factor authentication is now enabled on your account.');
 };
-​
+
 // Warn on tab close/refresh if there are unsaved mark edits. Browsers ignore custom message
 // text these days and just show their own generic prompt, but returnValue still triggers it.
 window.addEventListener('beforeunload', (e) => {
@@ -2326,7 +2326,7 @@ let cachedStructures = [];
 let cachedRoster = [];
 let cachedAssignments = [];
 let existingMarkStudentIds = new Set();
-​
+
 // ---------- SHARED HELPERS (bug fixes) ----------
 // Local calendar date (YYYY-MM-DD) in the browser's own timezone. Using toISOString() here
 // returned the UTC date, which is the previous day between 00:00 and 05:30 IST -- that made
@@ -2335,13 +2335,13 @@ function localToday() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
-​
+
 // Roll numbers are strings but should sort naturally (…09, …10, …11) and must not crash on
 // a null/undefined roll.
 function compareRoll(a, b) {
   return String(a ?? '').localeCompare(String(b ?? ''), undefined, { numeric: true, sensitivity: 'base' });
 }
-​
+
 // CSV cell escaping + formula-injection guard: a value starting with = + - @ (or a leading
 // tab/CR) is executed as a formula by Excel/Sheets, so prefix it with an apostrophe.
 function csvCell(v) {
@@ -2349,7 +2349,7 @@ function csvCell(v) {
   if (/^[=+\-@\t\r]/.test(str)) str = "'" + str;
   return `"${str.replace(/"/g, '""')}"`;
 }
-​
+
 // PostgREST caps a plain select at 1000 rows and long .in() lists blow past URL length limits,
 // so institution-wide report queries were silently truncated. Chunk the id list and page
 // through every chunk with .range().
@@ -2373,7 +2373,7 @@ async function fetchAllByIn(table, columns, column, ids) {
   }
   return { data: out, error: null };
 }
-​
+
 // Called by loadOfferings(). These two were previously called but never defined, which threw
 // a ReferenceError (module = strict mode) on every login and stopped the assigned-subjects
 // list from ever rendering.
@@ -2385,7 +2385,7 @@ function updateDashboardSectionOptions() {
   el.innerHTML = '<option value="">— All —</option>' + names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
   if (names.includes(current)) el.value = current;
 }
-​
+
 function renderDashboardFilterSummary() {
   const el = document.getElementById('dashboard-filter-summary');
   if (!el) return;
@@ -2396,7 +2396,7 @@ function renderDashboardFilterSummary() {
     ? `${total} assigned offering(s) · ${subjects} subject(s) · ${sections} section(s).`
     : '';
 }
-​
+
 // Print, then lock once the print dialog has actually closed. window.print() is not reliably
 // blocking, so locking on the next line could fire while the dialog was still open.
 function printThenLock() {
@@ -2405,7 +2405,7 @@ function printThenLock() {
   window.print();
   setTimeout(() => { window.removeEventListener('afterprint', onDone); lockScreen(); }, 3000);
 }
-​
+
 // Suggests a regulation based on Academic Year + Year/Sem, using each batch's
 // admission year (current AY minus years-of-study already completed).
 function suggestRegulation(academicYear, yearSem) {
@@ -2417,7 +2417,7 @@ function suggestRegulation(academicYear, yearSem) {
   const match = cachedRegulationMap.find(r => (r.admission_years || []).includes(admissionYearStr));
   return match ? match.regulation : '';
 }
-​
+
 function updateSuggestedRegulation(ayId = 'sec-ay', yearSemId = 'sec-yearsem', regId = 'sec-reg') {
   const ay = document.getElementById(ayId)?.value;
   const yearSem = document.getElementById(yearSemId)?.value;
@@ -2426,7 +2426,7 @@ function updateSuggestedRegulation(ayId = 'sec-ay', yearSemId = 'sec-yearsem', r
     regField.value = suggestRegulation(ay, yearSem) || '(none found)';
   }
 }
-​
+
 // ---------- PRE-LOGIN INFO (countdown ticker + static announcement, works before auth) ----------
 async function loadPreLoginInfo() {
   const tickerEl = document.getElementById('pre-login-info');
@@ -2435,7 +2435,7 @@ async function loadPreLoginInfo() {
   if (error || !data) return;
   const map = {};
   data.forEach(s => map[s.key] = s.value);
-​
+
   if (tickerEl && map.ENTRY_END) {
     const end = new Date(map.ENTRY_END + 'T23:59:59');
     const now = new Date();
@@ -2444,7 +2444,7 @@ async function loadPreLoginInfo() {
     const item = `<span class="ticker-item"><span class="ticker-label">Deadline</span><span class="ticker-count">${label}</span><span>— closes ${map.ENTRY_END}</span></span>`;
     tickerEl.innerHTML = `<div class="ticker-wrap"><div class="ticker-track">${item}${item}</div></div>`;
   }
-​
+
   // Always show the Announcement box (static fallback message when nothing is configured),
   // with a "New" tag only when a real announcement is actually set.
   if (annEl) {
@@ -2458,7 +2458,7 @@ async function loadPreLoginInfo() {
   }
 }
 loadPreLoginInfo();
-​
+
 // ---------- AUTH ----------
 document.getElementById('login-btn').onclick = async () => {
   await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } })
@@ -2483,12 +2483,12 @@ document.getElementById('sidebar-toggle').onclick = () => {
   document.querySelector('.shell-sidebar').classList.toggle('collapsed');
   document.querySelector('.shell-body').classList.toggle('sidebar-collapsed');
 };
-​
+
 document.getElementById('logout-btn').onclick = async () => {
   await supabase.auth.signOut();
   window.location.href = window.location.origin;
 }
-​
+
 // Used by dead-end screens (registration, access-pending, account-setup) built via innerHTML,
 // where a normal getElementById().onclick wiring isn't convenient — inline onclick calls this
 // global instead, so someone stuck on any of those screens can always back out and try a
@@ -2497,7 +2497,7 @@ window.__forceSignOut = async () => {
   await supabase.auth.signOut();
   window.location.href = window.location.origin;
 };
-​
+
 // Populates a "Select..." dropdown + its paired "other" text input from a stored value,
 // falling back to __other when the value isn't one of the predefined options. Shared by
 // the Department and Designation fields on the My Profile edit form.
@@ -2513,7 +2513,7 @@ function fillSelectOrOther(selectEl, otherEl, value) {
     otherEl.style.display = 'none';
   }
 }
-​
+
 document.getElementById('edit-profile-btn').onclick = () => {
   if (!currentProfile) return;
   document.getElementById('profile-dropdown').classList.remove('open');
@@ -2525,21 +2525,21 @@ document.getElementById('edit-profile-btn').onclick = () => {
   document.getElementById('ep-status').innerText = '';
   document.getElementById('profile-edit-overlay').style.display = 'flex';
 };
-​
+
 document.getElementById('ep-department').onchange = (e) => {
   document.getElementById('ep-department-other').style.display = e.target.value === '__other' ? 'block' : 'none';
 };
 document.getElementById('ep-designation').onchange = (e) => {
   document.getElementById('ep-designation-other').style.display = e.target.value === '__other' ? 'block' : 'none';
 };
-​
+
 document.getElementById('ep-cancel-btn').onclick = () => {
   document.getElementById('profile-edit-overlay').style.display = 'none';
 };
 document.getElementById('profile-edit-overlay').onclick = (e) => {
   if (e.target.id === 'profile-edit-overlay') e.target.style.display = 'none';
 };
-​
+
 document.getElementById('ep-save-btn').onclick = async () => {
   const statusEl = document.getElementById('ep-status');
   const fullName = document.getElementById('ep-full-name').value.trim();
@@ -2550,7 +2550,7 @@ document.getElementById('ep-save-btn').onclick = async () => {
   const designation = desigSel === '__other' ? document.getElementById('ep-designation-other').value.trim() : desigSel;
   if (!fullName) { statusEl.innerText = 'Full name cannot be empty.'; return; }
   if (!mobile) { statusEl.innerText = 'Mobile number cannot be empty.'; return; }
-​
+
   statusEl.innerText = 'Saving...';
   // Reuses the same register_profile RPC as first-time registration — it upserts by the
   // signed-in user's own row (SECURITY DEFINER, so it works regardless of RLS), so calling
@@ -2564,17 +2564,17 @@ document.getElementById('ep-save-btn').onclick = async () => {
     p_designation: designation || null
   });
   if (updErr) { statusEl.innerText = 'Error: ' + updErr.message; return; }
-​
+
   currentProfile = { ...currentProfile, full_name: fullName, mobile: mobile || null, department: department || null, designation: designation || null };
   const displayName = currentProfile.full_name || currentProfile.email.split('@')[0];
   document.getElementById('profile-avatar').innerText = displayName.trim().charAt(0).toUpperCase();
   document.getElementById('profile-email-text').innerText = displayName;
   document.getElementById('user-meta').innerText =
     [currentProfile.designation, currentProfile.department, currentProfile.mobile].filter(Boolean).join(' · ');
-​
+
   document.getElementById('profile-edit-overlay').style.display = 'none';
 };
-​
+
 // Renders a one-field registration form for first-time sign-ins (profile row exists,
 // created by the auth trigger, but has no name/faculty code yet).
 // Shared render for "stuck" screens (registration pending approval, account still being
@@ -2591,7 +2591,7 @@ function renderDeadEndScreen(title, messageHtml) {
     </div>
   `;
 }
-​
+
 function showRegistrationForm(session, profile) {
   const email = session.user.email;
   const suggestedName = (profile.full_name || session.user.user_metadata?.full_name || session.user.user_metadata?.name || '').replace(/"/g, '&quot;');
@@ -2643,7 +2643,7 @@ function showRegistrationForm(session, profile) {
       </div>
     </div>
   `;
-​
+
   document.getElementById('reg-department').onchange = (e) => {
     document.getElementById('reg-department-other').style.display = e.target.value === '__other' ? 'block' : 'none';
   };
@@ -2655,7 +2655,7 @@ function showRegistrationForm(session, profile) {
   document.getElementById('reg-mobile').addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
   });
-​
+
   document.getElementById('reg-submit-btn').onclick = async () => {
     const statusEl = document.getElementById('reg-status');
     const fullName = document.getElementById('reg-full-name').value.trim();
@@ -2667,7 +2667,7 @@ function showRegistrationForm(session, profile) {
     if (!fullName) { statusEl.innerText = 'Enter your full name to continue.'; return; }
     if (!/^\d{10}$/.test(mobileDigits)) { statusEl.innerText = 'Enter a valid 10-digit mobile number.'; return; }
     const mobile = '+91' + mobileDigits;
-​
+
     statusEl.innerText = 'Registering...';
     const facultyCode = profile.faculty_code || generateFacultyCode();
     const { data: updated, error: updErr } = await supabase.rpc('register_profile', {
@@ -2678,7 +2678,7 @@ function showRegistrationForm(session, profile) {
       p_designation: designation || null
     });
     if (updErr) { statusEl.innerText = 'Error: ' + updErr.message; return; }
-​
+
     if (updated.role === 'unapproved') {
       renderDeadEndScreen('Access Pending',
         `Your account (${esc(email)}) is not yet approved. Your faculty ID is <strong>${esc(updated.faculty_code) || '—'}</strong> — share this with the admin. Contact the admin to get approved.`);
@@ -2688,14 +2688,14 @@ function showRegistrationForm(session, profile) {
     }
   };
 }
-​
+
 async function init() {
   const { data: { session } } = await supabase.auth.getSession();
   if (!session) return;
-​
+
   const email = session.user.email;
   let { data: profile, error } = await supabase.from('profiles').select('*').eq('email', email).single();
-​
+
   // Normally the on_auth_user_created trigger (handle_new_user) creates this row the
   // instant Google sign-in completes, so this branch is a rare defensive fallback —
   // it does NOT insert client-side (profiles has no INSERT policy for regular users).
@@ -2704,9 +2704,9 @@ async function init() {
       'Give it a moment and try signing in again. If this keeps happening, contact the admin.');
     return;
   }
-​
+
   if (error || !profile) { alert('Could not load profile: ' + (error?.message || 'not found')); return; }
-​
+
   // First login: the trigger creates a bare row with no name/faculty code yet.
   if (!profile.full_name) {
     showRegistrationForm(session, profile);
@@ -2718,7 +2718,7 @@ async function init() {
     return;
   }
   currentProfile = profile;
-​
+
   // MFA gate: only accounts that have already enrolled a TOTP factor are asked for a code
   // here — enrollment itself happens later, from the My Profile > Security section, so this
   // never locks anyone out who hasn't opted in yet. getAuthenticatorAssuranceLevel tells us
@@ -2729,18 +2729,18 @@ async function init() {
     showMfaChallenge(() => enterApp(profile, email));
     return;
   }
-​
+
   enterApp(profile, email);
 }
-​
+
 async function enterApp(profile, email) {
   // Needed for the "Your Assigned Subjects" Regulation auto-suggest filter — RLS allows
   // approved faculty/admin/clerk to read this table, so fetch it regardless of role
   // (admins get a fuller version anyway from refreshCatalogCache below).
   const { data: regMap } = await supabase.from('regulation_mapping').select('*');
   cachedRegulationMap = regMap || [];
-​
-​
+
+
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   document.getElementById('user-info').innerText = `${email} — ${profile.role}`;
@@ -2753,7 +2753,7 @@ async function enterApp(profile, email) {
   // static "KMIT (AEB) Marks Management System" label with who's actually signed in).
   document.getElementById('portal-label').innerText =
     [displayName, profile.designation, profile.department].filter(Boolean).join(' · ');
-​
+
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   document.getElementById('welcome-heading').innerText = `${greeting}, ${displayName}!`;
@@ -2761,10 +2761,10 @@ async function enterApp(profile, email) {
     [profile.role === 'admin' ? 'Admin' : profile.role === 'hod' ? 'HOD' : profile.role === 'coe' ? 'COE' : profile.role === 'clerk' ? 'Clerk' : 'Faculty', profile.designation, profile.department, profile.faculty_code]
       .filter(Boolean).join(' · ');
   document.getElementById('welcome-banner').style.display = 'block';
-​
+
   const { data: settings } = await supabase.from('settings').select('*').eq('key', 'PORTAL_LABEL').single();
   if (settings) document.getElementById('portal-label').innerText = settings.value;
-​
+
   if (profile.role === 'admin') {
     document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'inline-block');
     await refreshCatalogCache();
@@ -2779,20 +2779,20 @@ async function enterApp(profile, email) {
     document.querySelectorAll('.clerk-visible').forEach(el => el.style.display = 'inline-block');
     await refreshCatalogCache();
   }
-​
+
   loadOfferings();
   loadDashboard();
   refreshMfaStatusLine();
   startIdleTimer();
 }
-​
+
 // Generates a short, human-readable, effectively-unique faculty code, e.g. KMIT-7F3K-2Q1B
 function generateFacultyCode() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no 0/O/1/I to avoid confusion
   const part = () => Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
   return `KMIT-${part()}-${part()}`;
 }
-​
+
 // ---------- TABS ----------
 function updatePageHeading(label) {
   document.getElementById('page-title').innerText = label;
@@ -2843,7 +2843,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     if (btn.dataset.tab === 'coe-dashboard') loadCoeDashboard();
   };
 });
-​
+
 // ---------- DASHBOARD ----------
 async function loadDashboard() {
   const el = document.getElementById('dashboard-stats');
@@ -2872,7 +2872,7 @@ async function loadDashboard() {
 function statCard(num, label) {
   return `<div class="stat-card"><div class="stat-num">${num}</div><div class="stat-label">${label}</div></div>`;
 }
-​
+
 // ---------- CATALOG CACHE (used across dropdowns) ----------
 async function refreshCatalogCache() {
   const [{ data: sections }, { data: subjects }, { data: offerings }, { data: faculty }, { data: regMap }, { data: subjCurriculum }] = await Promise.all([
@@ -2891,29 +2891,29 @@ async function refreshCatalogCache() {
   cachedSubjectCurriculum = subjCurriculum || [];
   populateDropdowns();
 }
-​
+
 function populateDropdowns() {
   const secOpts = cachedSections.map(s => `<option value="${s.id}">${esc(s.name)} (${esc(s.branch)}) — ${esc(s.academic_year) || '—'}</option>`).join('');
   const subjOpts = cachedSubjects.map(s => `<option value="${s.id}">${esc(s.name)} (${esc(s.code)})</option>`).join('');
   const facOpts = cachedFaculty.map(f => `<option value="${f.email}">${f.full_name ? `${esc(f.full_name)} — ${esc(f.email)}` : esc(f.email)} (${esc(f.role)})</option>`).join('');
-​
+
   updateOffSectionOptions(); // filtered version, replaces plain secOpts for off-section
   updateOffSubjectOptions(); // filtered version, replaces plain subjOpts for off-subject
   updateImportSectionOptions(); // filtered version, replaces plain secOpts for import-section
   const rosterSection = document.getElementById('roster-section'); if (rosterSection) rosterSection.innerHTML = secOpts;
   const assignFaculty = document.getElementById('assign-faculty'); if (assignFaculty) assignFaculty.innerHTML = facOpts;
-​
+
   updateSuggestedRegulation('af-ay', 'af-yearsem', 'af-reg'); // filtered version, replaces plain offOpts for assign-offering
   updateAssignSectionOptions();
   updateAssignSubjectOptions();
   updateAssignOfferingOptions();
-​
+
   const scSubject = document.getElementById('sc-subject'); if (scSubject) scSubject.innerHTML = subjOpts;
   const scRegulation = document.getElementById('sc-regulation');
   if (scRegulation) scRegulation.innerHTML = cachedRegulationMap.map(r => `<option value="${esc(r.regulation)}">${esc(r.regulation)}</option>`).join('');
   renderSubjectCurriculumList();
 }
-​
+
 function renderSubjectCurriculumList() {
   const body = document.getElementById('sc-list-body');
   if (!body) return;
@@ -2934,7 +2934,7 @@ function renderSubjectCurriculumList() {
     </tr>
   `).join('');
 }
-​
+
 window.__viewSubjectCurriculum = (id) => {
   const c = cachedSubjectCurriculum.find(x => x.id === id);
   if (!c) { alert('Mapping not found in cache — try reloading.'); return; }
@@ -2943,14 +2943,14 @@ window.__viewSubjectCurriculum = (id) => {
     `Regulation: ${c.regulation}\nYear: ${c.year}\nBranch: ${c.branch || '— All —'}`
   );
 }
-​
+
 window.__unmapSubjectCurriculum = async (id) => {
   if (!confirm('Remove this curriculum mapping? It will no longer show up as a Subject option for that Reg/Year/Branch.')) return;
   const { error } = await supabase.rpc('admin_unmap_subject_curriculum', { p_id: id });
   if (error) { alert(error.message); return; }
   await refreshCatalogCache();
 };
-​
+
 document.getElementById('sc-csv-sample-btn').onclick = () => {
   const sample = 'subject_code,regulation,year,branch\r\n' +
     (cachedSubjects[0]?.code || 'CS101') + ',KR24,II,\r\n' +
@@ -2962,7 +2962,7 @@ document.getElementById('sc-csv-sample-btn').onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 };
-​
+
 // Minimal CSV parser — handles quoted fields with embedded commas, good enough for this
 // simple 4-column template (no multi-line quoted fields).
 function parseCsv(text) {
@@ -2985,17 +2985,17 @@ function parseCsv(text) {
     return out.map(s => s.trim());
   });
 }
-​
+
 document.getElementById('sc-csv-upload-btn').onclick = async () => {
   const statusEl = document.getElementById('sc-csv-status');
   const fileInput = document.getElementById('sc-csv-file');
   const file = fileInput.files[0];
   if (!file) { statusEl.innerText = 'Choose a CSV file first.'; return; }
-​
+
   const text = await file.text();
   const rows = parseCsv(text);
   if (rows.length === 0) { statusEl.innerText = 'File is empty.'; return; }
-​
+
   const header = rows[0].map(h => h.toLowerCase());
   const idx = {
     code: header.indexOf('subject_code'),
@@ -3007,7 +3007,7 @@ document.getElementById('sc-csv-upload-btn').onclick = async () => {
     statusEl.innerText = 'Header must include subject_code, regulation, year (branch is optional).';
     return;
   }
-​
+
   const dataRows = rows.slice(1);
   let mapped = 0, failed = 0;
   const errors = [];
@@ -3029,7 +3029,7 @@ document.getElementById('sc-csv-upload-btn').onclick = async () => {
   fileInput.value = '';
   await refreshCatalogCache();
 };
-​
+
 document.getElementById('sc-map-btn').onclick = async () => {
   const statusEl = document.getElementById('sc-map-status');
   const subjectId = document.getElementById('sc-subject').value;
@@ -3044,7 +3044,7 @@ document.getElementById('sc-map-btn').onclick = async () => {
   statusEl.innerText = 'Mapped.';
   await refreshCatalogCache();
 };
-​
+
 // Filters the Create Offering "Section" dropdown by the selected Academic Year + Branch.
 // Generic — reused by any AY/Branch/Section select trio (Create Offering, Assign Faculty).
 function updateSectionSelect(ayId, branchId, selectId) {
@@ -3061,7 +3061,7 @@ function updateSectionSelect(ayId, branchId, selectId) {
 }
 function updateOffSectionOptions() { updateSectionSelect('off-ay', 'off-branch', 'off-section'); }
 function updateImportSectionOptions() { updateSectionSelect('imp-ay', 'imp-branch', 'import-section'); }
-​
+
 // Returns subject_curriculum rows (deduped by subject) matching a Regulation/Year/Branch.
 // Branch '' on a curriculum row means "common to all branches" and always matches.
 function filteredSubjectCurriculum(reg, year, branch) {
@@ -3095,7 +3095,7 @@ function updateSubjectSelect(regId, yearSemId, branchId, selectId) {
     : `<option value="">No subjects mapped for ${esc(reg)} / ${esc(year)}${branch ? ' / ' + esc(branch) : ''} — add one in Subject Curriculum above</option>`;
 }
 function updateOffSubjectOptions() { updateSubjectSelect('off-reg', 'off-yearsem', 'off-branch', 'off-subject'); }
-​
+
 // ---------- RE-REGISTRATION REPORT: cascading filters ----------
 function updateRRSectionOptions() { updateSectionSelect('rr-ay', 'rr-branch', 'rr-section'); }
 function updateRRSubjectOptions() { updateSubjectSelect('rr-reg', 'rr-yearsem', 'rr-branch', 'rr-subject'); }
@@ -3103,15 +3103,15 @@ document.getElementById('rr-ay').onchange = () => { updateSuggestedRegulation('r
 document.getElementById('rr-yearsem').onchange = () => { updateSuggestedRegulation('rr-ay', 'rr-yearsem', 'rr-reg'); updateRRSubjectOptions(); };
 document.getElementById('rr-branch').onchange = () => { updateRRSectionOptions(); updateRRSubjectOptions(); };
 document.getElementById('goto-reregistration-btn').onclick = () => document.querySelector('[data-tab="admin-reregistration"]').click();
-​
+
 let lastRRFlagged = [];
-​
+
 document.getElementById('rr-generate-btn').onclick = async () => {
   const statusEl = document.getElementById('rr-status');
   const resultsPanel = document.getElementById('rr-results-panel');
   resultsPanel.style.display = 'none';
   statusEl.innerText = 'Generating...';
-​
+
   const reg = document.getElementById('rr-reg').value;
   const yearSem = document.getElementById('rr-yearsem').value;
   const year = yearSem.split('-')[0];
@@ -3122,7 +3122,7 @@ document.getElementById('rr-generate-btn').onclick = async () => {
   const labThreshold = Number(document.getElementById('rr-threshold-lab').value);
   if (!reg || reg === '(none found)') { statusEl.innerText = 'No regulation found for this Academic Year / Year-Sem combination.'; return; }
   if (isNaN(theoryThreshold) || isNaN(labThreshold)) { statusEl.innerText = 'Enter both qualifying marks.'; return; }
-​
+
   // 1. Every subject_offerings row (both MIDs, both types) for this regulation/year.
   let offQuery = supabase.from('subject_offerings')
     .select('*, subjects(name,code), sections(id,name,branch,academic_year)')
@@ -3130,7 +3130,7 @@ document.getElementById('rr-generate-btn').onclick = async () => {
   if (subjectId) offQuery = offQuery.eq('subject_id', subjectId);
   const { data: offerings, error: offErr } = await offQuery;
   if (offErr) { statusEl.innerText = 'Error: ' + offErr.message; return; }
-​
+
   // Filter by academic year / branch / section on the joined section row (subject_offerings has no direct branch column).
   const scopedOfferings = (offerings || []).filter(o => {
     const sec = o.sections;
@@ -3141,10 +3141,10 @@ document.getElementById('rr-generate-btn').onclick = async () => {
     return true;
   });
   if (scopedOfferings.length === 0) { statusEl.innerText = 'No offerings match these filters.'; return; }
-​
+
   const offeringIds = scopedOfferings.map(o => o.id);
   const sectionIds = [...new Set(scopedOfferings.map(o => o.section_id))];
-​
+
   // 2. Marks for those offerings, and the students in those sections.
   const [{ data: marksRows, error: marksErr }, { data: students, error: stuErr }] = await Promise.all([
     fetchAllByIn('marks', 'student_id, offering_id, computed_total', 'offering_id', offeringIds),
@@ -3154,7 +3154,7 @@ document.getElementById('rr-generate-btn').onclick = async () => {
   if (stuErr) { statusEl.innerText = 'Error: ' + stuErr.message; return; }
   const marksByOfferingAndStudent = {};
   (marksRows || []).forEach(m => { marksByOfferingAndStudent[`${m.offering_id}|${m.student_id}`] = m.computed_total; });
-​
+
   // 3. Group offerings by subject, so we know exactly which offering rows (MID x type)
   //    are supposed to exist for that subject — this is what "complete data" is checked against.
   const offeringsBySubject = {};
@@ -3162,27 +3162,27 @@ document.getElementById('rr-generate-btn').onclick = async () => {
     if (!offeringsBySubject[o.subject_id]) offeringsBySubject[o.subject_id] = [];
     offeringsBySubject[o.subject_id].push(o);
   });
-​
+
   const flagged = [];
   const incomplete = [];
-​
+
   Object.entries(offeringsBySubject).forEach(([subjId, subjOfferings]) => {
     const subjectName = `${subjOfferings[0].subjects?.name || '?'} (${subjOfferings[0].subjects?.code || ''})`;
     const subjSectionIds = [...new Set(subjOfferings.map(o => o.section_id))];
     const subjStudents = (students || []).filter(s => subjSectionIds.includes(s.section_id));
-​
+
     subjStudents.forEach(stu => {
       const relevantOfferings = subjOfferings.filter(o => o.section_id === stu.section_id);
       const missing = [];
       const failed = [];
-​
+
       relevantOfferings.forEach(o => {
         const val = marksByOfferingAndStudent[`${o.id}|${stu.id}`];
         if (val === undefined || val === null) { missing.push(`${o.mid} ${o.type}`); return; }
         const threshold = o.type === 'lab' ? labThreshold : theoryThreshold;
         if (Number(val) < threshold) failed.push(`${o.mid} ${o.type === 'lab' ? 'Lab' : 'Theory'} (${val}/${threshold})`);
       });
-​
+
       const record = { roll: stu.roll_number, name: stu.name, section: relevantOfferings[0].sections?.name || '?', subject: subjectName };
       if (missing.length > 0) {
         incomplete.push({ ...record, missing: missing.join(', ') });
@@ -3193,15 +3193,15 @@ document.getElementById('rr-generate-btn').onclick = async () => {
       }
     });
   });
-​
+
   flagged.sort((a, b) => compareRoll(a.roll, b.roll));
   incomplete.sort((a, b) => compareRoll(a.roll, b.roll));
   lastRRFlagged = flagged;
-​
+
   document.getElementById('rr-flagged-body').innerHTML = flagged.length
     ? flagged.map(f => `<tr><td>${esc(f.roll)}</td><td>${esc(f.name)}</td><td>${esc(f.section)}</td><td>${esc(f.subject)}</td><td>${esc(f.failed)}</td></tr>`).join('')
     : `<tr><td colspan="5" class="status-msg">No students below the qualifying marks for these filters.</td></tr>`;
-​
+
   const incompleteHeading = document.getElementById('rr-incomplete-heading');
   const incompleteTable = document.getElementById('rr-incomplete-table');
   if (incomplete.length > 0) {
@@ -3213,11 +3213,11 @@ document.getElementById('rr-generate-btn').onclick = async () => {
     incompleteHeading.style.display = 'none';
     incompleteTable.style.display = 'none';
   }
-​
+
   statusEl.innerText = `${flagged.length} flagged, ${incomplete.length} incomplete (skipped), across ${Object.keys(offeringsBySubject).length} subject(s).`;
   resultsPanel.style.display = 'block';
 };
-​
+
 document.getElementById('rr-export-btn').onclick = () => {
   if (lastRRFlagged.length === 0) { alert('Nothing to export — generate a report first.'); return; }
   const header = 'Roll No,Name,Section,Subject,Failed Component(s)\r\n';
@@ -3229,23 +3229,23 @@ document.getElementById('rr-export-btn').onclick = () => {
   a.download = 're-registration-candidates.csv';
   a.click();
 };
-​
+
 // ---------- REPORTS: cascading filters ----------
 function updateRepSectionOptions() { updateSectionSelect('rep-ay', 'rep-branch', 'rep-section'); }
 function updateRepSubjectOptions() { updateSubjectSelect('rep-reg', 'rep-yearsem', 'rep-branch', 'rep-subject'); }
 document.getElementById('rep-ay').onchange = () => { updateSuggestedRegulation('rep-ay', 'rep-yearsem', 'rep-reg'); updateRepSectionOptions(); updateRepSubjectOptions(); };
 document.getElementById('rep-yearsem').onchange = () => { updateSuggestedRegulation('rep-ay', 'rep-yearsem', 'rep-reg'); updateRepSubjectOptions(); };
 document.getElementById('rep-branch').onchange = () => { updateRepSectionOptions(); updateRepSubjectOptions(); };
-​
+
 let lastReportRows = [];
 let lastReportMeta = { title: '', meta: '' };
-​
+
 document.getElementById('rep-generate-btn').onclick = async () => {
   const statusEl = document.getElementById('rep-status');
   const resultsPanel = document.getElementById('rep-results-panel');
   resultsPanel.style.display = 'none';
   statusEl.innerText = 'Generating...';
-​
+
   const reg = document.getElementById('rep-reg').value;
   const yearSem = document.getElementById('rep-yearsem').value;
   const year = yearSem.split('-')[0];
@@ -3256,14 +3256,14 @@ document.getElementById('rep-generate-btn').onclick = async () => {
   const thresholdRaw = document.getElementById('rep-threshold').value;
   const threshold = thresholdRaw !== '' ? Number(thresholdRaw) : null;
   if (!reg || reg === '(none found)') { statusEl.innerText = 'No regulation found for this Academic Year / Year-Sem combination.'; return; }
-​
+
   let offQuery = supabase.from('subject_offerings')
     .select('*, subjects(name,code), sections(id,name,branch,academic_year)')
     .eq('regulation', reg).eq('year', year);
   if (subjectId) offQuery = offQuery.eq('subject_id', subjectId);
   const { data: offerings, error: offErr } = await offQuery;
   if (offErr) { statusEl.innerText = 'Error: ' + offErr.message; return; }
-​
+
   const scopedOfferings = (offerings || []).filter(o => {
     const sec = o.sections;
     if (!sec) return false;
@@ -3273,10 +3273,10 @@ document.getElementById('rep-generate-btn').onclick = async () => {
     return true;
   });
   if (scopedOfferings.length === 0) { statusEl.innerText = 'No offerings match these filters.'; return; }
-​
+
   const offeringIds = scopedOfferings.map(o => o.id);
   const sectionIds = [...new Set(scopedOfferings.map(o => o.section_id))];
-​
+
   const [{ data: marksRows, error: marksErr }, { data: students, error: stuErr }] = await Promise.all([
     fetchAllByIn('marks', 'student_id, offering_id, computed_total', 'offering_id', offeringIds),
     fetchAllByIn('students', '*', 'section_id', sectionIds)
@@ -3285,7 +3285,7 @@ document.getElementById('rep-generate-btn').onclick = async () => {
   if (stuErr) { statusEl.innerText = 'Error: ' + stuErr.message; return; }
   const totalByOfferingAndStudent = {};
   (marksRows || []).forEach(m => { totalByOfferingAndStudent[`${m.offering_id}|${m.student_id}`] = m.computed_total; });
-​
+
   const rows = [];
   if (scope === 'Consolidated') {
     // Group offerings by (subject, type) — average whichever of I/II MID totals actually exist
@@ -3328,7 +3328,7 @@ document.getElementById('rep-generate-btn').onclick = async () => {
       });
     });
   }
-​
+
   const filtered = threshold !== null ? rows.filter(r => r.total < threshold) : rows;
   filtered.sort((a, b) => compareRoll(a.roll, b.roll));
   lastReportRows = filtered;
@@ -3336,7 +3336,7 @@ document.getElementById('rep-generate-btn').onclick = async () => {
     title: `${scope} Marks Report${threshold !== null ? ` — Below ${threshold}` : ''}`,
     meta: `${document.getElementById('rep-ay').value} · ${yearSem} (${reg}) · ${branch || 'All branches'} — generated ${new Date().toLocaleString()}`
   };
-​
+
   document.getElementById('rep-results-title').innerText = lastReportMeta.title;
   document.getElementById('rep-body').innerHTML = filtered.length
     ? filtered.map(r => `<tr><td>${esc(r.roll)}</td><td>${esc(r.name)}</td><td>${esc(r.section)}</td><td>${esc(r.subject)}</td><td>${esc(r.type)}</td><td>${esc(r.total)}</td></tr>`).join('')
@@ -3344,7 +3344,7 @@ document.getElementById('rep-generate-btn').onclick = async () => {
   statusEl.innerText = `${filtered.length} record(s) across ${scopedOfferings.length} offering(s).`;
   resultsPanel.style.display = 'block';
 };
-​
+
 document.getElementById('rep-export-csv-btn').onclick = () => {
   if (lastReportRows.length === 0) { alert('Nothing to export — generate a report first.'); return; }
   const header = ['Roll No', 'Name', 'Section', 'Subject', 'Type', 'Total'];
@@ -3358,7 +3358,7 @@ document.getElementById('rep-export-csv-btn').onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 };
-​
+
 document.getElementById('rep-export-pdf-btn').onclick = () => {
   if (lastReportRows.length === 0) { alert('Nothing to export — generate a report first.'); return; }
   document.getElementById('print-report-title').innerText = `KMIT (AEB) — ${lastReportMeta.title}`;
@@ -3367,11 +3367,11 @@ document.getElementById('rep-export-pdf-btn').onclick = () => {
     `<tr><td>${esc(r.roll)}</td><td>${esc(r.name)}</td><td>${esc(r.section)}</td><td>${esc(r.subject)}</td><td>${esc(r.type)}</td><td>${esc(r.total)}</td></tr>`).join('');
   printThenLock(); // same reasoning as marks print — this report contains real student data
 };
-​
+
 // ---------- ASSIGN FACULTY: cascading filters ----------
 function updateAssignSectionOptions() { updateSectionSelect('af-ay', 'af-branch', 'af-section'); }
 function updateAssignSubjectOptions() { updateSubjectSelect('af-reg', 'af-yearsem', 'af-branch', 'af-subject'); }
-​
+
 // Narrows the "Offering" select to subject_offerings rows matching every filter above it —
 // there should be at most one match, since Regulation+Year+Type+MID+Section+Subject is how
 // Create Offering builds an offering in the first place.
@@ -3385,7 +3385,7 @@ function updateAssignOfferingOptions() {
   const mid = document.getElementById('af-mid')?.value;
   const sectionId = document.getElementById('af-section')?.value;
   const subjectId = document.getElementById('af-subject')?.value;
-​
+
   if (!reg || reg === '(none found)' || !year || !sectionId || !subjectId) {
     el.innerHTML = `<option value="">Select filters above</option>`;
     return;
@@ -3398,38 +3398,38 @@ function updateAssignOfferingOptions() {
     ? matches.map(o => `<option value="${o.id}">${esc(o.subjects?.name) || '?'} — ${esc(o.sections?.name) || '?'} (${esc(o.mid)}) [${esc(o.status)}]</option>`).join('')
     : `<option value="">No matching offering — create it in Manage Offerings first</option>`;
 }
-​
+
 // ---------- FACULTY: OFFERINGS LIST ----------
 let facultyOfferingsRaw = [];
-​
+
 let lastLowMarksRows = [];
-​
+
 async function loadLowMarksTab() {
   const statusEl = document.getElementById('lm-status');
   const bodyEl = document.getElementById('lm-body');
   statusEl.innerText = 'Loading...';
   if (facultyOfferingsRaw.length === 0) await loadOfferings();
   if (facultyOfferingsRaw.length === 0) { statusEl.innerText = 'No subjects assigned yet.'; bodyEl.innerHTML = ''; return; }
-​
+
   const threshold = Number(document.getElementById('lm-threshold').value) || 14;
   const offeringIds = facultyOfferingsRaw.map(o => o.id);
   const sectionNameByOffering = {};
   facultyOfferingsRaw.forEach(o => { sectionNameByOffering[o.id] = o.sections?.name || '?'; });
-​
+
   const { data: marksRows, error: marksErr } =
     await fetchAllByIn('marks', 'student_id, offering_id, computed_total', 'offering_id', offeringIds);
   if (marksErr) { statusEl.innerText = 'Error: ' + marksErr.message; return; }
-​
+
   const studentIds = [...new Set((marksRows || []).map(m => m.student_id))];
   if (studentIds.length === 0) { statusEl.innerText = 'No marks entered yet across your subjects.'; bodyEl.innerHTML = ''; return; }
   const { data: students, error: stuErr } = await fetchAllByIn('students', 'id, roll_number, name', 'id', studentIds);
   if (stuErr) { statusEl.innerText = 'Error: ' + stuErr.message; return; }
   const studentById = {};
   (students || []).forEach(s => { studentById[s.id] = s; });
-​
+
   const offeringById = {};
   facultyOfferingsRaw.forEach(o => { offeringById[o.id] = o; });
-​
+
   const rows = (marksRows || [])
     .filter(m => m.computed_total !== null && Number(m.computed_total) < threshold)
     .map(m => {
@@ -3443,14 +3443,14 @@ async function loadLowMarksTab() {
       };
     })
     .sort((a, b) => compareRoll(a.roll, b.roll));
-​
+
   lastLowMarksRows = rows;
   bodyEl.innerHTML = rows.length
     ? rows.map(r => `<tr><td>${esc(r.roll)}</td><td>${esc(r.name)}</td><td>${esc(r.subject)}</td><td>${esc(r.section)}</td><td>${esc(r.mid)}</td><td>${esc(r.type)}</td><td>${esc(r.total)}</td></tr>`).join('')
     : `<tr><td colspan="7" class="status-msg">No students below ${threshold} marks. 🎉</td></tr>`;
   statusEl.innerText = `${rows.length} student(s) below ${threshold} marks, across ${facultyOfferingsRaw.length} of your offering(s).`;
 }
-​
+
 document.getElementById('lm-refresh-btn').onclick = loadLowMarksTab;
 document.getElementById('lm-export-btn').onclick = () => {
   if (lastLowMarksRows.length === 0) { alert('Nothing to export — refresh the list first.'); return; }
@@ -3465,7 +3465,7 @@ document.getElementById('lm-export-btn').onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 };
-​
+
 async function loadOfferings() {
   const listEl = document.getElementById('offerings-list');
   let query = supabase.from('faculty_assignments').select(`
@@ -3484,12 +3484,12 @@ async function loadOfferings() {
   updateDashboardSectionOptions();
   renderDashboardFilterSummary();
   if (facultyOfferingsRaw.length === 0) { listEl.innerHTML = `<p class="status-msg">No subjects assigned yet.</p>`; return; }
-​
+
   updateMyOfferingsSectionOptions();
   updateMyOfferingsSubjectOptions();
   renderMyOfferings();
 }
-​
+
 // Narrows the Section dropdown to sections actually present among this faculty's own
 // assigned offerings, matching the selected Academic Year + Branch.
 function updateMyOfferingsSectionOptions() {
@@ -3507,7 +3507,7 @@ function updateMyOfferingsSectionOptions() {
   el.innerHTML = '<option value="">— All —</option>' + names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
   if (names.includes(current)) el.value = current;
 }
-​
+
 // Narrows the Subject dropdown to subjects actually present among this faculty's own
 // assigned offerings, matching every other filter currently selected.
 function updateMyOfferingsSubjectOptions() {
@@ -3519,7 +3519,7 @@ function updateMyOfferingsSubjectOptions() {
   el.innerHTML = '<option value="">— All —</option>' + names.map(n => `<option value="${esc(n)}">${esc(n)}</option>`).join('');
   if (names.includes(current)) el.value = current;
 }
-​
+
 // Applies every filter except (optionally) Subject — used both to render the list and to
 // compute what should populate the Subject dropdown itself.
 function filterMyOfferings({ skipSubject = false } = {}) {
@@ -3543,7 +3543,7 @@ function filterMyOfferings({ skipSubject = false } = {}) {
     (skipSubject || !subject || off.subjects?.name === subject)
   );
 }
-​
+
 function renderMyOfferings() {
   const listEl = document.getElementById('offerings-list');
   const rows = filterMyOfferings();
@@ -3565,7 +3565,7 @@ function renderMyOfferings() {
     listEl.appendChild(div);
   });
 }
-​
+
 document.getElementById('mo-ay').onchange = () => {
   updateSuggestedRegulation('mo-ay', 'mo-yearsem', 'mo-reg');
   updateMyOfferingsSectionOptions();
@@ -3589,7 +3589,7 @@ document.getElementById('mo-yearsem').onchange = () => {
   renderMyOfferings();
 });
 document.getElementById('mo-subject').onchange = renderMyOfferings;
-​
+
 window.__openOffering = async (offeringId) => {
   const { data: offering, error: offErr } = await supabase
     .from('subject_offerings')
@@ -3597,7 +3597,7 @@ window.__openOffering = async (offeringId) => {
     .eq('id', offeringId).single();
   if (offErr) { alert(offErr.message); return; }
   currentOffering = offering;
-​
+
   const { data: cols, error: colErr } = await supabase
     .from('mark_structures')
     .select('*')
@@ -3607,7 +3607,7 @@ window.__openOffering = async (offeringId) => {
     .order('sort_order');
   if (colErr) { alert(colErr.message); return; }
   currentColumns = cols || [];
-​
+
   const { data: students, error: stuErr } = await supabase
     .from('students')
     .select('*')
@@ -3621,7 +3621,7 @@ window.__openOffering = async (offeringId) => {
     document.getElementById('marks-status').innerText =
       'No students found for this section — if students were already imported, check the `students` table RLS policy allows faculty to read their assigned section\'s roster.';
   }
-​
+
   const { data: existingMarks } = await supabase
     .from('marks')
     .select('*')
@@ -3631,13 +3631,13 @@ window.__openOffering = async (offeringId) => {
   // Needed so that clearing every mark for a student still produces a save (an erase),
   // instead of the row being skipped and the old value surviving in the database.
   existingMarkStudentIds = new Set((existingMarks || []).map(m => m.student_id));
-​
+
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelector('[data-tab="offerings"]').classList.add('active');
   document.getElementById('view-offerings').classList.add('active');
   updatePageHeading('My Subjects');
-​
+
   document.getElementById('offerings-panel').style.display = 'none';
   document.getElementById('marks-panel').style.display = 'block';
   document.getElementById('marks-title').innerText =
@@ -3646,7 +3646,7 @@ window.__openOffering = async (offeringId) => {
   // this class's rows.
   document.getElementById('marks-search').value = '';
   document.getElementById('marks-filter').value = 'all';
-​
+
   // Read-only whenever: manually frozen by admin, entry hasn't opened yet, or the deadline
   // has passed — unless the admin has granted a deadline_override for this offering, in which
   // case the date restrictions are ignored (frozen still applies either way). This mirrors
@@ -3657,7 +3657,7 @@ window.__openOffering = async (offeringId) => {
   const deadlinePassed = !offering.deadline_override && offering.end_date && today > offering.end_date;
   const readOnly = offering.status === 'FROZEN' || notYetOpen || deadlinePassed;
   currentReadOnly = readOnly;
-​
+
   let statusMsg = '';
   if (offering.status === 'FROZEN') statusMsg = 'This offering is frozen — read only.';
   else if (notYetOpen) statusMsg = `Entry opens on ${offering.start_date} — read only until then.`;
@@ -3666,12 +3666,12 @@ window.__openOffering = async (offeringId) => {
   else if (offering.end_date) statusMsg = `Entry deadline: ${offering.end_date}.`;
   document.getElementById('marks-status').innerText = statusMsg;
   document.getElementById('save-all-btn').style.display = readOnly ? 'none' : 'inline-block';
-​
+
   const headerRow = document.getElementById('marks-header');
   headerRow.innerHTML = '<th>Roll No / Name</th>' +
     currentColumns.map(c => `<th>${esc(c.column_label)}<br><span style="font-weight:400;">/${esc(c.max_marks)}</span></th>`).join('') +
     '<th>Total</th>';
-​
+
   const body = document.getElementById('marks-body');
   body.innerHTML = '';
   students.forEach(stu => {
@@ -3692,7 +3692,7 @@ window.__openOffering = async (offeringId) => {
     tr.innerHTML = cells;
     body.appendChild(tr);
   });
-​
+
   // Live validation: clamp/flag any mark entered above its column max or below 0. Also marks
   // the sheet dirty so navigating away / closing the tab can warn before losing unsaved edits.
   body.querySelectorAll('input[data-key]').forEach(inp => {
@@ -3702,7 +3702,7 @@ window.__openOffering = async (offeringId) => {
   marksDirty = false;
   applyMarksFilter();
 }
-​
+
 // Live search + status filter over the currently rendered student rows — client-side only,
 // no re-fetch, so it stays instant as the faculty types or edits marks.
 function applyMarksFilter() {
@@ -3717,7 +3717,7 @@ function applyMarksFilter() {
     const firstCell = tr.children[0];
     const text = firstCell ? firstCell.innerText.toLowerCase() : '';
     const matchesSearch = !query || text.includes(query);
-​
+
     const inputs = tr.querySelectorAll('input[data-key]');
     const hasAnyValue = Array.from(inputs).some(inp => inp.value !== '');
     const hasInvalid = tr.querySelector('input.invalid') !== null;
@@ -3725,7 +3725,7 @@ function applyMarksFilter() {
     if (filter === 'entered') matchesFilter = hasAnyValue;
     else if (filter === 'pending') matchesFilter = !hasAnyValue;
     else if (filter === 'invalid') matchesFilter = hasInvalid;
-​
+
     const visible = matchesSearch && matchesFilter;
     tr.style.display = visible ? '' : 'none';
     if (visible) shown++;
@@ -3733,10 +3733,10 @@ function applyMarksFilter() {
   const countEl = document.getElementById('marks-filter-count');
   if (countEl) countEl.innerText = `Showing ${shown} of ${rows.length}`;
 }
-​
+
 document.getElementById('marks-search').addEventListener('input', applyMarksFilter);
 document.getElementById('marks-filter').addEventListener('change', applyMarksFilter);
-​
+
 function validateMarkInput(inp) {
   const max = Number(inp.dataset.max);
   const raw = inp.value;
@@ -3750,7 +3750,7 @@ function validateMarkInput(inp) {
   updateMarksValidationSummary();
   return !invalid;
 }
-​
+
 function updateMarksValidationSummary() {
   const errEl = document.getElementById('marks-validation-error');
   const invalidInputs = document.querySelectorAll('#marks-body input.invalid');
@@ -3767,19 +3767,19 @@ function updateMarksValidationSummary() {
     saveBtn.style.cursor = '';
   }
 }
-​
+
 document.getElementById('back-btn').onclick = () => {
   if (marksDirty && !confirm('You have unsaved mark changes. Leave without saving?')) return;
   marksDirty = false;
   document.getElementById('marks-panel').style.display = 'none';
   document.getElementById('offerings-panel').style.display = 'block';
 }
-​
+
 document.getElementById('refresh-offering-btn').onclick = () => {
   if (marksDirty && !confirm('You have unsaved mark changes. Refresh and discard them?')) return;
   if (currentOffering) window.__openOffering(currentOffering.id);
 };
-​
+
 // Opens whichever offering comes after the one currently open, within the same
 // filtered list shown on "Your Assigned Subjects" — lets faculty page through
 // their subjects/sections without going back to the list each time.
@@ -3794,7 +3794,7 @@ document.getElementById('next-offering-btn').onclick = () => {
   }
   window.__openOffering(rows[idx + 1].id);
 };
-​
+
 // Reads whatever is currently on screen (including unsaved edits) into a plain array of rows:
 // [roll_number, name, ...one value per currentColumns in order, total]. Shared by Print and CSV export.
 function collectMarksRows({ visibleOnly = false } = {}) {
@@ -3817,14 +3817,14 @@ function collectMarksRows({ visibleOnly = false } = {}) {
   });
   return rows;
 }
-​
+
 document.getElementById('print-marks-btn').onclick = () => {
   if (!currentOffering) return;
   const subjectName = currentOffering.subjects?.name || 'Marks Entry';
   const branch = currentOffering.sections?.branch || '';
   const sectionName = currentOffering.sections?.name || '';
   const yearSem = `${currentOffering.regulation}/Year ${currentOffering.year}`;
-​
+
   // currentProfile is whoever is logged in and clicked Print. That's the right faculty name
   // automatically when a faculty member prints their own sheet — but when an admin prints on
   // a faculty member's behalf, currentProfile is the admin, not the subject's actual faculty,
@@ -3835,7 +3835,7 @@ document.getElementById('print-marks-btn').onclick = () => {
     if (entered === null) return; // admin cancelled the print
     facultyName = entered.trim();
   }
-​
+
   document.getElementById('print-marks-title').innerText = `KMIT (AEB) — ${subjectName}`;
   document.getElementById('print-marks-meta').innerText =
     `Subject: ${subjectName} · Section: ${sectionName}${branch ? ' (' + branch + ')' : ''} · ${currentOffering.mid} · ${yearSem} — printed ${new Date().toLocaleString()}`;
@@ -3853,7 +3853,7 @@ document.getElementById('print-marks-btn').onclick = () => {
   // marks visible/editable unattended.
   printThenLock();
 };
-​
+
 // Feedback: opens the person's own email client via mailto, addressed to internals@kmit.in,
 // with subject/body pre-filled so nothing has to be typed twice, and their name/role/email
 // included automatically for context.
@@ -3871,7 +3871,7 @@ document.getElementById('fb-send-btn').onclick = () => {
   window.location.href = `mailto:internals@kmit.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   statusEl.innerText = 'Opening your email app...';
 };
-​
+
 document.getElementById('export-marks-btn').onclick = () => {
   if (!currentOffering) return;
   const header = ['Roll No', 'Name', ...currentColumns.map(c => `${c.column_label} /${c.max_marks}`), 'Total'];
@@ -3886,10 +3886,10 @@ document.getElementById('export-marks-btn').onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 };
-​
+
 document.getElementById('save-all-btn').onclick = async () => {
   if (!currentOffering) return;
-​
+
   // Final guard: re-validate every visible mark input before touching the DB.
   const allInputs = document.querySelectorAll('#marks-body input[data-key]');
   let anyInvalid = false;
@@ -3898,10 +3898,10 @@ document.getElementById('save-all-btn').onclick = async () => {
     document.getElementById('marks-status').innerText = 'Cannot save — some marks are out of range. Fix the highlighted cells first.';
     return;
   }
-​
+
   const saveBtn = document.getElementById('save-all-btn');
   const statusEl = document.getElementById('marks-status');
-​
+
   // Build the list of rows that actually have something to save (skip untouched students).
   const toSave = [];
   document.querySelectorAll('#marks-body tr').forEach(row => {
@@ -3919,12 +3919,12 @@ document.getElementById('save-all-btn').onclick = async () => {
     if (anyFilled || existingMarkStudentIds.has(studentId)) toSave.push({ studentId, rollNo, values });
   });
   if (toSave.length === 0) { statusEl.innerText = 'Nothing to save — no marks entered yet.'; return; }
-​
+
   saveBtn.disabled = true;
   const originalLabel = saveBtn.innerText;
   let saved = 0, failed = 0;
   const failedRolls = [];
-​
+
   // Save in small concurrent batches rather than one-at-a-time — much faster for a full class
   // (72 students at ~150ms/request is ~11s sequential vs ~1.5s in batches of 8), while still
   // capping concurrency so we're not firing 70+ simultaneous requests at once.
@@ -3942,14 +3942,14 @@ document.getElementById('save-all-btn').onclick = async () => {
       else saved++;
     });
   }
-​
+
   saveBtn.disabled = false;
   saveBtn.innerText = originalLabel;
   statusEl.innerText = `Saved ${saved} record(s)${failed ? `, ${failed} failed: ${failedRolls.join(', ')}` : ''}.`;
   marksDirty = false;
   window.__openOffering(currentOffering.id);
 }
-​
+
 // ---------- ADMIN: CATALOG ----------
 async function loadCatalog() {
   await refreshCatalogCache();
@@ -3957,7 +3957,7 @@ async function loadCatalog() {
   renderFilteredSections();
   renderFilteredSubjects();
 }
-​
+
 function renderFilteredSections() {
   const body = document.getElementById('sections-body');
   const ay = document.getElementById('sec-filter-ay').value;
@@ -3981,20 +3981,20 @@ function renderFilteredSections() {
     </tr>
   `).join('');
 }
-​
+
 window.__viewSection = (id) => {
   const s = cachedSections.find(x => x.id === id);
   if (!s) { alert('Section not found in cache — try reloading.'); return; }
   alert(`Section: ${s.name}\nBranch: ${s.branch}\nAcademic Year: ${s.academic_year}`);
 }
-​
+
 window.__deleteSection = async (id) => {
   if (!confirm('Delete this section? This may fail if students, offerings, or assignments still reference it.')) return;
   const { error } = await supabase.from('sections').delete().eq('id', id);
   if (error) { alert(error.message); return; }
   await refreshCatalogCache();
 }
-​
+
 function renderFilteredSubjects() {
   const body = document.getElementById('subjects-body');
   const q = document.getElementById('subj-search').value.trim().toLowerCase();
@@ -4018,20 +4018,20 @@ function renderFilteredSubjects() {
     </tr>
   `).join('');
 }
-​
+
 window.__viewSubject = (id) => {
   const s = cachedSubjects.find(x => x.id === id);
   if (!s) { alert('Subject not found in cache — try reloading.'); return; }
   alert(`Subject: ${s.name}\nCode: ${s.code || '—'}`);
 }
-​
+
 window.__deleteSubject = async (id) => {
   if (!confirm('Delete this subject? This may fail if it is still mapped in the curriculum or has offerings.')) return;
   const { error } = await supabase.from('subjects').delete().eq('id', id);
   if (error) { alert(error.message); return; }
   await refreshCatalogCache();
 }
-​
+
 document.getElementById('sec-filter-ay').onchange = () => {
   const ay = document.getElementById('sec-filter-ay').value;
   const yearSem = document.getElementById('sec-filter-yearsem').value;
@@ -4047,7 +4047,7 @@ document.getElementById('sec-filter-yearsem').onchange = () => {
 };
 document.getElementById('sec-filter-branch').onchange = renderFilteredSections;
 document.getElementById('subj-search').oninput = renderFilteredSubjects;
-​
+
 document.getElementById('sec-ay').onchange = updateSuggestedRegulation;
 document.getElementById('sec-yearsem').onchange = updateSuggestedRegulation;
 document.getElementById('off-ay').onchange = () => {
@@ -4063,7 +4063,7 @@ document.getElementById('off-branch').onchange = () => {
   updateOffSectionOptions();
   updateOffSubjectOptions();
 };
-​
+
 document.getElementById('imp-ay').onchange = () => {
   updateSuggestedRegulation('imp-ay', 'imp-yearsem', 'imp-reg');
   updateImportSectionOptions();
@@ -4074,7 +4074,7 @@ document.getElementById('imp-yearsem').onchange = () => {
 document.getElementById('imp-branch').onchange = () => {
   updateImportSectionOptions();
 };
-​
+
 document.getElementById('af-ay').onchange = () => {
   updateSuggestedRegulation('af-ay', 'af-yearsem', 'af-reg');
   updateAssignSectionOptions();
@@ -4099,7 +4099,7 @@ document.getElementById('sec-branch').onchange = () => {
   const isOther = document.getElementById('sec-branch').value === '__other';
   document.getElementById('sec-branch-other-field').style.display = isOther ? 'flex' : 'none';
 };
-​
+
 document.getElementById('add-section-btn').onclick = async () => {
   const statusEl = document.getElementById('section-add-status');
   const branchSelect = document.getElementById('sec-branch').value;
@@ -4118,7 +4118,7 @@ document.getElementById('add-section-btn').onclick = async () => {
   document.getElementById('sec-letter').value = '';
   loadCatalog();
 }
-​
+
 document.getElementById('add-subject-btn').onclick = async () => {
   const statusEl = document.getElementById('subject-add-status');
   const { error } = await supabase.rpc('admin_create_subject', {
@@ -4129,13 +4129,13 @@ document.getElementById('add-subject-btn').onclick = async () => {
   statusEl.innerText = 'Subject added.';
   loadCatalog();
 }
-​
+
 // ---------- ADMIN: MANAGE STUDENTS ----------
 async function loadStudentsTab() {
   if (cachedSections.length === 0) await refreshCatalogCache();
   else populateDropdowns();
 }
-​
+
 document.getElementById('download-sample-csv').onclick = (e) => {
   e.preventDefault();
   const sampleRows = [
@@ -4162,13 +4162,13 @@ document.getElementById('download-sample-csv').onclick = (e) => {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 };
-​
+
 document.getElementById('import-students-btn').onclick = async () => {
   const statusEl = document.getElementById('import-status');
   const sectionId = document.getElementById('import-section').value;
   const file = document.getElementById('import-file').files[0];
   if (!sectionId || !file) { statusEl.innerText = 'Select a section and a CSV file.'; return; }
-​
+
   const text = await file.text();
   // Use the shared quote-aware parser -- a plain split(',') corrupted any quoted name that
   // contained a comma (e.g. "Reddy, Sai Kiran").
@@ -4191,7 +4191,7 @@ document.getElementById('import-students-btn').onclick = async () => {
     else seen.add(key);
   }
   if (students.length === 0) { statusEl.innerText = 'No valid rows found in CSV.'; return; }
-​
+
   const { data, error } = await supabase.rpc('admin_bulk_import_students', {
     p_section_id: sectionId,
     p_students: students
@@ -4199,7 +4199,7 @@ document.getElementById('import-students-btn').onclick = async () => {
   if (error) { statusEl.innerText = 'Error: ' + error.message; return; }
   statusEl.innerText = `Imported ${data} student(s).` + (duplicates.length ? ` Skipped ${duplicates.length} duplicate roll number(s): ${duplicates.join(', ')}.` : '');
 }
-​
+
 document.getElementById('load-roster-btn').onclick = async () => {
   const sectionId = document.getElementById('roster-section').value;
   const { data, error } = await supabase.from('students').select('*').eq('section_id', sectionId).order('roll_number');
@@ -4216,27 +4216,27 @@ document.getElementById('load-roster-btn').onclick = async () => {
     </tr>
   `).join('');
 }
-​
+
 window.__viewStudent = (id) => {
   const s = cachedRoster.find(x => x.id === id);
   if (!s) { alert('Student not found in cache — try reloading the roster.'); return; }
   alert(`Roll No: ${s.roll_number}\nName: ${s.name}`);
 }
-​
+
 window.__deleteStudent = async (id) => {
   if (!confirm('Delete this student? This may fail if marks have already been recorded for them.')) return;
   const { error } = await supabase.from('students').delete().eq('id', id);
   if (error) { alert(error.message); return; }
   document.getElementById('load-roster-btn').click();
 }
-​
+
 // ---------- ADMIN: OFFERINGS ----------
 document.getElementById('create-offering-btn').onclick = async () => {
   const statusEl = document.getElementById('offering-create-status');
   const regulation = document.getElementById('off-reg').value;
   const yearSem = document.getElementById('off-yearsem').value;
   const year = yearSem.split('-')[0]; // "II-II" -> "II", matches mark_structures.year
-​
+
   if (!regulation || regulation === '(none found)') {
     statusEl.innerText = 'No regulation mapping found for this Academic Year / Year-Semester combo. Check Manage Catalog → regulation mapping.';
     return;
@@ -4245,7 +4245,7 @@ document.getElementById('create-offering-btn').onclick = async () => {
     statusEl.innerText = 'No section selected — adjust Academic Year / Branch filters above.';
     return;
   }
-​
+
   const { data, error } = await supabase.rpc('admin_create_offering', {
     p_subject_id: document.getElementById('off-subject').value,
     p_section_id: document.getElementById('off-section').value,
@@ -4261,7 +4261,7 @@ document.getElementById('create-offering-btn').onclick = async () => {
   await refreshCatalogCache();
   loadAdminOfferings();
 }
-​
+
 async function loadAdminOfferings() {
   if (cachedSections.length === 0) await refreshCatalogCache();
   const el = document.getElementById('admin-offerings-list');
@@ -4292,7 +4292,7 @@ async function loadAdminOfferings() {
     el.appendChild(div);
   });
 }
-​
+
 // Grants or revokes a per-offering exception that lets faculty enter/edit marks outside the
 // configured Entry Opens / Deadline window. Enforced server-side in save_marks — this is a
 // genuine bypass, not just a UI toggle, so it's confirmed before applying either direction.
@@ -4306,7 +4306,7 @@ window.__toggleOverride = async (offeringId, currentlyOn) => {
   await refreshCatalogCache();
   loadAdminOfferings();
 }
-​
+
 window.__setOfferingDeadline = async (offeringId) => {
   const off = cachedOfferings.find(o => o.id === offeringId);
   if (!off) { alert('Offering not found in cache — try reloading Manage Offerings.'); return; }
@@ -4321,7 +4321,7 @@ window.__setOfferingDeadline = async (offeringId) => {
   await refreshCatalogCache();
   loadAdminOfferings();
 }
-​
+
 window.__viewOffering = (offeringId) => {
   const off = cachedOfferings.find(o => o.id === offeringId);
   if (!off) { alert('Offering not found in cache — try reloading Manage Offerings.'); return; }
@@ -4334,7 +4334,7 @@ window.__viewOffering = (offeringId) => {
     `Deadline override: ${off.deadline_override ? 'ON — faculty can enter anytime' : 'off'}`
   );
 }
-​
+
 window.__deleteOffering = async (offeringId) => {
   if (!confirm('Delete this offering? This will also remove any faculty assignments and marks tied to it, and cannot be undone.')) return;
   // Delete dependents first — subject_offerings is referenced by marks and faculty_assignments,
@@ -4357,21 +4357,21 @@ window.__deleteOffering = async (offeringId) => {
   await refreshCatalogCache();
   loadAdminOfferings();
 }
-​
+
 window.__freezeOffering = async (offeringId) => {
   if (!confirm('Freeze this offering? Faculty will no longer be able to edit marks.')) return;
   const { error } = await supabase.rpc('admin_bulk_freeze', { p_offering_id: offeringId });
   if (error) { alert(error.message); return; }
   loadAdminOfferings();
 }
-​
+
 window.__unfreezeOffering = async (offeringId) => {
   if (!confirm('Unfreeze this offering? Faculty will be able to edit marks again.')) return;
   const { error } = await supabase.rpc('admin_bulk_unfreeze', { p_offering_id: offeringId });
   if (error) { alert(error.message); return; }
   loadAdminOfferings();
 }
-​
+
 window.__approveOffering = async (offeringId) => {
   if (!confirm('Mark all entered marks for this offering as verified/approved?')) return;
   const { data, error } = await supabase.rpc('admin_bulk_set_status', { p_offering_id: offeringId, p_status: 'verified' });
@@ -4379,7 +4379,7 @@ window.__approveOffering = async (offeringId) => {
   alert(`Approved ${data} mark record(s).`);
   loadAdminOfferings();
 }
-​
+
 // ---------- ADMIN: MARK STRUCTURES ----------
 // Auto-calc toggle: only show the Formula/Calculation fields when they're actually relevant.
 document.getElementById('ms-auto').onchange = (e) => {
@@ -4387,7 +4387,7 @@ document.getElementById('ms-auto').onchange = (e) => {
   document.getElementById('ms-formula-row').style.display = show ? 'flex' : 'none';
   document.getElementById('ms-calc-row').style.display = show ? 'flex' : 'none';
 };
-​
+
 // Calculation Type toggle: show the Columns-to-sum field for "sum", or the Pairs/Best-N
 // fields for "best_n_of_pairs".
 document.getElementById('ms-calc-type').onchange = (e) => {
@@ -4396,7 +4396,7 @@ document.getElementById('ms-calc-type').onchange = (e) => {
   document.getElementById('ms-calc-pairs-field').style.display = showPairs ? 'block' : 'none';
   document.getElementById('ms-calc-n-field').style.display = showPairs ? 'block' : 'none';
 };
-​
+
 // Builds { calc_type, calc_config } from the friendly comma-separated inputs above, or nulls
 // if Calculation Type is left as "None". This is what actually drives save_marks to compute
 // the column — the Formula field above is just a human-readable note and isn't parsed.
@@ -4419,7 +4419,7 @@ function buildCalcConfig() {
   const n = Number(document.getElementById('ms-calc-n').value) || pairs.length;
   return { calc_type: 'best_n_of_pairs', calc_config: { pairs, n } };
 }
-​
+
 // Reverse of buildCalcConfig: populates the friendly inputs from a saved calc_type/calc_config
 // when editing an existing column.
 function populateCalcConfig(calcType, calcConfig) {
@@ -4435,7 +4435,7 @@ function populateCalcConfig(calcType, calcConfig) {
     document.getElementById('ms-calc-n').value = calcConfig.n || '';
   }
 }
-​
+
 // Suggests the next Sort Order for whichever Regulation/Year/Type is currently selected,
 // so admins adding a run of columns don't have to look up "what's the last order number"
 // in the Existing Structures table each time.
@@ -4454,7 +4454,7 @@ async function suggestNextOrder() {
   document.getElementById(id).onchange = suggestNextOrder;
 });
 suggestNextOrder();
-​
+
 function clearColumnFields() {
   document.getElementById('ms-key').value = '';
   document.getElementById('ms-label').value = '';
@@ -4468,7 +4468,7 @@ function clearColumnFields() {
   suggestNextOrder();
 }
 document.getElementById('ms-clear-btn').onclick = clearColumnFields;
-​
+
 // Loads an existing row back into the form above for editing — saving again with the same
 // Regulation/Year/Type/Column Key upserts (updates) that row rather than creating a new one.
 window.__editStructureRow = (id) => {
@@ -4489,7 +4489,7 @@ window.__editStructureRow = (id) => {
   document.getElementById('structure-save-status').innerText = `Editing "${c.column_label}" — change fields below and Save Column to update it.`;
   document.querySelector('[data-tab="admin-structures"]').scrollIntoView({ behavior: 'smooth' });
 }
-​
+
 document.getElementById('save-structure-btn').onclick = async () => {
   const statusEl = document.getElementById('structure-save-status');
   const key = document.getElementById('ms-key').value.trim();
@@ -4521,7 +4521,7 @@ document.getElementById('save-structure-btn').onclick = async () => {
   clearColumnFields();
   loadStructures();
 }
-​
+
 // Landscape print-preview of the sample theory/lab/mandatory structures, laid out with the
 // same merged-header groups as the original KMIT mark sheet, so the CSV column layout is
 // easy to sanity-check before uploading.
@@ -4560,26 +4560,26 @@ document.getElementById('ms-csv-preview-btn').onclick = () => {
           <td>5</td><td>10</td><td>10</td><td>15 (auto)</td><td>40 (auto)</td><td>40 (auto)</td>
         </tr>
       </table>
-​
+
       <h2>KR24 / II / lab — sample layout</h2>
       <table>
         <tr><th>Record</th><th>Viva</th><th>Total</th></tr>
         <tr><td>10</td><td>10</td><td>20 (auto)</td></tr>
       </table>
-​
+
       <h2>KR24 / II / mandatory — sample layout</h2>
       <table>
         <tr><th>Attendance</th><th>Total</th></tr>
         <tr><td>50</td><td>50 (auto)</td></tr>
       </table>
-​
+
       <p style="font-size:11px;color:#555;">This is only a starting skeleton — max marks, column names, and row count will differ per year/regulation. Edit the downloaded CSV to match the real structure before uploading.</p>
     </body></html>
   `);
   w.document.close();
   w.onload = () => w.print();
 };
-​
+
 // Sample CSV gives a bare minimal starter for each type (theory, lab, mandatory) since every
 // year's actual structure differs — admins are expected to rename columns, add/remove rows,
 // and adjust max_marks to match the real structure before uploading. The theory block mirrors
@@ -4614,7 +4614,7 @@ document.getElementById('ms-csv-sample-btn').onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 };
-​
+
 // Bulk upload: each row can carry its own regulation/year/type (so one file can seed several
 // structures at once); rows that leave those blank fall back to whatever's selected in the
 // form above. sort_order auto-numbers per regulation/year/type group, in file order, when left
@@ -4625,15 +4625,15 @@ document.getElementById('ms-csv-upload-btn').onclick = async () => {
   const fileInput = document.getElementById('ms-csv-file');
   const file = fileInput.files[0];
   if (!file) { statusEl.innerText = 'Choose a CSV file first.'; return; }
-​
+
   const defaultReg = document.getElementById('ms-reg').value;
   const defaultYear = document.getElementById('ms-year').value;
   const defaultType = document.getElementById('ms-type').value;
-​
+
   const text = await file.text();
   const rows = parseCsv(text);
   if (rows.length === 0) { statusEl.innerText = 'File is empty.'; return; }
-​
+
   const header = rows[0].map(h => h.toLowerCase());
   const idx = {
     reg: header.indexOf('regulation'),
@@ -4652,7 +4652,7 @@ document.getElementById('ms-csv-upload-btn').onclick = async () => {
     statusEl.innerText = 'Header must include column_key, column_label, max_marks (regulation, year, type, sort_order, auto_calculated, formula, calc_type, calc_config are optional).';
     return;
   }
-​
+
   const dataRows = rows.slice(1).filter(r => r[idx.key]);
   // Track the next auto-number separately per regulation/year/type group, seeded from
   // whatever's already saved for each group so uploads append rather than collide.
@@ -4671,7 +4671,7 @@ document.getElementById('ms-csv-upload-btn').onclick = async () => {
     }
     return nextOrderByGroup[gKey]++;
   };
-​
+
   let saved = 0, failed = 0;
   const errors = [];
   const groupsTouched = new Set();
@@ -4709,7 +4709,7 @@ document.getElementById('ms-csv-upload-btn').onclick = async () => {
   fileInput.value = '';
   loadStructures();
 };
-​
+
 // Exports whatever is currently filtered/shown in Existing Structures, so it can be tweaked
 // in Excel and re-uploaded above (e.g. as the starting point for a similar Year/Type).
 document.getElementById('ms-export-btn').onclick = () => {
@@ -4731,7 +4731,7 @@ document.getElementById('ms-export-btn').onclick = () => {
   a.click();
   URL.revokeObjectURL(a.href);
 };
-​
+
 document.getElementById('ms-filter-btn').onclick = loadStructures;
 document.getElementById('ms-print-btn').onclick = () => {
   const meta = document.getElementById('print-structures-meta');
@@ -4741,7 +4741,7 @@ document.getElementById('ms-print-btn').onclick = () => {
   meta.innerText = `${reg} · ${year} · ${type} — printed ${new Date().toLocaleString()}`;
   window.print();
 };
-​
+
 async function loadStructures() {
   const body = document.getElementById('structures-body');
   const printBody = document.getElementById('print-structures-body');
@@ -4770,7 +4770,7 @@ async function loadStructures() {
     <tr><td>${esc(c.column_key)}</td><td>${esc(c.column_label)}</td><td>${esc(c.max_marks)}</td><td>${esc(c.sort_order)}</td><td>${c.auto_calculated ? 'Yes' : 'No'}</td></tr>
   `).join('');
 }
-​
+
 window.__viewStructureRow = (id) => {
   const c = cachedStructures.find(x => x.id === id);
   if (!c) { alert('Row not found in cache — try reloading.'); return; }
@@ -4781,21 +4781,21 @@ window.__viewStructureRow = (id) => {
     (c.formula ? `\nFormula: ${c.formula}` : '')
   );
 }
-​
+
 window.__deleteStructureRow = async (id) => {
   if (!confirm('Delete this mark-structure column? Faculty entering marks for this Regulation/Year/Type will no longer see it.')) return;
   const { error } = await supabase.from('mark_structures').delete().eq('id', id);
   if (error) { alert(error.message); return; }
   loadStructures();
 }
-​
+
 // ---------- ADMIN: ASSIGN FACULTY ----------
 async function loadAssignTab() {
   if (cachedSections.length === 0) await refreshCatalogCache();
   else populateDropdowns();
   loadAssignments();
 }
-​
+
 document.getElementById('assign-btn').onclick = async () => {
   const statusEl = document.getElementById('assign-status');
   const { error } = await supabase.rpc('admin_assign_faculty', {
@@ -4806,7 +4806,7 @@ document.getElementById('assign-btn').onclick = async () => {
   statusEl.innerText = 'Assigned — covers both I MID and II MID for this subject/section (whichever already exist).';
   loadAssignments();
 }
-​
+
 document.getElementById('mfa-reset-btn').onclick = async () => {
   const statusEl = document.getElementById('mfa-reset-status');
   const email = document.getElementById('mfa-reset-email').value.trim();
@@ -4819,7 +4819,7 @@ document.getElementById('mfa-reset-btn').onclick = async () => {
     : `${email} didn't have two-factor authentication set up — nothing to remove.`;
   document.getElementById('mfa-reset-email').value = '';
 };
-​
+
 async function loadAssignments() {
   const body = document.getElementById('assignments-body');
   const { data, error } = await supabase.from('faculty_assignments').select(`
@@ -4837,7 +4837,7 @@ async function loadAssignments() {
     </tr>
   `).join('');
 }
-​
+
 window.__viewAssignment = (facultyId, offeringId) => {
   const a = cachedAssignments.find(x => x.faculty_id === facultyId && x.offering_id === offeringId);
   if (!a) { alert('Assignment not found in cache — try reloading.'); return; }
@@ -4849,7 +4849,7 @@ window.__viewAssignment = (facultyId, offeringId) => {
     `MID: ${a.subject_offerings?.mid || '—'}\nRegulation: ${a.subject_offerings?.regulation || '—'}\nYear: ${a.subject_offerings?.year || '—'}\nType: ${a.subject_offerings?.type || '—'}\nStatus: ${a.subject_offerings?.status || '—'}`
   );
 }
-​
+
 // Composite delete (faculty_id + offering_id) — works whether or not the table also has its
 // own surrogate `id` column. Requires an RLS DELETE policy on faculty_assignments for admins.
 window.__deleteAssignment = async (facultyId, offeringId) => {
@@ -4858,10 +4858,10 @@ window.__deleteAssignment = async (facultyId, offeringId) => {
   if (error) { alert(error.message); return; }
   loadAssignments();
 }
-​
+
 // ---------- ADMIN: AUDIT LOG ----------
 document.getElementById('refresh-audit-btn').onclick = loadAudit;
-​
+
 async function loadAudit() {
   const body = document.getElementById('audit-body');
   const { data, error } = await supabase.rpc('admin_get_audit_log', { p_limit: 50 });
@@ -4875,7 +4875,7 @@ async function loadAudit() {
     </tr>
   `).join('');
 }
-​
+
 // ---------- ADMIN: HOD MANAGEMENT ----------
 document.getElementById('hod-promote-btn').onclick = async () => {
   const statusEl = document.getElementById('hod-promote-status');
@@ -4891,7 +4891,7 @@ document.getElementById('hod-promote-btn').onclick = async () => {
   await refreshCatalogCache();
   loadHodTab();
 };
-​
+
 async function loadHodTab() {
   const select = document.getElementById('hod-assign-select');
   const hods = cachedFaculty.filter(f => f.role === 'hod');
@@ -4900,7 +4900,7 @@ async function loadHodTab() {
     : `<option value="">No HODs yet — promote one above first</option>`;
   loadHodAssignments();
 }
-​
+
 async function loadHodAssignments() {
   const body = document.getElementById('hod-assignments-body');
   const { data, error } = await supabase.from('hod_assignments').select(`*, profiles(full_name, email)`).order('created_at');
@@ -4916,7 +4916,7 @@ async function loadHodAssignments() {
     `).join('')
     : `<tr><td colspan="4" class="status-msg">No HOD grants yet.</td></tr>`;
 }
-​
+
 document.getElementById('hod-assign-btn').onclick = async () => {
   const statusEl = document.getElementById('hod-assign-status');
   const hodId = document.getElementById('hod-assign-select').value;
@@ -4928,13 +4928,13 @@ document.getElementById('hod-assign-btn').onclick = async () => {
   statusEl.innerText = 'Granted.';
   loadHodAssignments();
 };
-​
+
 window.__deleteHodAssignment = async (id) => {
   if (!confirm('Remove this HOD grant?')) return;
   await supabase.from('hod_assignments').delete().eq('id', id);
   loadHodAssignments();
 };
-​
+
 // ---------- ADMIN: CLERK (YEAR COORDINATOR) MANAGEMENT ----------
 async function loadClerkTab() {
   const select = document.getElementById('clerk-assign-select');
@@ -4944,7 +4944,7 @@ async function loadClerkTab() {
     : `<option value="">No clerks yet — promote one above first</option>`;
   loadClerkAssignments();
 }
-​
+
 async function loadClerkAssignments() {
   const body = document.getElementById('clerk-assignments-body');
   const { data, error } = await supabase.from('clerk_assignments').select(`*, profiles(full_name, email)`).order('created_at');
@@ -4959,7 +4959,7 @@ async function loadClerkAssignments() {
     `).join('')
     : `<tr><td colspan="3" class="status-msg">No clerk grants yet.</td></tr>`;
 }
-​
+
 document.getElementById('clerk-assign-btn').onclick = async () => {
   const statusEl = document.getElementById('clerk-assign-status');
   const clerkId = document.getElementById('clerk-assign-select').value;
@@ -4970,13 +4970,13 @@ document.getElementById('clerk-assign-btn').onclick = async () => {
   statusEl.innerText = 'Granted.';
   loadClerkAssignments();
 };
-​
+
 window.__deleteClerkAssignment = async (id) => {
   if (!confirm('Remove this clerk grant?')) return;
   await supabase.from('clerk_assignments').delete().eq('id', id);
   loadClerkAssignments();
 };
-​
+
 // ---------- HOD: READ-ONLY DASHBOARD ----------
 async function loadHodDashboard() {
   const summaryEl = document.getElementById('hod-scope-summary');
@@ -4985,7 +4985,7 @@ async function loadHodDashboard() {
   summaryEl.innerText = (grants && grants.length)
     ? grants.map(g => `${g.branch || 'All Branches'} · ${g.year || 'All Years'}`).join('  |  ')
     : 'No scope assigned yet — contact the admin.';
-​
+
   const body = document.getElementById('hod-marks-body');
   // RLS (is_hod_for_offering / is_hod_for_branch) does the actual scoping server-side — this
   // query just asks for everything and only gets back what the HOD's grants cover.
@@ -5009,7 +5009,7 @@ async function loadHodDashboard() {
     `).join('')
     : `<tr><td colspan="7" class="status-msg">No marks recorded yet within your scope.</td></tr>`;
 }
-​
+
 // COE sees everything, institution-wide, no grants table needed — the "coe read marks" /
 // "coe read offerings" / "coe read students" RLS policies do all the scoping (i.e. none).
 async function loadCoeDashboard() {
@@ -5034,7 +5034,7 @@ async function loadCoeDashboard() {
     `).join('')
     : `<tr><td colspan="7" class="status-msg">No marks recorded yet.</td></tr>`;
 }
-​
+
 init();
 </script>
 </body>
