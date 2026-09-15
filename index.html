@@ -875,6 +875,7 @@
         <button class="tab-btn admin-only clerk-visible" data-tab="admin-offerings" style="display:none;">Manage Offerings</button>
         <button class="tab-btn admin-only" data-tab="admin-structures" style="display:none;">Mark Structures</button>
         <button class="tab-btn admin-only clerk-visible" data-tab="admin-assign" style="display:none;">Assign Faculty</button>
+        <button class="tab-btn admin-only clerk-visible" data-tab="admin-university-export" style="display:none;">University Export</button>
         <button class="tab-btn admin-only" data-tab="admin-hod" style="display:none;">HOD Management</button>
         <button class="tab-btn admin-only" data-tab="admin-audit" style="display:none;">Audit Log</button>
         <button class="tab-btn hod-only" data-tab="hod-dashboard" style="display:none;">HOD Dashboard</button>
@@ -1666,6 +1667,8 @@
             <select id="off-type">
               <option value="theory" selected>theory</option>
               <option value="lab">lab</option>
+              <option value="mandatory">mandatory</option>
+              <option value="sdc">sdc</option>
             </select>
           </div>
           <div class="field">
@@ -1877,6 +1880,8 @@
             <select id="af-type">
               <option value="theory" selected>theory</option>
               <option value="lab">lab</option>
+              <option value="mandatory">mandatory</option>
+              <option value="sdc">sdc</option>
             </select>
           </div>
           <div class="field">
@@ -1912,6 +1917,29 @@
           <button id="mfa-reset-btn">Reset Their 2FA</button>
         </div>
         <p class="status-msg" id="mfa-reset-status"></p>
+      </div>
+    </div>
+
+    <!-- ADMIN/CLERK: UNIVERSITY UPLOAD FORMAT EXPORT -->
+    <div class="view" id="view-admin-university-export">
+      <div class="panel">
+        <h3 style="margin-top:0;">Export to University Upload Format</h3>
+        <p class="status-msg">Converts stored marks into the flat HTNO/subcode format the university's own upload expects. Lab, Mandatory, and SDC offerings export a single CIE column (the computed total); Theory offerings need you to map each target column to one of your stored mark columns first, since naming varies by subject/regulation.</p>
+        <div class="form-row">
+          <div class="field" style="flex:1;"><label>Offering</label><select id="uex-offering"></select></div>
+          <button id="uex-load-btn">Load</button>
+        </div>
+        <div id="uex-mapping-row" style="display:none;">
+          <p class="status-msg">Map each university column to one of this subject's stored mark columns:</p>
+          <div class="form-row">
+            <div class="field"><label>Assignment</label><select id="uex-map-assignment"></select></div>
+            <div class="field"><label>Viva-voce</label><select id="uex-map-vivavoce"></select></div>
+            <div class="field"><label>Objective</label><select id="uex-map-objective"></select></div>
+            <div class="field"><label>Descriptive</label><select id="uex-map-descriptive"></select></div>
+          </div>
+        </div>
+        <button id="uex-export-btn" style="display:none;">Download CSV</button>
+        <p class="status-msg" id="uex-status"></p>
       </div>
     </div>
 
@@ -2839,6 +2867,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     }
     if (btn.dataset.tab === 'admin-audit') loadAudit();
     if (btn.dataset.tab === 'admin-hod') { loadHodTab(); loadClerkTab(); }
+    if (btn.dataset.tab === 'admin-university-export') loadUexTab();
     if (btn.dataset.tab === 'hod-dashboard') loadHodDashboard();
     if (btn.dataset.tab === 'coe-dashboard') loadCoeDashboard();
   };
@@ -4890,6 +4919,99 @@ document.getElementById('hod-promote-btn').onclick = async () => {
   document.getElementById('hod-promote-email').value = '';
   await refreshCatalogCache();
   loadHodTab();
+};
+
+// ---------- ADMIN/CLERK: UNIVERSITY UPLOAD FORMAT EXPORT ----------
+async function loadUexTab() {
+  const select = document.getElementById('uex-offering');
+  const { data, error } = await supabase.from('subject_offerings')
+    .select(`id, regulation, year, type, mid, subjects(name, code), sections(name)`)
+    .order('regulation').order('year').order('type');
+  if (error) { select.innerHTML = `<option value="">${esc(error.message)}</option>`; return; }
+  select.innerHTML = (data || []).length
+    ? data.map(o => `<option value="${o.id}">${esc(o.subjects?.name)} (${esc(o.subjects?.code)}) — ${esc(o.sections?.name)} — ${esc(o.regulation)}/${esc(o.year)}/${esc(o.type)} — ${esc(o.mid)}</option>`).join('')
+    : `<option value="">No offerings yet</option>`;
+  document.getElementById('uex-mapping-row').style.display = 'none';
+  document.getElementById('uex-export-btn').style.display = 'none';
+}
+
+let uexCurrentOffering = null;
+
+document.getElementById('uex-load-btn').onclick = async () => {
+  const statusEl = document.getElementById('uex-status');
+  const offeringId = document.getElementById('uex-offering').value;
+  if (!offeringId) { statusEl.innerText = 'Choose an offering first.'; return; }
+  const { data: off, error } = await supabase.from('subject_offerings')
+    .select(`*, subjects(name, code), sections(name)`).eq('id', offeringId).single();
+  if (error) { statusEl.innerText = error.message; return; }
+  uexCurrentOffering = off;
+  statusEl.innerText = '';
+
+  if (off.type === 'theory') {
+    const { data: cols } = await supabase.from('mark_structures').select('column_key, column_label')
+      .eq('regulation', off.regulation).eq('year', off.year).eq('type', off.type).order('sort_order');
+    const options = (cols || []).map(c => `<option value="${esc(c.column_key)}">${esc(c.column_label)} (${esc(c.column_key)})</option>`).join('');
+    const blank = `<option value="">— choose —</option>`;
+    ['assignment','vivavoce','objective','descriptive'].forEach(id => {
+      document.getElementById(`uex-map-${id}`).innerHTML = blank + options;
+    });
+    // Reasonable auto-defaults where a column_key obviously matches — Viva-voce is deliberately
+    // left unmapped since there's no reliable naming convention for it across subjects.
+    const findCol = (needle) => (cols || []).find(c => c.column_key.toLowerCase().includes(needle));
+    const assignmentCol = findCol('assign');
+    const objectiveCol = findCol('objective');
+    const descriptiveCol = findCol('descriptive') || findCol('total');
+    if (assignmentCol) document.getElementById('uex-map-assignment').value = assignmentCol.column_key;
+    if (objectiveCol) document.getElementById('uex-map-objective').value = objectiveCol.column_key;
+    if (descriptiveCol) document.getElementById('uex-map-descriptive').value = descriptiveCol.column_key;
+    document.getElementById('uex-mapping-row').style.display = 'block';
+  } else {
+    document.getElementById('uex-mapping-row').style.display = 'none';
+  }
+  document.getElementById('uex-export-btn').style.display = 'inline-block';
+};
+
+document.getElementById('uex-export-btn').onclick = async () => {
+  const statusEl = document.getElementById('uex-status');
+  if (!uexCurrentOffering) { statusEl.innerText = 'Load an offering first.'; return; }
+  const off = uexCurrentOffering;
+  const { data: marksData, error } = await supabase.from('marks')
+    .select(`computed_total, values, students(roll_number)`)
+    .eq('offering_id', off.id);
+  if (error) { statusEl.innerText = error.message; return; }
+  if (!marksData || marksData.length === 0) { statusEl.innerText = 'No marks recorded for this offering yet.'; return; }
+
+  const subcode = off.subjects?.code || '';
+  let header, rows;
+
+  if (off.type === 'theory') {
+    const mapAssignment = document.getElementById('uex-map-assignment').value;
+    const mapVivavoce = document.getElementById('uex-map-vivavoce').value;
+    const mapObjective = document.getElementById('uex-map-objective').value;
+    const mapDescriptive = document.getElementById('uex-map-descriptive').value;
+    if (!mapAssignment || !mapVivavoce || !mapObjective || !mapDescriptive) {
+      statusEl.innerText = 'Map all four columns before exporting — Viva-voce has no default, pick it manually.';
+      return;
+    }
+    header = 'HTNO,subcode,Assignment,Viva-voce,Objective,Descriptive';
+    rows = marksData.map(m => [
+      m.students?.roll_number, subcode,
+      m.values?.[mapAssignment] ?? 0, m.values?.[mapVivavoce] ?? 0,
+      m.values?.[mapObjective] ?? 0, m.values?.[mapDescriptive] ?? 0
+    ].join(','));
+  } else {
+    header = 'HTNO,subcode,CIE';
+    rows = marksData.map(m => [m.students?.roll_number, subcode, m.computed_total ?? 0].join(','));
+  }
+
+  const csv = [header, ...rows].join('\r\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${off.type.toUpperCase()}-${subcode}-${off.mid}.csv`.replace(/\s+/g, '');
+  a.click();
+  URL.revokeObjectURL(a.href);
+  statusEl.innerText = `Exported ${rows.length} row(s).`;
 };
 
 async function loadHodTab() {
