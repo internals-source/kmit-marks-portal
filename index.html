@@ -278,9 +278,12 @@
   .light-footer { max-width: 1300px; margin: 30px auto 0; padding: 18px 48px 24px; border-top: 1px solid var(--lh-border); }
   @media (max-width: 900px) { .light-footer { padding: 16px 20px 20px; } }
 
+  .sidebar-backdrop { display:none; }
   @media (max-width: 900px) {
-    .shell-sidebar { transform: translateX(-100%); }
-    .shell-sidebar.open { transform: translateX(0); }
+    /* Mobile drawer: hidden by default, sits above the letterhead, dimmed backdrop behind it. */
+    .shell-sidebar { transform: translateX(-100%); top:0; z-index:70; width:min(280px, 85vw); visibility:hidden; transition: transform .2s ease, visibility 0s linear .2s; }
+    .shell-sidebar.open { transform: translateX(0); visibility:visible; box-shadow: 4px 0 24px rgba(0,0,0,.28); transition: transform .2s ease; }
+    .sidebar-backdrop.show { display:block; position:fixed; inset:0; background:rgba(15,20,45,.45); z-index:65; }
     .shell-body { margin-left:0; }
     .topbar-search { display:none; }
     .profile-email-text { max-width:90px; }
@@ -882,6 +885,7 @@
         <button class="tab-btn coe-only" data-tab="coe-dashboard" style="display:none;">COE Dashboard</button>
         <a href="marks-screen-preview.html" target="_blank" rel="noopener" class="tab-btn admin-only" style="display:none; text-decoration:none;" title="Opens a static preview of the marks entry screen with sample data — not connected to Supabase">Marks Screen Preview ↗</a>
         <button class="tab-btn" data-tab="feedback">Feedback</button>
+        <button class="tab-btn" data-tab="roles">Roles &amp; Responsibilities</button>
       </div>
     </aside>
 
@@ -2069,6 +2073,61 @@
     </div>
 
     <!-- FEEDBACK (visible to both admin and faculty) -->
+    <!-- ROLES & RESPONSIBILITIES -->
+    <div class="view" id="view-roles">
+      <div class="panel">
+        <h3 style="margin-top:0;">Roles &amp; Responsibilities</h3>
+        <p class="status-msg">What each role can see and do in this portal. New sign-ins start as <strong>Unapproved</strong> until the admin approves the account.</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Role</th><th style="text-align:left;">Responsibilities</th><th style="text-align:left;">Access</th><th style="text-align:left;">Cannot do</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Admin</strong><br><span style="font-size:11px;color:var(--muted);">Academic Examination Branch</span></td>
+                <td style="white-space:normal;text-align:left;">Sets up the portal each semester: sections, subjects, curriculum, students and mark structures. Creates offerings with entry deadlines, assigns faculty, freezes offerings and grants or revokes deadline overrides. Approves accounts and promotes people to HOD or COE.</td>
+                <td style="white-space:normal;text-align:left;">All tabs: Manage Catalog, Students, Offerings, Mark Structures, Assign Faculty, Re-Registration, Reports, University Export, HOD Management, Audit Log. Can edit marks at any time, including after a deadline or freeze.</td>
+                <td style="white-space:normal;text-align:left;">Nothing is blocked, so every action is recorded in the Audit Log.</td>
+              </tr>
+              <tr>
+                <td><strong>Clerk</strong><br><span style="font-size:11px;color:var(--muted);">Data entry support</span></td>
+                <td style="white-space:normal;text-align:left;">Prepares data for the examination branch: maintains the catalog and student lists, sets up offerings and faculty assignments, and prepares the university upload file.</td>
+                <td style="white-space:normal;text-align:left;">Manage Catalog, Manage Students, Manage Offerings, Assign Faculty, University Export.</td>
+                <td style="white-space:normal;text-align:left;">No access to Mark Structures, Reports, Re-Registration, HOD Management or Audit Log.</td>
+              </tr>
+              <tr>
+                <td><strong>HOD</strong><br><span style="font-size:11px;color:var(--muted);">Head of Department</span></td>
+                <td style="white-space:normal;text-align:left;">Monitors marks entry and results for their own branch and year, as scoped by the admin.</td>
+                <td style="white-space:normal;text-align:left;">HOD Dashboard (read-only marks overview for their scope).</td>
+                <td style="white-space:normal;text-align:left;">Cannot edit marks or change settings. Cannot see branches or years outside their scope.</td>
+              </tr>
+              <tr>
+                <td><strong>COE</strong><br><span style="font-size:11px;color:var(--muted);">Controller of Examinations</span></td>
+                <td style="white-space:normal;text-align:left;">Reviews marks and reports across the whole institution.</td>
+                <td style="white-space:normal;text-align:left;">COE Dashboard (read-only, all branches and years).</td>
+                <td style="white-space:normal;text-align:left;">Cannot edit marks or change settings.</td>
+              </tr>
+              <tr>
+                <td><strong>Faculty</strong></td>
+                <td style="white-space:normal;text-align:left;">Enters I MID and II MID marks for the subjects and sections assigned to them, within the entry window. Checks the totals, saves, and prints or exports the sheet. Follows up with students scoring below the pass threshold.</td>
+                <td style="white-space:normal;text-align:left;">Dashboard, My Subjects (marks entry), &lt; 14 Marks Students, Feedback. Only their own assigned offerings.</td>
+                <td style="white-space:normal;text-align:left;">Cannot enter marks before the entry opens, after the deadline, or once an offering is frozen, unless the admin grants an override. Cannot see other faculty's subjects.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-top:0;">Marks entry rules</h3>
+        <ul style="margin:0; padding-left:20px; line-height:1.8; font-size:13px;">
+          <li>Each marks entry sheet has an <strong>Entry Opens</strong> date and a <strong>Deadline</strong>. Outside that window the sheet is read-only, and the server rejects saves as well.</li>
+          <li>The admin can <strong>freeze</strong> an offering, or <strong>grant an override</strong> so one offering stays open past its deadline. The admin can revoke the override later.</li>
+          <li>Marks above a column's maximum are rejected. Totals and auto-calculated columns are computed by the system, not typed in.</li>
+          <li>Every save by faculty and every change by admin is recorded in the Audit Log.</li>
+          <li>Use <strong>Feedback</strong> to report a problem to the Academic Examination Branch.</li>
+        </ul>
+      </div>
+    </div>
+
     <div class="view" id="view-feedback">
       <div class="panel">
         <h3 style="margin-top:0;">Feedback</h3>
@@ -2502,15 +2561,34 @@ document.addEventListener('click', (e) => {
     dd.classList.remove('open');
   }
 });
+const mobileNavMq = window.matchMedia('(max-width: 900px)');
+function setMobileNav(open) {
+  document.querySelector('.shell-sidebar').classList.toggle('open', open);
+  let bd = document.getElementById('sidebar-backdrop');
+  if (!bd) {
+    bd = document.createElement('div');
+    bd.id = 'sidebar-backdrop';
+    bd.className = 'sidebar-backdrop';
+    bd.onclick = () => setMobileNav(false);
+    document.body.appendChild(bd);
+  }
+  bd.classList.toggle('show', open);
+}
 document.getElementById('sidebar-toggle').onclick = () => {
-  // One button, two meanings by screen size: reveals the drawer on mobile ('open'),
-  // collapses the sidebar to reclaim space on desktop ('collapsed'). Both classes toggle
-  // together — each only has an effect within its own media query, so this works correctly
-  // at any width without needing to check window size in JS.
-  document.querySelector('.shell-sidebar').classList.toggle('open');
-  document.querySelector('.shell-sidebar').classList.toggle('collapsed');
-  document.querySelector('.shell-body').classList.toggle('sidebar-collapsed');
+  const sb = document.querySelector('.shell-sidebar');
+  if (mobileNavMq.matches) {
+    setMobileNav(!sb.classList.contains('open'));   // mobile: open/close the drawer
+  } else {
+    const collapsed = sb.classList.toggle('collapsed');   // desktop: collapse to reclaim width
+    document.querySelector('.shell-body').classList.toggle('sidebar-collapsed', collapsed);
+  }
 };
+// Close the drawer after picking a page, on Escape, and when the screen grows to desktop width.
+document.querySelector('.shell-sidebar').addEventListener('click', (e) => {
+  if (mobileNavMq.matches && e.target.closest('.tab-btn')) setMobileNav(false);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mobileNavMq.matches) setMobileNav(false); });
+mobileNavMq.addEventListener('change', () => setMobileNav(false));
 
 document.getElementById('logout-btn').onclick = async () => {
   await supabase.auth.signOut();
